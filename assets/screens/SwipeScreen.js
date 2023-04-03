@@ -5,7 +5,7 @@ const SwipeScreen = () => {
     return (
         <View style={{flex: 1, justifyContent: "center",
             alignItems: "center", backgroundColor: "lightgreen"}}>
-            <Text>SwipeScreen</Text>
+            <Text>Swipe screen</Text>
         </View>
     );
 }
