@@ -1,51 +1,36 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-
+import { View, Text, Image } from 'react-native';
+import SEB from "../images/SEB.jpeg";
+import heartNotFilled from "../images/heartNotFilled.png";
 
 
 const JobCard = () => {
     return (
-        <View style={styles.card}>
-            <Text style={styles.title}>Software Engineer</Text>
-            <Text style={styles.company}>Google</Text>
-            <Text style={styles.location}>Mountain View, CA</Text>
-            <Text className="bg-amber-600"> testing</Text>
+        <View className="flex-1 flex-row h-28 mb-4 bg-pink-50 shadow ml-4 mr-4">
+            <View className=" w-3/12 h-28 justify-center">
+            <Image source={SEB} className="w-20 h-16 ml-3"/>
+            </View>
+            <View className="flex-1 flex-col">
+                <View className="flex-1 flex-row justify-between">
+                    <Text className="text-xl ml-4">Internship</Text>
+                    <View>
+                        <Image source={heartNotFilled} className="w-6 h-5 mt-2 mr-2" />
+                    </View>
+                </View>
+                <View className="flex-1 flex-row">
+                    <Text className="text-lg ml-4">SEB</Text>
+                    <Text className="text-lg ml-4">Stockholm</Text>
+                    <Text className="text-lg ml-4">2021-08-01</Text>
+                </View>
+                <View className="flex-1 flex-row">
+                    <Text className="text-lg ml-4">144kr/h</Text>
+                    <Text className="text-lg ml-4">8 veckor</Text>
+                    <Text className="text-lg ml-4">Erfarenhet krävs</Text>
+                </View>
+            </View>
         </View>
     );
 };
 
-const styles = StyleSheet.create({
-    card: {
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        flexDirection: 'row',
-        elevation: 5,
-        padding: 16,
-        borderRadius: 8,
-        marginBottom: 16,
-        backgroundColor: '#fff',
-    },
-    title: {
-        fontWeight: 'bold',
-        fontSize: 18,
-        marginRight: 8,
-    },
-    company: {
-        color: '#999',
-        fontSize: 14,
-        marginBottom: 8,
-    },
-    location: {
-        color: '#999',
-        fontSize: 14,
-        marginBottom: 8,
-    },
-    description: {
-        color: '#666',
-        fontSize: 14,
-    },
-});
 
 export default JobCard;

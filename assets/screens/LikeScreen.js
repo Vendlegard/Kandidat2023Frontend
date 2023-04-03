@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {View, TextInput, StyleSheet, Text, ScrollView} from "react-native";
+import {View, TextInput, Text, ScrollView} from "react-native";
 import JobCard from "../components/JobCard";
 
 
@@ -12,10 +12,10 @@ const LikeScreen = () => {
 
     return (
         <ScrollView>
-        <View style={styles.container}>
-            <View style={styles.searchContainer}>
+        <View className="flex-1">
+            <View className="mb-3">
                 <TextInput
-                    style={styles.searchInput}
+                    className="h-10 border border-gray-300 rounded px-3"
                     placeholder="Search jobs"
                     onChangeText={handleSearchTextChange}
                     value={searchText}
@@ -24,26 +24,9 @@ const LikeScreen = () => {
             <JobCard />
             <JobCard />
             <JobCard />
-            <Text className="bg-amber-400"> Testing nativewind</Text>
         </View>
         </ScrollView>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 16,
-    },
-    searchContainer: {
-        marginBottom: 16,
-    },
-    searchInput: {
-        height: 40,
-        borderColor: "#ccc",
-        borderWidth: 1,
-        paddingHorizontal: 8,
-    },
-});
 
 export default LikeScreen;
