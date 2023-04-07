@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text, Image } from 'react-native';
 import SEB from "../images/SEB.jpeg";
+import sweco from "../images/sweco.png";
+import vattenfall from "../images/vattenfall.jpeg";
 import heartNotFilled from "../images/heartNotFilled.png";
 
 
@@ -31,6 +33,5 @@ const JobCard = () => {
         </View>
     );
 };
-
 
 export default JobCard;

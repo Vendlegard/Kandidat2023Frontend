@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import {View, TextInput, Text, ScrollView} from "react-native";
 import JobCard from "../components/JobCard";
+import SEB from "../images/SEB.jpeg";
+import sweco from "../images/sweco.png";
+import vattenfall from "../images/vattenfall.jpeg";
 
 
 const LikeScreen = () => {
@@ -21,9 +24,9 @@ const LikeScreen = () => {
                     value={searchText}
                 />
             </View>
-            <JobCard />
-            <JobCard />
-            <JobCard />
+            <JobCard/>
+            <JobCard/>
+            <JobCard/>
         </View>
         </ScrollView>
     );

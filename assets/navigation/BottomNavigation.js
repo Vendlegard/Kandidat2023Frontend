@@ -26,8 +26,7 @@ const Navigator = () => {
             <Tab.Navigator>
                 <Tab.Screen name="Swipe" component={SwipeScreen} />
                 <Tab.Screen name="Like" component={LikeScreen} />
-                {loggedIn && <Tab.Screen name="Profile" component={ProfileScreen} />}
-                {!loggedIn && <Tab.Screen name="Login" component={() => <LoginScreen updateLoggedInState={updateLoggedInState} />} />}
+                <Tab.Screen name="Profile" component={ProfileScreen} />
                 <Tab.Screen name="Search" component={SearchScreen} />
             </Tab.Navigator>
         </NavigationContainer>
