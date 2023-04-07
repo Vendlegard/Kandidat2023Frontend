@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import {View, TextInput, Text, ScrollView} from "react-native";
 import JobCard from "../components/JobCard";
 import SEB from "../images/SEB.jpeg";
@@ -15,19 +15,31 @@ const LikeScreen = () => {
 
     return (
         <ScrollView>
-        <View className="flex-1">
-            <View className="mb-3">
-                <TextInput
-                    className="h-10 border border-gray-300 rounded px-3"
-                    placeholder="Search jobs"
-                    onChangeText={handleSearchTextChange}
-                    value={searchText}
+            <View className="flex-1">
+                <View className="mb-3">
+                    <TextInput
+                        className="h-10 border border-gray-300 rounded px-3"
+                        placeholder="Search jobs"
+                        onChangeText={handleSearchTextChange}
+                        value={searchText}
+                    />
+                </View>
+                <JobCard
+                    jobIcon={SEB}
+                    jobTitle="Internship"
+                    employer="SEB"
+                />
+                <JobCard
+                    jobIcon={sweco}
+                    jobTitle="Deltid"
+                    employer="Sweco"
+                />
+                <JobCard
+                    jobIcon={vattenfall}
+                    jobTitle="Dankat sommarjobb"
+                    employer="Vattenfall"
                 />
             </View>
-            <JobCard/>
-            <JobCard/>
-            <JobCard/>
-        </View>
         </ScrollView>
     );
 };

@@ -6,21 +6,21 @@ import vattenfall from "../images/vattenfall.jpeg";
 import heartNotFilled from "../images/heartNotFilled.png";
 
 
-const JobCard = () => {
+const JobCard = ({jobIcon, jobTitle, employer}) => {
     return (
         <View className="flex-1 flex-row h-28 mb-4 bg-pink-50 shadow ml-4 mr-4">
             <View className=" w-3/12 h-28 justify-center">
-            <Image source={SEB} className="w-20 h-16 ml-3"/>
+            <Image source={jobIcon} className="w-20 h-16 ml-3"/>
             </View>
             <View className="flex-1 flex-col">
                 <View className="flex-1 flex-row justify-between">
-                    <Text className="text-xl ml-4">Internship</Text>
+                    <Text className="text-xl ml-4">{jobTitle}</Text>
                     <View>
                         <Image source={heartNotFilled} className="w-6 h-5 mt-2 mr-2" />
                     </View>
                 </View>
                 <View className="flex-1 flex-row">
-                    <Text className="text-lg ml-4">SEB</Text>
+                    <Text className="text-lg ml-4">{employer}</Text>
                     <Text className="text-lg ml-4">Stockholm</Text>
                     <Text className="text-lg ml-4">2021-08-01</Text>
                 </View>
