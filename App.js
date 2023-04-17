@@ -3,6 +3,8 @@ import { View} from 'react-native';
 import React, {useState} from "react";
 import BottomNavigation from "./assets/navigation/BottomNavigation";
 import LoginScreen from "./assets/screens/LoginScreen";
+import { NavigationContainer } from '@react-navigation/native';
+
 
 
 
@@ -14,10 +16,12 @@ export default function App() {
     };
 
 
+
     return (
         <View className="flex-1 bg-amber-100">
             <StatusBar style="auto" />
             <BottomNavigation />
         </View>
+        
     );
 }
