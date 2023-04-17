@@ -7,6 +7,7 @@ import { NavigationContainer } from '@react-navigation/native';
 
 
 
+
 export default function App() {
 
     const [loggedIn, setLoggedIn] = useState(false);
@@ -19,7 +20,7 @@ export default function App() {
     return (
         <View className="flex-1 bg-amber-100">
             <StatusBar style="auto" />
-            {loggedIn ? <BottomNavigation /> : <LoginScreen updateLoggedInState={updateLoggedInState} />}
+            <BottomNavigation />
         </View>
         
     );
