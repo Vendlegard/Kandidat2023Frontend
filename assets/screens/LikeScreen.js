@@ -4,6 +4,7 @@ import JobCard from "../components/JobCard";
 import SEB from "../images/SEB.jpeg";
 import sweco from "../images/sweco.png";
 import vattenfall from "../images/vattenfall.jpeg";
+import { AntDesign, Ionicons, Entypo, MaterialIcons } from '@expo/vector-icons'
 
 
 const LikeScreen = () => {
