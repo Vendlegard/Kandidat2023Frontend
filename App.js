@@ -5,6 +5,7 @@ import BottomNavigation from "./assets/navigation/BottomNavigation";
 import LoginScreen from "./assets/screens/LoginScreen";
 
 
+
 export default function App() {
 
     const [loggedIn, setLoggedIn] = useState(false);
