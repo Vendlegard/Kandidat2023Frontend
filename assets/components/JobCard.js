@@ -22,7 +22,7 @@ const JobCard = ({jobIcon, jobTitle, employer}) => {
                 <View className="flex-1 flex-row">
                     <Text className="text-lg ml-4">{employer}</Text>
                     <Text className="text-lg ml-4">Stockholm</Text>
-                    <Text className="text-lg ml-4">2021-08-01</Text>
+                    <Text className="text-lg ml-4">2021-08-02</Text>
                 </View>
                 <View className="flex-1 flex-row">
                     <Text className="text-lg ml-4">144kr/h</Text>
