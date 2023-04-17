@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions, TextInput, Image } from "react-native";
-import EditProfile from "../components/EditProfile";
 import Svg, { Path } from 'react-native-svg';
 import profilePicture from '../images/profilePicture.png'
 import schoolPic from '../images/schoolPic.png'
@@ -12,10 +11,6 @@ import termPic from '../images/termPic.png'
 
 const ProfileScreen = () => {
     const [isProfileEdited, setIsProfileEdited] = useState(false);
-    const [larosate, setLarosate] = useState("");
-    const [termin, setTermin] = useState("");
-    const [kompetenser, setKompetenser] = useState("");
-    const [sokning, setSokning] = useState("");
 
     const handleEditProfile = () => {
         setIsProfileEdited(true);
@@ -39,7 +34,7 @@ const ProfileScreen = () => {
                 <View className="flex-1">
                     <View className="flex flex-row">
                         <View className="align-text-top">
-                            <View className="w-24 h-24 bg-blue-200 rounded-full">
+                            <View className="w-24 h-24 bg-profileScreen rounded-full">
                             </View>
                             <View className="w-12 h-12 bg-pink-200 rounded-full"></View>
                         </View>
@@ -123,7 +118,7 @@ const ProfileScreen = () => {
                                     style={styles.topWavy}
                                 >
                                     <Path
-                                        fill="#2471A3"
+                                        fill="#B3EADF"
                                         d="M0,64L60,96C120,128,240,192,360,202.7C480,213,600,171,720,138.7C840,107,960,85,1080,112C1200,139,1320,213,1380,250.7L1440,288L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"
                                     />
                                 </Svg>
@@ -146,7 +141,7 @@ const ProfileScreen = () => {
                             <Text className="text-x1">Uppsala Universitet</Text>
                         </View>
                         <View className="m-5 flex-col-reverse items-center bg-green-200">
-                            <View className="h-20 border-l border-gray-400 dark:border-gray-700">
+                            <View className="h-20 border-l border-gray dark:border-gray">
                             </View>
                         </View>
 
@@ -156,7 +151,7 @@ const ProfileScreen = () => {
                         </View>
                     </View>
                     <View className="items-center justify-center">
-                        <View className="h-px bg-gray-400 border-0 dark:bg-gray-700 w-60">
+                        <View className="h-px bg-gray border-0 dark:bg-gray w-60">
                         </View>
                     </View>
                     <View className="flex-2 m-7 flex-row items-center justify-center">
@@ -166,7 +161,7 @@ const ProfileScreen = () => {
                         </View>
                     </View>
                     <View className="items-center justify-center">
-                        <View className="h-px bg-gray-400 border-0 dark:bg-gray-700 w-60">
+                        <View className="h-px bg-gray border-0 dark:bg-gray w-60">
                         </View>
                     </View>
                     <View className="flex-2 m-7 flex-row items-center justify-center">

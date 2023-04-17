@@ -7,6 +7,8 @@ module.exports = {
       'green': '#6ee3b4',
       'red': '#ec5288',
       'black': '#000000',
+      'gray': '#A9A9A9',
+      "profileScreen": '#B3EADF',
     }
   },
   plugins: [],
