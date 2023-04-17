@@ -36,7 +36,7 @@ const ProfileScreen = () => {
                         <View className="align-text-top">
                             <View className="w-24 h-24 bg-profileScreen rounded-full">
                             </View>
-                            <View className="w-12 h-12 bg-pink-200 rounded-full"></View>
+                            <View className="w-12 h-12 bg-pink rounded-full"></View>
                         </View>
                         <View className="items-center justify-center mt-12">
                             <Image source={profilePicture} className="w-20 h-16 ml-3"></Image>
@@ -96,7 +96,7 @@ const ProfileScreen = () => {
                                 placeholder="SQL, React, Javascript"/>
                         </View>
                     </View>
-                    <View className="w-12 h-12 bg-pink-200 rounded-full"></View>
+                    <View className="w-12 h-12 bg-pink rounded-full"></View>
 
 
 

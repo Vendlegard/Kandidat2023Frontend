@@ -9,6 +9,8 @@ module.exports = {
       'black': '#000000',
       'gray': '#A9A9A9',
       "profileScreen": '#B3EADF',
+      'white': '#FFFFFF',
+      'pink': '#FFC0CB'
     }
   },
   plugins: [],
