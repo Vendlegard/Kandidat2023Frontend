@@ -18,7 +18,7 @@ const LikeScreen = () => {
             <View className="flex-1">
                 <View className="mb-3">
                     <TextInput
-                        className="h-10 border border-gray-300 rounded px-3"
+                        className="h-10 border border-gray-30 rounded px-3"
                         placeholder="Search jobs"
                         onChangeText={handleSearchTextChange}
                         value={searchText}
