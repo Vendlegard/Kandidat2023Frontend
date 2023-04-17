@@ -20,6 +20,8 @@ const LikeScreen = () => {
             const response = await fetch("http://127.0.0.1:8000/api/fetchJobs");
             const data = await response.json();
             console.log(data);
+            list = data.message
+            console.log(typeof(list))
             setServerResponse(data.message); // set the server response as state
         } catch (error) {
             console.error(error);
