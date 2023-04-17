@@ -48,7 +48,7 @@ const SwipeScreen = () => {
         ref = {swipeRef}
         containerStyle={{backgroundColor: '#FFFFFF'}}
         cards = {testCards}
-               /*stackSize = {3}... Amount of cards (companies) in the deck*/
+        stackSize = {3} /* Amount of cards (companies) in the deck*/
         cardIndex = {0}        /*Start from card 0 in the deck*/
         animateCardOpacity
         verticalSwipe = {false}
@@ -58,7 +58,6 @@ const SwipeScreen = () => {
         onSwipedRight={() => {
             console.log('Swiped LIKE')
         }}
-        backgroundColor={'#FF0000'} /*verkar ej funka*/
         overlayLabels={{        /*LIKE and NOPE signs*/
             left: {
                 title: 'NOPE',
@@ -81,16 +80,16 @@ const SwipeScreen = () => {
         }}
         renderCard={(card) => (
            
-            <View style = {{backgroundColor: 'rgb(244 244 245)', height: '100%', borderRadius: 15}} key = {card.id}>
+            <View style = {{backgroundColor: 'rgb(244 244 245)', height: '75%', borderRadius: 15, shadowColor: '#000', shadowOffset: {width:0, height: 2}, shadowOpacity: 0.25, shadoRadius: 3, elevation: 2}} key = {card.id}>
                 <Image style={{flex: 1, justifyContent: 'center', height: '30%', margin: '5%', borderRadius: 5}} source={{uri: card.photoURL}}/>
                 <Text className = 'font-bold text-4xl mt-5 text-center'>{card.jobTitle}</Text>
                 <Text className = 'text-xl mt-5 text-center'>{card.jobDesc}</Text>
                 
                 <View className ="flex-1 flex-row">
-                    <View className =  "flex-1 flex-row-reverse items-center mt-7">
-                        <Image source={location} className =  "w-10 h-10"/>
+                     <View className = "flex-1 items-end mt-5 pt-12">
+                        <Entypo name='location-pin' size={54}/>
                     </View>
-                    <View className = "flex-1 items-center mt-10 pt-12 mr-10 pr-10">
+                    <View className = "flex-1 items-center mt-5 pt-12 mr-10 pr-10"> 
                         <Text className=" flex-1 text-xl">{card.jobLocation}</Text>
                     </View>
                 </View>
@@ -99,15 +98,21 @@ const SwipeScreen = () => {
         />
     </View>
 
-    <View className = 'flex flex-row justify-evenly'>
-        <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', borderRadius: 50, width: 70, height: 70, backgroundColor: 'rgb(254 202 202)' }}>
-            <Entypo name='cross' size={24}/>
-        </TouchableOpacity>
+        <View className = 'flex flex-row justify-evenly bg-white pb-3'>
+            <TouchableOpacity 
+            onPress={() =>swipeRef.current.swipeLeft()}
+            style={{ alignItems: 'center', justifyContent: 'center', borderRadius: 50, width: 75, height: 75, backgroundColor: 'rgb(254 202 202)' 
+            }}
+            >
+                <Entypo name='cross' size={35}/>
+            </TouchableOpacity>
 
-        <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', borderRadius: 50, width: 70, height: 70, backgroundColor: 'rgb(187 247 208)' }}>
-            <AntDesign name='heart' size={24}/>
-        </TouchableOpacity>
-    </View>
+            <TouchableOpacity 
+            onPress={() =>swipeRef.current.swipeRight()}
+            style={{ alignItems: 'center', justifyContent: 'center', borderRadius: 50, width: 75, height: 75, backgroundColor: 'rgb(187 247 208)' }}>
+                <AntDesign name='heart' size={30}/>
+            </TouchableOpacity>
+        </View>
     
     </SafeAreaView> 
     );
