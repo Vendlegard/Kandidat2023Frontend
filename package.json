@@ -14,11 +14,7 @@
     "expo-status-bar": "~1.4.4",
     "nativewind": "^2.0.11",
     "react": "18.2.0",
-    "react-native": "0.71.6",
-    "react-native-deck-swiper": "^2.0.13",
-    "react-native-gesture-handler": "^2.9.0",
-    "tailwind-react-native-classnames": "^1.5.1",
-    "tailwind-rn": "^4.2.0"
+    "react-native": "0.71.4"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
