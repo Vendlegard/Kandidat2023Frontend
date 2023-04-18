@@ -5,8 +5,9 @@ import profilePicture from '../images/profilePicture.png'
 import schoolPic from '../images/schoolPic.png'
 import jobPic from '../images/jobPic.png'
 import coursePic from '../images/coursePic.png'
-import heartNotFilled from '../images/heartNotFilled.png'
-import termPic from '../images/termPic.png'
+import emptyHeart from '../images/emptyHeart.png'
+import terminPic from '../images/terminPic.png'
+import profilePic from '../images/profilePic.png'
 
 
 const ProfileScreen = () => {
@@ -30,83 +31,130 @@ const ProfileScreen = () => {
 
     return (
         <View className="flex-1">
+
+
             {isProfileEdited ? (
+                // RedigeraView - följande dolt nås med knapp "Redigera profil"
+
                 <View className="flex-1">
-                    <View className="flex flex-row">
-                        <View className="align-text-top">
-                            <View className="w-24 h-24 bg-profileScreen rounded-full">
-                            </View>
-                            <View className="w-12 h-12 bg-pink rounded-full"></View>
-                        </View>
-                        <View className="items-center justify-center mt-12">
-                            <Image source={profilePicture} className="w-20 h-16 ml-3"></Image>
+
+
+                    <View className="flex-row justify-center items-center">
+                        {/* Profile Picture and Name */}
+                        <View className="flex-col justify-center items-center mt-14">
+                            <Image source={profilePic} className="w-20 h-16"></Image>
                             <Text className="font-railway text-lg font-bold m-4">Victoria Berinder</Text>
                         </View>
+
+                        {/* Profile Bubbles */}
+                        <View className="absolute top-0 left-0">
+                            {/* ProfileScreen Bubble */}
+                            <View className="w-28 h-28 bg-profileScreen rounded-full -mt-3 -ml-2"></View>
+
+                            {/* Pink Bubble */}
+                            <View className="w-20 h-20 bg-purple rounded-full -mt-8 ml-8"></View>
+
+                            {/* Gray Bubble */}
+                            <View className="absolute top-0 left-full mt-8 ml-2">
+                                <View className="w-14 h-14 bg-lightgray rounded-full -ml-10"></View>
+                            </View>
+                        </View>
+
                     </View>
-                    <View className="flex-1 mt-7">
+
+
+
+                    {/* Information om användaren med redigeringsmöjlighet */}
+                    <View className="flex-1 flex-col justify-evenly mt-7">
+
+                        {/* Lärosäte */}
                         <View className="flex-row m-3">
-                            <Image className="w-10 h-10 ml-4" source={schoolPic}></Image>
+                            <Image className="w-8 h-8 ml-3" source={schoolPic}></Image>
                             <TextInput
-                                className="h-10 border border-gray-30 rounded px-3 ml-2"
-                                placeholder="Uppsala Universitet"/>
+                                style={{ borderWidth: 0, fontSize: 16, color: 'black' }}
+                                placeholder="Uppsala Universitet"
+                                placeholderTextColor="black"
+                            />
                         </View>
-                        <View className="items-center justify-center">
-                            <View className="h-px bg-gray-400 border-0 dark:bg-gray-700 w-10/12">
+                        <View className="ml-7">
+                            <View className="h-px bg-gray border-0 dark:bg-gray w-10/12">
                             </View>
                         </View>
 
-                        <View className="flex-row m-3 mt-4">
-                            <Image className="w-12 h-12 ml-3" source={coursePic}></Image>
+                        {/* Program på Universitet */}
+                        <View className="flex-row m-3">
+                            <Image className="w-8 h-8 ml-3" source={coursePic}></Image>
                             <TextInput
-                                className="h-10 border border-gray-30 rounded px-3 ml-1 mt-1"
-                                placeholder="Civilingenjör i system i teknik och samhälle"/>
+                                style={{ borderWidth: 0, fontSize: 16, color: 'black' }}
+                                placeholder="Civilingenjör i system i teknik och samhälle"
+                                placeholderTextColor="black"
+                            />
                         </View>
-                        <View className="items-center justify-center">
-                            <View className="h-px bg-gray-400 border-0 dark:bg-gray-700 w-10/12">
+                        <View className="ml-7">
+                            <View className="h-px bg-gray border-0 dark:bg-gray w-10/12">
                             </View>
                         </View>
 
-
-                        <View className="flex-row m-3 mt-5">
-                            <Image className="w-8 h-8 ml-5" source={termPic}></Image>
+                        {/* Termin som tas */}
+                        <View className="flex-row m-3">
+                            <Image className="w-8 h-8 ml-3" source={terminPic}></Image>
                             <TextInput
-                                className="h-10 border border-gray-30 rounded px-3 ml-3"
-                                placeholder="Termin 6/10"/>
+                                style={{ borderWidth: 0, fontSize: 16, color: 'black' }}
+                                placeholder="Termin 6/10"
+                                placeholderTextColor="black"
+                            />
                         </View>
-                        <View className="items-center justify-center mt-2">
-                            <View className="h-px bg-gray-400 border-0 dark:bg-gray-700 w-10/12">
+
+                        <View className="ml-7">
+                            <View className="h-px bg-gray border-0 dark:bg-gray w-10/12">
                             </View>
                         </View>
 
-                        <View className="flex-row m-3 mt-5">
-                            <Image className="w-11 h-11 ml-3" source={jobPic}></Image>
+                        {/* Typ av jobb som sökes */}
+                        <View className="flex-row m-3">
+                            <Image className="w-8 h-8 ml-3" source={jobPic}></Image>
                             <TextInput
-                                className="h-10 border border-gray-30 rounded px-3 ml-1"
-                                placeholder="Sommarjobb, Trainee"/>
+                                style={{ borderWidth: 0, fontSize: 16, color: 'black' }}
+                                placeholder="Sommarjobb, Trainee"
+                                placeholderTextColor="black"
+                            />
                         </View>
-                        <View className="items-center justify-center">
-                            <View className="h-px bg-gray-400 border-0 dark:bg-gray-700 w-10/12">
+
+                        <View className="ml-7">
+                            <View className="h-px bg-gray border-0 dark:bg-gray w-10/12">
                             </View>
                         </View>
 
-                        <View className="flex-row m-3 mt-5">
-                            <Image className="w-6 h-6 ml-5 mt-2" source={heartNotFilled}></Image>
+                        {/* Kompetenser för användare */}
+                        <View className="flex-row m-3">
+                            <Image className="w-8 h-8 ml-3" source={emptyHeart}></Image>
                             <TextInput
-                                className="h-10 border border-gray-30 rounded px-3 ml-4"
-                                placeholder="SQL, React, Javascript"/>
+                                style={{ borderWidth: 0, fontSize: 16, color: 'black' }}
+                                placeholder="SQL, React, Javascript"
+                                placeholderTextColor="black"
+                            />
                         </View>
                     </View>
-                    <View className="w-12 h-12 bg-pink rounded-full"></View>
+                    <View style={{ position: 'absolute', bottom: 0, right: 0 }}>
+                        <View className="w-24 h-24 bg-profileScreen rounded-full"></View>
+                        <View className="w-14 h-14 bg-purple rounded-full" style={{ position: 'absolute', top: -25, left: 40 }}></View>
+                    </View>
 
+                    {/* Knapp för att spara redigerad profil */}
+                    <View className="flex justify-center items-center">
+                        <TouchableOpacity className="bg-black w-16 h-8 flex justify-center items-center rounded m-4 mb-4" onPress={handleSaveProfile}>
+                            <Text className="text-white text-sm">Spara</Text>
+                        </TouchableOpacity>
+                    </View>
 
-
-
-                    <TouchableOpacity className="bg-black w-15 h-8 flex justify-center items-center rounded m-4" onPress={handleSaveProfile}>
-                        <Text className="text-white text-sm">Spara</Text>
-                    </TouchableOpacity>
                 </View>
+
+
+                // Slut dold redigeringsview
+
             ) : (
 
+                // Styling av "våg" toppen av sidan
                 <View className="flex-1">
                     <View style={styles.container}>
                         <View style={styles.top}>
@@ -129,12 +177,14 @@ const ProfileScreen = () => {
                         <View style={styles.bottom}></View>
                     </View>
 
+                    {/* Namn, bild och universitetsprogram main ProfileScreen */}
                     <View className="justify-center items-center ">
-                        <Image source={profilePicture} className="w-20 h-16 ml-3 rounded"></Image>
+                        <Image source={profilePic} className="w-20 h-16 ml-3 rounded"></Image>
                         <Text className="font-railway text-lg font-bold m-2">Victoria Berinder</Text>
                         <Text className="font-railway text-sm">Civilingenjör i system i teknik och samhälle</Text>
                     </View>
-                    {/* <View className=" bg-blue-200 h-3/6 flex-1"> */}
+
+                    {/* Input Lärosäte  */}
                     <View className="flex-2 m-3 flex-row items-center justify-space">
                         <View className="items-center justify-center m-8">
                             <Text className="text-x1 font-bold">Lärosäte</Text>
@@ -145,6 +195,7 @@ const ProfileScreen = () => {
                             </View>
                         </View>
 
+                        {/* Input Termin */}
                         <View className="items-center justify-center m-8">
                             <Text className="text-x1 font-bold">Temin</Text>
                             <Text className="text-x1">6/10</Text>
@@ -154,6 +205,8 @@ const ProfileScreen = () => {
                         <View className="h-px bg-gray border-0 dark:bg-gray w-60">
                         </View>
                     </View>
+
+                    {/* Input min kompetenser */}
                     <View className="flex-2 m-7 flex-row items-center justify-center">
                         <View className="items-center justify-center">
                             <Text className="text-x1 font-bold">Mina kompetenser</Text>
@@ -164,6 +217,8 @@ const ProfileScreen = () => {
                         <View className="h-px bg-gray border-0 dark:bg-gray w-60">
                         </View>
                     </View>
+
+                    {/* Input vad jag söker för jobb */}
                     <View className="flex-2 m-7 flex-row items-center justify-center">
                         <View className="items-center justify-center">
                             <Text className="text-x1 font-bold">Jag söker</Text>
@@ -171,11 +226,7 @@ const ProfileScreen = () => {
                         </View>
                     </View>
 
-
-
-
-
-                    {/* <View className=" items-center bg-green-200 h-1/6"> */}
+                    {/* Redigera profil och logga ut - knappar main profileScreen */}
                     <View className="m-12 mt-17">
                         <TouchableOpacity className="bg-black w-17 h-8 flex justify-center items-center rounded m-4" onPress={handleEditProfile}>
                             <Text className="text-white text-sm">Redigera profil</Text>
@@ -192,7 +243,7 @@ const ProfileScreen = () => {
 };
 
 
-
+// Styling för "våg" toppen av sidan
 
 const styles = StyleSheet.create({
     container: {
@@ -202,40 +253,12 @@ const styles = StyleSheet.create({
     bottom: {},
 
 
+
 });
 
 export default ProfileScreen;
 
 
-
-
-
-const EditableText = () => {
-  const [isEditable, setIsEditable] = useState(false);
-  const [text, setText] = useState('This text is editable');
-
-  const toggleEditable = () => {
-    setIsEditable(!isEditable);
-  };
-
-  const onChangeText = (newText) => {
-    setText(newText);
-  };
-
-  return (
-    <View style={styles.container}>
-      {isEditable ? (
-        <TouchableOpacity onPress={toggleEditable} style={tailwind('w-full')}>
-          <Text style={tailwind('bg-gray-100 p-2 rounded-lg')}>{text}</Text>
-        </TouchableOpacity>
-      ) : (
-        <TouchableWithoutFeedback onPress={toggleEditable}>
-          <Text style={tailwind('bg-transparent p-2 rounded-lg')}>{text}</Text>
-        </TouchableWithoutFeedback>
-      )}
-    </View>
-  );
-};
 
 
 
