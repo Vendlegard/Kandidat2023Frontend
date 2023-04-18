@@ -5,6 +5,8 @@ import SEB from "../images/SEB.jpeg";
 import sweco from "../images/sweco.png";
 import vattenfall from "../images/vattenfall.jpeg";
 import { AntDesign, Ionicons, Entypo, MaterialIcons } from '@expo/vector-icons'
+import vattenfallPic from '../images/vattenfallPic.png'
+import AFRY from '../images/AFRY.png'
 
 
 const LikeScreen = () => {
@@ -49,12 +51,12 @@ const LikeScreen = () => {
                     employer="SEB"
                 />
                 <JobCard
-                    jobIcon={sweco}
+                    jobIcon={AFRY}
                     jobTitle="Deltid"
                     employer="Sweco"
                 />
                 <JobCard
-                    jobIcon={vattenfall}
+                    jobIcon={vattenfallPic}
                     jobTitle="Dankat sommarjobb"
                     employer="Vattenfall"
                 />
