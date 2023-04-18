@@ -6,6 +6,7 @@ import LikeScreen from "../screens/LikeScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import SearchScreen from "../screens/SearchScreen";
 import LoginScreen from "../screens/LoginScreen";
+import { AntDesign, Ionicons, Entypo, MaterialIcons } from '@expo/vector-icons'
 
 const Tab = createBottomTabNavigator();
 
@@ -22,12 +23,28 @@ const Navigator = () => {
 
 
     return (
-        <NavigationContainer>
+        <NavigationContainer className = 'b'>
             <Tab.Navigator>
-                <Tab.Screen name="Swipe" component={SwipeScreen} />
-                <Tab.Screen name="Like" component={LikeScreen} />
-                <Tab.Screen name="Profile" component={ProfileScreen} />
-                <Tab.Screen name="Search" component={SearchScreen} />
+                <Tab.Screen name = 'Swipe' component={SwipeScreen} options={{
+                    tabBarIcon: ({color, size, name}) => (
+                        <MaterialIcons name = 'work' size = {30} color={'#6b7280'}/>
+                    )
+                }} />
+                <Tab.Screen name="Liked" component={LikeScreen} options={{
+                    tabBarIcon: ({color, size}) => (
+                        <Ionicons name = 'heart' size = {30} color={'#6b7280'}/>
+                    )
+                }} />
+                <Tab.Screen name="Profile" component={ProfileScreen} options={{
+                    tabBarIcon: ({color, size}) => (
+                        <Ionicons name = 'person-circle-sharp' size = {30} color={'#6b7280'}/>
+                    )
+                }} /> 
+                <Tab.Screen name="Search" component={SearchScreen} options={{
+                    tabBarIcon: ({color, size}) => (
+                        <Ionicons name = 'search' size = {30} color={'#6b7280'}/>
+                    )
+                }} />
             </Tab.Navigator>
         </NavigationContainer>
     );

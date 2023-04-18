@@ -4,6 +4,7 @@ import SEB from "../images/SEB.jpeg";
 import sweco from "../images/sweco.png";
 import vattenfall from "../images/vattenfall.jpeg";
 import heartNotFilled from "../images/heartNotFilled.png";
+import { AntDesign, Ionicons, Entypo, MaterialIcons } from '@expo/vector-icons'
 
 
 const JobCard = ({jobIcon, jobTitle, employer}) => {
@@ -16,7 +17,7 @@ const JobCard = ({jobIcon, jobTitle, employer}) => {
                 <View className="flex-1 flex-row justify-between">
                     <Text className="text-xl ml-4">{jobTitle}</Text>
                     <View>
-                        <Image source={heartNotFilled} className="w-6 h-5 mt-2 mr-2" />
+                        <AntDesign name='hearto' size={30}/>
                     </View>
                 </View>
                 <View className="flex-1 flex-row">
