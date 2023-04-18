@@ -7,8 +7,8 @@ const SearchScreen = () => {
     const [serverResponse, setServerResponse] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
-    const [University, setUniversity] = useState("");
-    const [Education, setEducation] = useState(""); // lägga till termin och kanske bild i user table?
+    const [university, setUniversity] = useState("");
+    const [education, setEducation] = useState(""); // lägga till termin och kanske bild i user table?
     const [emailAdress, setEmailAdress] = useState("");
     const [password, setPassword] = useState("");
     const [emailAdressAuth, setEmailAdressAuth] = useState("");
@@ -46,7 +46,7 @@ const SearchScreen = () => {
         setEducation(text);
     }
 
-    const registerUser = async (emailAddressToSend,passwordToSend, firstNameToSend, lastNameToSend, UniversityToSend, EducationToSend) => {
+    const registerUser = async (emailAddressToSend, passwordToSend, firstNameToSend, lastNameToSend, UniversityToSend, EducationToSend) => {
         try {
             const response = await fetch("http://127.0.0.1:8000/api/testResponse", {
                 method: "POST",
@@ -115,6 +115,7 @@ const SearchScreen = () => {
         <View className="flex-1 justify-evenly">
 
             <View>
+            <Text> first name: {firstName}, last name: {lastName}</Text>
             <TextInput
                     style={{ height: 40, borderColor: "blue", borderWidth: 1 }}
                     placeholder="First name"
@@ -135,7 +136,7 @@ const SearchScreen = () => {
                     style={{ height: 40, borderColor: "blue", borderWidth: 1 }}
                     placeholder="University"
                     onChangeText={onChangeUniversity}
-                    value={University}
+                    value={university}
                 >
                 </TextInput>
 
@@ -143,7 +144,7 @@ const SearchScreen = () => {
                     style={{ height: 40, borderColor: "blue", borderWidth: 1 }}
                     placeholder="Education"
                     onChangeText={onChangeEducation}
-                    value={Education}
+                    value={education}
                 >
                 </TextInput>
                 
@@ -162,7 +163,7 @@ const SearchScreen = () => {
                 >
                 </TextInput>
                 
-                <TouchableOpacity onPress={() => registerUser(emailAdress,password, firstName, lastName, University, Education)}>
+                <TouchableOpacity onPress={() => registerUser(emailAdress, password, firstName, lastName, university, education)}>
                     <Text>Send email and password to the server</Text>
                 </TouchableOpacity>
                 {serverResponse !== "" && ( // render the server response if it's not an empty string
