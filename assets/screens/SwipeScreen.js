@@ -84,12 +84,18 @@ const SwipeScreen = () => {
                 <Image style={{flex: 1, justifyContent: 'center', height: '30%', margin: '5%', borderRadius: 5}} source={{uri: card.photoURL}}/>
                 <Text className = 'font-bold text-4xl mt-5 text-center'>{card.jobTitle}</Text>
                 <Text className = 'text-xl mt-5 text-center'>{card.jobDesc}</Text>
-                
+
+                {/*
+                <View className = 'flex-1 flex-row'>
+                    <Text style={{fontSize: 20, margin: 5, paddingHorizontal: 10, paddingVertical: 5, backgroundColor: '#e0f2fe', height: 35, borderRadius: 15, borderWidth: 1, borderColor: '#bae6fd', overflow: "hidden"}}>Heltid</Text>
+                    <Text style={{fontSize: 20, margin: 5, paddingHorizontal: 10, paddingVertical: 5, backgroundColor: '#e0f2fe', height: 35, borderRadius: 15, borderWidth: 1, borderColor: '#bae6fd', overflow: "hidden"}}>Finans</Text>
+                </View>
+        */}
                 <View className ="flex-1 flex-row">
-                     <View className = "flex-1 items-end mt-5 pt-12">
+                     <View className = "flex-1 items-end mt-5 pt-5">
                         <Entypo name='location-pin' size={54}/>
                     </View>
-                    <View className = "flex-1 items-center mt-5 pt-12 mr-10 pr-10"> 
+                    <View className = "flex-1 items-center mt-5 pt-5 mr-10 pr-10"> 
                         <Text className=" flex-1 text-xl">{card.jobLocation}</Text>
                     </View>
                 </View>

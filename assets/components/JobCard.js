@@ -9,9 +9,12 @@ import { AntDesign, Ionicons, Entypo, MaterialIcons } from '@expo/vector-icons'
 
 const JobCard = ({ jobIcon, jobTitle, employer }) => {
     return (
-        <View className="flex-1 flex-row h-28 mb-4 bg-pink-50 shadow ml-4 mr-4">
-            <View className="w-20 h-16 flex justify-center items-center mt-6 ml-2">
-                <Image source={jobIcon} className="w-11/12 h-full object-contain" />
+
+        
+        <View className="flex-1 flex-row h-28 mb-4 ml-4 mr-4 border border-indigo-600 font-railway">
+            <View className=" w-3/12 h-28 justify-center">
+            <Image source={jobIcon} className="w-20 h-16 ml-3"/>
+
             </View>
 
 
@@ -24,14 +27,14 @@ const JobCard = ({ jobIcon, jobTitle, employer }) => {
                     </View>
                 </View>
                 <View className="flex-1 flex-row">
-                    <Text className="text-lg ml-4">{employer}</Text>
-                    <Text className="text-lg ml-4">Stockholm</Text>
-                    <Text className="text-lg ml-4">2021-08-02</Text>
+                    <Text className="text-sm ml-4">{employer}</Text>
+                    <Text className="text-sm ml-4">Stockholm</Text>
+                    <Text className="text-sm ml-4">2021-08-02</Text>
                 </View>
                 <View className="flex-1 flex-row">
-                    <Text className="text-lg ml-4">144kr/h</Text>
-                    <Text className="text-lg ml-4">8 veckor</Text>
-                    <Text className="text-lg ml-4">Erfarenhet krävs</Text>
+                    <Text className="text-sm ml-4">144kr/h</Text>
+                    <Text className="text-sm ml-4">8 veckor</Text>
+                    <Text className="text-sm ml-4">Erfarenhet krävs</Text>
                 </View>
             </View>
         </View>

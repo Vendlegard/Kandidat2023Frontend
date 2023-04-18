@@ -10,11 +10,21 @@ import AFRY from '../images/AFRY.png'
 
 
 const LikeScreen = () => {
+
+
     const [searchText, setSearchText] = useState("");
 
     const handleSearchTextChange = (text) => {
         setSearchText(text);
     };
+
+    const [jobsToLoad, setJobsToLoad] = useState([]);
+
+    const handleSetJobs = (object) => {
+        setJobsToLoad(object);
+    }
+
+
 
     const [serverResponse, setServerResponse] = useState("");
 
@@ -22,8 +32,19 @@ const LikeScreen = () => {
         try {
             const response = await fetch("http://127.0.0.1:8000/api/fetchJobs");
             const data = await response.json();
-            console.log(data);
             setServerResponse(data.message); // set the server response as state
+            var listOfJobs = data.message;
+            setJobsToLoad([]);
+            for ( let i = 0; i<listOfJobs.length; i++){
+                let objectToPush = { 
+                    employer : "",
+                    jobName: ""
+                }
+                objectToPush.jobName = listOfJobs[i][0];
+                objectToPush.employer = listOfJobs[i][1];
+                setJobsToLoad(previousJobs => [...previousJobs, objectToPush]);
+            }
+            console.log(jobsToLoad.length);
         } catch (error) {
             console.error(error);
         }
@@ -47,7 +68,7 @@ const LikeScreen = () => {
                 </View>
                 <JobCard
                     jobIcon={SEB}
-                    jobTitle="Internship"
+                    jobTitle="Jobs"
                     employer="SEB"
                 />
                 <JobCard
