@@ -5,6 +5,8 @@ import SEB from "../images/SEB.jpeg";
 import sweco from "../images/sweco.png";
 import vattenfall from "../images/vattenfall.jpeg";
 import { AntDesign, Ionicons, Entypo, MaterialIcons } from '@expo/vector-icons'
+import vattenfallPic from '../images/vattenfallPic.png'
+import AFRY from '../images/AFRY.png'
 
 
 const LikeScreen = () => {
@@ -52,8 +54,6 @@ const LikeScreen = () => {
     return (
         <ScrollView>
             <View className="flex-1">
-                <Text> {jobsToLoad.employer}</Text>
-                <Text> {jobsToLoad.jobName}</Text>
                 <TouchableOpacity onPress={fetchJobs}>
                     <Text>{serverResponse}</Text>
                     <Text> Get jobs</Text>
@@ -71,12 +71,16 @@ const LikeScreen = () => {
                     jobTitle="Jobs"
                     employer="SEB"
                 />
-                {jobsToLoad.map(job => (
-                    <JobCard
-                    jobIcon={SEB}
-                    jobTitle = {job.jobName} 
-                    employer = {job.employer}/>
-                ))}
+                <JobCard
+                    jobIcon={AFRY}
+                    jobTitle="Deltid"
+                    employer="Sweco"
+                />
+                <JobCard
+                    jobIcon={vattenfallPic}
+                    jobTitle="Dankat sommarjobb"
+                    employer="Vattenfall"
+                />
             </View>
         </ScrollView>
     );
