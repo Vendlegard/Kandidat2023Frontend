@@ -1,45 +1,68 @@
-import React, {useState, useRef} from "react";
+import React, {useState, useRef, useEffect} from "react";
 import {View, Text, SafeAreaView, Image} from "react-native";
-{/* import CardComp from "../components/CardComp"; */}
-import SEB from "../images/SEB.jpeg";
-import vattenfall from "../images/vattenfall.jpeg";
-import sweco from "../images/sweco.png"
 import Swiper from "react-native-deck-swiper";
-import location from "../images/location.png";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { AntDesign, Ionicons, Entypo } from '@expo/vector-icons'
+import { AntDesign, Entypo } from '@expo/vector-icons';
 
 
-
-
-
-const testCards = [
-    {jobIcon: {SEB},
-    jobTitle: "Internship",
-    jobDesc: "Vi söker dig som studerar ekonomi för att delta i vårt traineeprogram",
-    jobLocation: "Solna kommun, Stockholms län",
+ let testCards = [
+    {
+    title: "Internship",
+    desc: "Vi söker dig som studerar ekonomi för att delta i vårt traineeprogram",
+    location: "Solna kommun, Stockholms län",
     photoURL: "https://sebgroup.com/ImageVault/publishedmedia/nkuwms2up8mjzxmomo6p/SEB_Logotypes.jpg",
-    id: 123,
+    idJobs: 123,
     },
-    {jobIcon: {vattenfall},
-    jobTitle: "Sommarjobb",
-    jobDesc: "Ingenjörsstudent sökes till sommarjobb",
-    jobLocation: "Uppsala, Uppsala län",
+    {
+    title: "Sommarjobb",
+    desc: "Ingenjörsstudent sökes till sommarjobb",
+    location: "Uppsala, Uppsala län",
     photoURL: "https://cached-images.bonnier.news/gcs/di-bilder-prod/media/44de0244a8cd1b93ed81ce44af590011.jpg",
-    id: 456,
+    idJobs: 456,
     },
-    {jobIcon: {sweco},
-    jobTitle: "Sommarjobb",
-    jobDesc: "Prova på att vara konsult för sommaren",
-    jobLocation: "Västerås, Västerås län",
+    {
+    title: "Sommarjobb",
+    desc: "Prova på att vara konsult för sommaren",
+    location: "Västerås, Västerås län",
     photoURL: "https://www.swecogroup.com/wp-content/uploads/sites/2/2021/03/sweco_black.png",
-    id: 789,
+    idJobs: 789,
     }
 ];
 
 
 const SwipeScreen = () => {
     const swipeRef = useRef(null);
+
+
+    const [jobs, setJobs] = useState([]); //används om man kan ladda från Django databasen
+
+
+    useEffect(() => {
+        fetchJobs();
+        console.log("fetch jobs should've ran")
+    }
+    , []);
+
+
+
+
+
+    const fetchJobs = async () => {
+        try {
+            const response = await fetch("http://127.0.0.1:8000/api/fetchJobs", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+            const data = await response.json();
+            setJobs(data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+
 
     return (
     <SafeAreaView className = 'flex-1 -mt-8'>
@@ -48,7 +71,7 @@ const SwipeScreen = () => {
         ref = {swipeRef}
         containerStyle={{backgroundColor: '#FFFFFF'}}
         cards = {testCards}
-        stackSize = {3} /* Amount of cards (companies) in the deck*/
+        stackSize = {5} /* Amount of cards (companies) in the deck*/
         cardIndex = {0}        /*Start from card 0 in the deck*/
         animateCardOpacity
         verticalSwipe = {false}
@@ -78,23 +101,28 @@ const SwipeScreen = () => {
                 },
             },
         }}
-        renderCard={(card) => (
+        renderCard={(card) => card ?  (
            
-            <View style = {{backgroundColor: 'rgb(244 244 245)', height: '75%', borderRadius: 15, shadowColor: '#000', shadowOffset: {width:0, height: 2}, shadowOpacity: 0.25, shadoRadius: 3, elevation: 2}} key = {card.id}>
+            <View style = {{backgroundColor: 'rgb(244 244 245)', height: '75%', borderRadius: 15, shadowColor: '#000', shadowOffset: {width:0, height: 2}, shadowOpacity: 0.25, shadoRadius: 3, elevation: 2}} key = {card.idJobs}>
                 <Image style={{flex: 1, justifyContent: 'center', height: '30%', margin: '5%', borderRadius: 5}} source={{uri: card.photoURL}}/>
-                <Text className = 'font-bold text-4xl mt-5 text-center'>{card.jobTitle}</Text>
-                <Text className = 'text-xl mt-5 text-center'>{card.jobDesc}</Text>
+                <Text className = 'font-bold text-4xl mt-5 text-center'>{card.title}</Text>
+                <Text className = 'text-xl mt-5 text-center'>{card.desc}</Text>
                 
                 <View className ="flex-1 flex-row">
                      <View className = "flex-1 items-end mt-5 pt-12">
                         <Entypo name='location-pin' size={54}/>
                     </View>
                     <View className = "flex-1 items-center mt-5 pt-12 mr-10 pr-10"> 
-                        <Text className=" flex-1 text-xl">{card.jobLocation}</Text>
+                        <Text className=" flex-1 text-xl">{card.location}</Text>
                     </View>
                 </View>
             </View>
-         )} 
+         ) : (
+
+             <View>
+                 <Text> Vi väntar</Text>
+             </View>
+        )}
         />
     </View>
 
@@ -113,7 +141,6 @@ const SwipeScreen = () => {
                 <AntDesign name='heart' size={30}/>
             </TouchableOpacity>
         </View>
-    
     </SafeAreaView> 
     );
 };
