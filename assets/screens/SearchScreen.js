@@ -5,6 +5,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SearchScreen = () => {
     const [serverResponse, setServerResponse] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [University, setUniversity] = useState("");
+    const [Education, setEducation] = useState(""); // lägga till termin och kanske bild i user table?
     const [emailAdress, setEmailAdress] = useState("");
     const [password, setPassword] = useState("");
     const [emailAdressAuth, setEmailAdressAuth] = useState("");
@@ -27,7 +31,22 @@ const SearchScreen = () => {
         setPassword(text);
     }
 
-    const registerUser = async (emailAddressToSend,passwordToSend) => {
+    const onChangeFirstName = (text) => {
+        setFirstName(text);
+    }
+    const onChangeLastName = (text) => {
+        setLastName(text);
+    }
+
+    const onChangeUniversity = (text) => {
+        setUniversity(text);
+    }
+
+    const onChangeEducation = (text) => {
+        setEducation(text);
+    }
+
+    const registerUser = async (emailAddressToSend,passwordToSend, firstNameToSend, lastNameToSend, UniversityToSend, EducationToSend) => {
         try {
             const response = await fetch("http://127.0.0.1:8000/api/testResponse", {
                 method: "POST",
@@ -37,6 +56,10 @@ const SearchScreen = () => {
                 body: JSON.stringify({
                     email: emailAddressToSend,
                     password: passwordToSend,
+                    firstName: firstNameToSend,
+                    lastName: lastNameToSend,
+                    university: UniversityToSend,
+                    education: EducationToSend,
                 }),
             });
             const data = await response.json();
@@ -92,6 +115,38 @@ const SearchScreen = () => {
         <View className="flex-1 justify-evenly">
 
             <View>
+            <TextInput
+                    style={{ height: 40, borderColor: "blue", borderWidth: 1 }}
+                    placeholder="First name"
+                    onChangeText={onChangeFirstName}
+                    value={firstName}
+                >
+                </TextInput>
+            
+                <TextInput
+                    style={{ height: 40, borderColor: "blue", borderWidth: 1 }}
+                    placeholder="Last name"
+                    onChangeText={onChangeLastName}
+                    value={lastName}
+                >
+                </TextInput>
+
+                <TextInput
+                    style={{ height: 40, borderColor: "blue", borderWidth: 1 }}
+                    placeholder="University"
+                    onChangeText={onChangeUniversity}
+                    value={University}
+                >
+                </TextInput>
+
+                <TextInput
+                    style={{ height: 40, borderColor: "blue", borderWidth: 1 }}
+                    placeholder="Education"
+                    onChangeText={onChangeEducation}
+                    value={Education}
+                >
+                </TextInput>
+                
                 <Text> email sent is: {emailAdress}, password sent is: {password}</Text>
                 <TextInput
                     style={{ height: 40, borderColor: "blue", borderWidth: 1 }}
@@ -106,7 +161,8 @@ const SearchScreen = () => {
                     value={password}
                 >
                 </TextInput>
-                <TouchableOpacity onPress={() => registerUser(emailAdress,password)}>
+                
+                <TouchableOpacity onPress={() => registerUser(emailAdress,password, firstName, lastName, University, Education)}>
                     <Text>Send email and password to the server</Text>
                 </TouchableOpacity>
                 {serverResponse !== "" && ( // render the server response if it's not an empty string
