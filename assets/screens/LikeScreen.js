@@ -29,7 +29,7 @@ const LikeScreen = () => {
 
     return (
         <ScrollView>
-            <View className="flex-1">
+            <View className="flex-1 bg-white">
                 <TouchableOpacity onPress={fetchJobs}>
                     <Text>{serverResponse}</Text>
                     <Text> Get jobs</Text>
@@ -57,6 +57,10 @@ const LikeScreen = () => {
                     jobTitle="Dankat sommarjobb"
                     employer="Vattenfall"
                 />
+                <View className="bg-pink">
+        
+    
+                </View>
             </View>
         </ScrollView>
     );
