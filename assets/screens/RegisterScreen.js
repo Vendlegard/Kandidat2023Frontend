@@ -19,7 +19,7 @@ import React, {useState} from "react";
 import {View, Text, TextInput, Button, TouchableOpacity}  from "react-native";
 
 //create a basic component
-const RegisterScreen = () => {
+const RegisterScreen = ({updateRegisterState}) => {
 
     const [serverResponse, setServerResponse] = useState("");
     const [firstName, setFirstName] = useState("");
@@ -81,6 +81,10 @@ const RegisterScreen = () => {
         }
     };
 
+    function goBackToLogin() {
+        updateRegisterState(false);
+    }
+
     return (
         <View className="flex-1 justify-center">
             <Text> first name: {firstName}, last name: {lastName}</Text>
@@ -136,6 +140,9 @@ const RegisterScreen = () => {
             {serverResponse !== "" && ( // render the server response if it's not an empty string
                 <Text>Server response: {serverResponse}</Text>
             )}
+
+            <Button title={"Go back to login"} onPress={goBackToLogin}>
+            </Button>
         </View>
     );
 
