@@ -20,7 +20,10 @@ export default function App() {
     return (
         <View className="flex-1 bg-amber-100">
             <StatusBar style="auto" />
-            <BottomNavigation />
+                {loggedIn ?
+                <BottomNavigation/> 
+                : <LoginScreen updateLoggedInState={updateLoggedInState} />}
+            
         </View>
         
     );

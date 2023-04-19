@@ -15,36 +15,33 @@ const SearchScreen = () => {
     const [passwordAuth, setPasswordAuth] = useState("");
     const [token, setToken] = useState("");
 
+    
+
     const onChangeEmailAdressAuth = (text) => {
         setEmailAdressAuth(text);
     }
-
     const onChangePasswordAuth = (text) => {
         setPasswordAuth(text);
     }
-
     const onChangeEmailAdress = (text) => {
         setEmailAdress(text);
     }
-
     const onChangePassword = (text) => {
         setPassword(text);
     }
-
     const onChangeFirstName = (text) => {
         setFirstName(text);
     }
     const onChangeLastName = (text) => {
         setLastName(text);
     }
-
     const onChangeUniversity = (text) => {
         setUniversity(text);
     }
-
     const onChangeEducation = (text) => {
         setEducation(text);
     }
+
 
     const registerUser = async (emailAddressToSend, passwordToSend, firstNameToSend, lastNameToSend, UniversityToSend, EducationToSend) => {
         try {
