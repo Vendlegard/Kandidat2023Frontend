@@ -82,7 +82,7 @@ const RegisterScreen = () => {
     };
 
     return (
-        <View>
+        <View className="flex-1 justify-center">
             <Text> first name: {firstName}, last name: {lastName}</Text>
             <TextInput
                 style={{ height: 40, borderColor: "blue", borderWidth: 1 }}

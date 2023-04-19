@@ -30,16 +30,19 @@ export default function App() {
 
 
         <View className="flex-1 bg-amber-100">
-
-            <StatusBar style="auto" />
-                {loggedIn ?
+            {loggedIn ? (
                 <BottomNavigation/>
-                : <LoginScreen updateLoggedInState={updateLoggedInState}
-                               updateRegisterState={updateRegisterStatus}
-                    />}
-            {registerStatus ? <RegisterScreen/> : null}
-
+            ) : registerStatus ? (
+                <RegisterScreen />
+            ) : (
+                <LoginScreen
+                    updateLoggedInState={updateLoggedInState}
+                    updateRegisterState={updateRegisterStatus}
+                />
+            )}
         </View>
+
+
 
         
     );
