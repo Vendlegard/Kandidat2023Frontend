@@ -20,7 +20,6 @@ export default function App() {
     const [registerStatus, setRegisterStatus] = useState(false);
     const updateRegisterStatus = (value) => {
         setRegisterStatus(value);
-        console.log("registerStatus: " + registerStatus)
     };
 
 
@@ -30,16 +29,20 @@ export default function App() {
 
 
         <View className="flex-1 bg-amber-100">
-
-            <StatusBar style="auto" />
-                {loggedIn ?
+            {loggedIn ? (
                 <BottomNavigation/>
-                : <LoginScreen updateLoggedInState={updateLoggedInState}
-                               updateRegisterState={updateRegisterStatus}
-                    />}
-            {registerStatus ? <RegisterScreen/> : null}
-
+            ) : registerStatus ? (
+                <RegisterScreen
+                updateRegisterState={updateRegisterStatus}/>
+            ) : (
+                <LoginScreen
+                    updateLoggedInState={updateLoggedInState}
+                    updateRegisterState={updateRegisterStatus}
+                />
+            )}
         </View>
+
+
 
         
     );
