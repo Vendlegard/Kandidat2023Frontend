@@ -3,7 +3,7 @@ import {View, Text, TextInput, Button, TouchableOpacity}  from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-const LoginScreen = ({ updateLoggedInState }) => {
+const LoginScreen = ({ updateLoggedInState, updateRegisterState }) => {
     const [serverResponse, setServerResponse] = useState("");
     const [emailAdressAuth, setEmailAdressAuth] = useState("");
     const [passwordAuth, setPasswordAuth] = useState("");
@@ -61,11 +61,10 @@ const LoginScreen = ({ updateLoggedInState }) => {
         }
     }
 
-    function handleLogin() {
-        console.log("handleLogin was pressed")
-        if (emailAdressAuth === "Admin" && passwordAuth === "Password") {
-            updateLoggedInState(true);
-        }
+
+    function handleRegister() {
+        console.log("handleRegister was pressed")
+        updateRegisterState(true);
     }
 
     return (
@@ -96,6 +95,14 @@ const LoginScreen = ({ updateLoggedInState }) => {
                     <Text>Get Token</Text>
                 </TouchableOpacity>
             </View>
+
+            <View>
+                <Text> Här reggar vi någon </Text>
+                <TouchableOpacity onPress={() => handleRegister()}>
+                    <Text>Regga knapp</Text>
+                </TouchableOpacity>
+            </View>
+
 
         </View>
 
