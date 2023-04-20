@@ -22,6 +22,17 @@ export default function App() {
         setRegisterStatus(value);
     };
 
+    const [firstTimeLoggingIn, setFirstTimeLoggingIn] = useState(true);
+
+    const updateFirstTimeLoggingIn = (value) => {
+        setFirstTimeLoggingIn(value);
+    }
+
+    function finished(){
+        console.log("finshed called in app.js");
+        setLoggedIn(true);
+    }
+
 
 
     return (
@@ -33,7 +44,13 @@ export default function App() {
                 <BottomNavigation/>
             ) : registerStatus ? (
                 <RegisterScreen
-                updateRegisterState={updateRegisterStatus}/>
+                    updateRegisterState={updateRegisterStatus}
+                    firstTimeLoggingIn={updateFirstTimeLoggingIn}
+                />
+            ) : firstTimeLoggingIn ? (
+                <CompetenceScreen
+                finishedToApp={finished}
+                />
             ) : (
                 <LoginScreen
                     updateLoggedInState={updateLoggedInState}
@@ -44,6 +61,6 @@ export default function App() {
 
 
 
-        
+
     );
 }

@@ -19,7 +19,7 @@ import React, {useState} from "react";
 import {View, Text, TextInput, Button, TouchableOpacity}  from "react-native";
 
 //create a basic component
-const RegisterScreen = ({updateRegisterState}) => {
+const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn}) => {
 
     const [serverResponse, setServerResponse] = useState("");
     const [firstName, setFirstName] = useState("");
@@ -59,6 +59,10 @@ const RegisterScreen = ({updateRegisterState}) => {
     }
 
     const registerUser = async (emailAddressToSend, passwordToSend, firstNameToSend, lastNameToSend, UniversityToSend, EducationToSend) => {
+        if(emailAddressToSend === "" || passwordToSend === "" || firstNameToSend === "" || lastNameToSend === "" || UniversityToSend === "" || EducationToSend === "") {
+            alert("Please fill in all fields");
+            return;
+        }
         try {
             const response = await fetch("http://127.0.0.1:8000/api/testResponse", {
                 method: "POST",
@@ -76,6 +80,8 @@ const RegisterScreen = ({updateRegisterState}) => {
             });
             const data = await response.json();
             setServerResponse(data.message);
+            firstTimeLoggingIn(true);
+            updateRegisterState(false);
         } catch (error) {
             console.error(error);
         }

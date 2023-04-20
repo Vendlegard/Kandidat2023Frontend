@@ -17,13 +17,23 @@
 
 import React, {useState} from "react";
 import {View, Text, TextInput, Button, TouchableOpacity}  from "react-native";
+import InterestComponent from "../components/InterestComponent";
+
 
 //create a basic component
-const CompetenceScreen = () => {
+const CompetenceScreen = ({finishedToApp}) => {
+
+    function finishedRecevied(){
+        console.log("vi tog emot finished från interestcomponent");
+        finishedToApp();
+    }
+
 
     return (
-        <View>
-            <Text>CompetenceScreen</Text>
+        <View className="flex-1 items-center justify-center">
+            <InterestComponent
+            finishedEmit={finishedRecevied}
+            />
         </View>
     );
 
