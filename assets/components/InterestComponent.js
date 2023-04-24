@@ -25,6 +25,7 @@ const InterestComponent = ({finishedEmit}) => {
     [lookingFor, setLookingFor] = useState(["Sommarjobb", "Deltid", "Trainee", "Internship", "Exjobb", "Timanställning"]);
     [userLookingFor, setUserLookingFor] = useState([]);
     [userCompetencies, setUserCompetencies] = useState(["C#", "Java", "Python"]);
+    [dontRun, setdontRun] = useState(true);
 
 
     [answer, setanswer] = useState({
@@ -73,10 +74,33 @@ const InterestComponent = ({finishedEmit}) => {
     }
 
     function finishButton(){
+        if(dontRun){
+            return;
+        }
         console.log("här går en sql Call iväg och när responsen ok går vi tillbaka till appens första sida");
-        setfinished(true);
-        finishedEmit();
+       // setfinished(true);
+       // finishedEmit();
+        writeCompAndInterest("Vickanmejl", answer.userCompenencies, answer.lookingForPreferences);
     }
+
+    const writeCompAndInterest = async (emailAddressToSend, competenciesToSend, interestsToSend) => {
+        try {
+            const response = await fetch("http://127.0.0.1:8000/api/writeCompAndInt", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    email: emailAddressToSend,
+                    competencies: competenciesToSend,
+                    interests: interestsToSend,
+                }),
+            });
+            const data = await response.json();
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
 
 

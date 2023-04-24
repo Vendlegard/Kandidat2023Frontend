@@ -31,7 +31,7 @@ const InterestAndCompetenceButtonComponent = ({text, addToLookingFor, index}) =>
             </TouchableOpacity>
         </View>
         ) : (
-        <View className="flex-0 bg-lightgreen w-2/5 h-12 flex-row-reverse mr-12
+        <View className="flex-0 bg-lightgreen w-2/5 h-12 flex-row-reverse
              rounded-3xl border justify-center items-center mr-52 mt-2">
             <TouchableOpacity className="mr-4" onPress={() => addInterestToProfile(text)}>
                 <Text>
