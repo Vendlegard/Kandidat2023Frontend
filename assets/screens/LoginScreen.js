@@ -3,6 +3,7 @@ import {View, Text, TextInput, Button, TouchableOpacity}  from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
+
 const LoginScreen = ({ updateLoggedInState, updateRegisterState }) => {
     const [serverResponse, setServerResponse] = useState("");
     const [emailAdressAuth, setEmailAdressAuth] = useState("");
@@ -120,7 +121,7 @@ const LoginScreen = ({ updateLoggedInState, updateRegisterState }) => {
             </View>
 
             <View className="absolute bottom-10 justify-center items-center mb-10" >
-                <Text className="font-raleway text-xl "> Don't have an account yet? </Text>
+                <Text className="text-xl "> Don't have an account yet? </Text>
                 <TouchableOpacity className="bg-black w-20 h-8 justify-center items-center rounded-xl m-4"onPress={() => handleRegister()}>
                     <Text className="text-white text-sm">SIGNUP</Text>
                 </TouchableOpacity>
