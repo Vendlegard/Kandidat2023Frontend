@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Dimensions, TextInput, Image } from "react-native";
+import React, { useState, useEffect } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Dimensions, TextInput, Image, Animated } from "react-native";
 import Svg, { Path } from 'react-native-svg';
 import profilePicture from '../images/profilePicture.png'
 import schoolPic from '../images/schoolPic.png'
@@ -12,6 +12,8 @@ import profilePic from '../images/profilePic.png'
 
 const ProfileScreen = () => {
     const [isProfileEdited, setIsProfileEdited] = useState(false);
+    const [bubblesAnimation] = useState(new Animated.Value(0));
+
 
     const handleEditProfile = () => {
         setIsProfileEdited(true);
@@ -26,11 +28,37 @@ const ProfileScreen = () => {
         setIsProfileEdited(false);
         // Add navigation logic here to navigate to the logout screen or perform logout action
     };
+    useEffect(() => {
+        // Define an animation sequence for the bubbles
+        const sequence = Animated.sequence([
+            Animated.timing(bubblesAnimation, { toValue: -10, duration: 6000, useNativeDriver: true }),
+            Animated.timing(bubblesAnimation, { toValue: 0, duration: 6000, useNativeDriver: true }),
+            Animated.timing(bubblesAnimation, { toValue: 10, duration: 6000, useNativeDriver: true }),
+            Animated.timing(bubblesAnimation, { toValue: 0, duration: 6000, useNativeDriver: true })
+        ]);
+
+        // Start the animation loop
+        Animated.loop(sequence).start();
+    }, []);
+
+    const bubbleStyle = {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: 50,
+        height: 50,
+        borderRadius: 25,
+        backgroundColor: 'rgb(20, 52, 164)',
+        transform: [
+            { translateY: bubblesAnimation },
+            { translateX: bubblesAnimation }
+        ]
+    };
 
 
 
     return (
-        <View className="flex-1">
+        <View className="flex-1 bg-white">
 
 
             {isProfileEdited ? (
@@ -49,15 +77,11 @@ const ProfileScreen = () => {
                         {/* Profile Bubbles */}
                         <View className="absolute top-0 left-0">
                             {/* ProfileScreen Bubble */}
-                            <View className="w-28 h-28 bg-profileScreen rounded-full -mt-3 -ml-2"></View>
-
+                            <Animated.View style={[bubbleStyle, { backgroundColor: 'rgb(137, 207, 240)' }]} />
                             {/* Pink Bubble */}
-                            <View className="w-20 h-20 bg-purple rounded-full -mt-8 ml-8"></View>
-
+                            <Animated.View style={[bubbleStyle, { opacity: 0.8, top: 30, left: 30, backgroundColor: 'rgb(20, 52, 164)' }]} />
                             {/* Gray Bubble */}
-                            <View className="absolute top-0 left-full mt-8 ml-2">
-                                <View className="w-14 h-14 bg-lightgray rounded-full -ml-10"></View>
-                            </View>
+                            <Animated.View style={[bubbleStyle, { opacity: 0.5, top: -20, left: 50, width: 70, height: 70, borderRadius: 35, backgroundColor: 'rgb(100, 149, 237)' }]} />
                         </View>
 
                     </View>
@@ -166,7 +190,7 @@ const ProfileScreen = () => {
                                     style={styles.topWavy}
                                 >
                                     <Path
-                                        fill="#B3EADF"
+                                        fill="#6699CC"
                                         d="M0,64L60,96C120,128,240,192,360,202.7C480,213,600,171,720,138.7C840,107,960,85,1080,112C1200,139,1320,213,1380,250.7L1440,288L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"
                                     />
                                 </Svg>

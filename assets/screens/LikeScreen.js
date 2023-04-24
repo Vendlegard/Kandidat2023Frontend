@@ -2,8 +2,6 @@ import React, {useState} from "react";
 import {View, TextInput, Text, ScrollView, TouchableOpacity} from "react-native";
 import JobCard from "../components/JobCard";
 import SEB from "../images/SEB.jpeg";
-import sweco from "../images/sweco.png";
-import vattenfall from "../images/vattenfall.jpeg";
 import { AntDesign, Ionicons, Entypo, MaterialIcons } from '@expo/vector-icons'
 import vattenfallPic from '../images/vattenfallPic.png'
 import AFRY from '../images/AFRY.png'
@@ -68,18 +66,33 @@ const LikeScreen = () => {
                 </View>
                 <JobCard
                     jobIcon={SEB}
-                    jobTitle="Jobs"
+                    jobTitle="Extrajobb"
                     employer="SEB"
+                    location="Stockholm"
+                    date="2023-02-11"
+                    wage="144 kr/h"
+                    duration="8 veckor"
+                    experience="Erfarenhet krävs"
                 />
                 <JobCard
                     jobIcon={AFRY}
                     jobTitle="Deltid"
-                    employer="Sweco"
+                    employer="AFRY"
+                    location="Uppsala"
+                    date="2023-02-11"
+                    wage="150 kr/h"
+                    duration="8 veckor"
+                    experience="Erfarenhet krävs"
                 />
                 <JobCard
                     jobIcon={vattenfallPic}
-                    jobTitle="Dankat sommarjobb"
+                    jobTitle="Sommarjobb"
                     employer="Vattenfall"
+                    location="Stockholm"
+                    date="2023-02-11"
+                    wage="140 kr/h"
+                    duration="6 veckor"
+                    experience="Erfarenhet krävs"
                 />
             </View>
         </ScrollView>
