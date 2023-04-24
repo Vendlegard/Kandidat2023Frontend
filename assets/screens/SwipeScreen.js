@@ -101,8 +101,7 @@ const SwipeScreen = () => {
             },
         }}
         renderCard={(card) => card ? (
-           
-            <View style = {{backgroundColor: 'rgb(244 244 245)', height: '75%', borderRadius: 15, shadowColor: '#000', shadowOffset: {width:0, height: 2}, shadowOpacity: 0.25, shadoRadius: 3, elevation: 2}} key = {card.id}>
+            <View key = {card.id} style = {{backgroundColor: 'rgb(244 244 245)', height: '75%', borderRadius: 15, shadowColor: '#000', shadowOffset: {width:0, height: 2}, shadowOpacity: 0.25, shadoRadius: 3, elevation: 2}}>
                 <Image style={{flex: 1, justifyContent: 'center', height: '30%', margin: '5%', borderRadius: 5}} source={{uri: card.photoURL}}/>
                 <Text className = 'font-bold text-4xl mt-5 text-center'>{card.title}</Text>
                 <Text className = 'text-xl mt-5 text-center'>{card.desc}</Text>
@@ -116,10 +115,14 @@ const SwipeScreen = () => {
                     </View>
                 </View>
             </View>
-         ): (
-             <View>
-                    <Text>NO MORE CARDS</Text>
-                </View>
+
+         ) : (
+            
+            <View style = {{position: 'relative', justifyContent: 'center', alignContent: 'center', alignItems: 'center', backgroundColor: 'rgb(244 244 245)', height: '75%', borderRadius: 15, shadowColor: '#000', shadowOffset: {width:0, height: 2}, shadowOpacity: 0.25, shadoRadius: 3, elevation: 2}}>
+                <Text className = 'font-bold pb-5'>No more companies</Text>
+                <Entypo name='emoji-sad' size={70}/>
+            </View>
+           
         )
         }
         />

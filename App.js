@@ -4,6 +4,8 @@ import React, {useState} from "react";
 import BottomNavigation from "./assets/navigation/BottomNavigation";
 import LoginScreen from "./assets/screens/LoginScreen";
 import { NavigationContainer } from '@react-navigation/native';
+import CompetenceScreen from "./assets/screens/CompetenceScreen";
+import RegisterScreen from "./assets/screens/RegisterScreen";
 
 
 
@@ -15,13 +17,50 @@ export default function App() {
         setLoggedIn(value);
     };
 
+    const [registerStatus, setRegisterStatus] = useState(false);
+    const updateRegisterStatus = (value) => {
+        setRegisterStatus(value);
+    };
+
+    const [firstTimeLoggingIn, setFirstTimeLoggingIn] = useState(true);
+
+    const updateFirstTimeLoggingIn = (value) => {
+        setFirstTimeLoggingIn(value);
+    }
+
+    function finished(){
+        console.log("finshed called in app.js");
+        setLoggedIn(true);
+    }
+
 
 
     return (
+
+
+
         <View className="flex-1 bg-amber-100">
-            <StatusBar style="auto" />
-            <BottomNavigation />
+            {loggedIn ? (
+                <BottomNavigation/>
+            ) : registerStatus ? (
+                <RegisterScreen
+                    updateRegisterState={updateRegisterStatus}
+                    firstTimeLoggingIn={updateFirstTimeLoggingIn}
+                />
+            ) : firstTimeLoggingIn ? (
+                <CompetenceScreen
+                finishedToApp={finished}
+                />
+            ) : (
+                <LoginScreen
+                    updateLoggedInState={updateLoggedInState}
+                    updateRegisterState={updateRegisterStatus}
+                />
+            )}
         </View>
-        
+
+
+
+
     );
 }
