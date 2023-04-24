@@ -1,5 +1,5 @@
 import React, {useState, useRef} from "react";
-import {View, Text, SafeAreaView, Image} from "react-native";
+import {View, Text, SafeAreaView, Image, Pressable} from "react-native";
 import SEB from "../images/SEB.jpeg";
 import vattenfall from "../images/vattenfall.jpeg";
 import sweco from "../images/sweco.png"
@@ -39,7 +39,12 @@ let testCards = [
 const SwipeScreen = () => {
     const swipeRef = useRef(null);
     const [jobs, setJobs] = useState([]);
+    const [card, setCards] = useState(true);
 
+    const handleSwipedAll = () => {
+        card(false);
+      };
+   
 
     const fetchJobs = async () => {
         try {
@@ -68,6 +73,7 @@ const SwipeScreen = () => {
     <View className = 'flex-1'>
         <Swiper 
         ref = {swipeRef}
+        infinite={false}
         containerStyle={{backgroundColor: '#FFFFFF'}}
         cards = {testCards}
         stackSize = {3} /* Amount of cards (companies) in the deck*/
@@ -76,10 +82,15 @@ const SwipeScreen = () => {
         verticalSwipe = {false}
         onSwipedLeft={()=>{
             console.log('Swiped NOPE')
+            
         }}
         onSwipedRight={() => {
             console.log('Swiped LIKE')
+           
         }}
+     
+
+        onSwipedAll={handleSwipedAll}
         overlayLabels={{        /*LIKE and NOPE signs*/
             left: {
                 title: 'NOPE',
@@ -101,7 +112,13 @@ const SwipeScreen = () => {
             },
         }}
         renderCard={(card) => card ? (
-            <View key = {card.id} style = {{backgroundColor: 'rgb(244 244 245)', height: '75%', borderRadius: 15, shadowColor: '#000', shadowOffset: {width:0, height: 2}, shadowOpacity: 0.25, shadoRadius: 3, elevation: 2}}>
+        <Pressable onPress={() => {
+            console.log("clicked on card")
+            close
+          }}>
+            <View key = {card.id} 
+                style = {{backgroundColor: 'rgb(244 244 245)', height: '87%', borderRadius: 15, shadowColor: '#000', shadowOffset: {width:0, height: 2}, shadowOpacity: 0.25, shadoRadius: 3, elevation: 2}}
+                >
                 <Image style={{flex: 1, justifyContent: 'center', height: '30%', margin: '5%', borderRadius: 5}} source={{uri: card.photoURL}}/>
                 <Text className = 'font-bold text-4xl mt-5 text-center'>{card.title}</Text>
                 <Text className = 'text-xl mt-5 text-center'>{card.desc}</Text>
@@ -114,15 +131,17 @@ const SwipeScreen = () => {
                         <Text className=" flex-1 text-xl">{card.location}</Text>
                     </View>
                 </View>
+            
             </View>
-
+        </Pressable>
          ) : (
+
             
             <View style = {{position: 'relative', justifyContent: 'center', alignContent: 'center', alignItems: 'center', backgroundColor: 'rgb(244 244 245)', height: '75%', borderRadius: 15, shadowColor: '#000', shadowOffset: {width:0, height: 2}, shadowOpacity: 0.25, shadoRadius: 3, elevation: 2}}>
                 <Text className = 'font-bold pb-5'>No more companies</Text>
                 <Entypo name='emoji-sad' size={70}/>
             </View>
-           
+          
         )
         }
         />
