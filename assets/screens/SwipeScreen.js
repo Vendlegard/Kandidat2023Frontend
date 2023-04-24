@@ -1,11 +1,12 @@
 import React, {useState, useRef} from "react";
-import {View, Text, SafeAreaView, Image, Pressable} from "react-native";
+import {View, Text, SafeAreaView, Image, Pressable, Modal} from "react-native";
 import SEB from "../images/SEB.jpeg";
 import vattenfall from "../images/vattenfall.jpeg";
 import sweco from "../images/sweco.png"
 import Swiper from "react-native-deck-swiper";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { AntDesign, Entypo } from '@expo/vector-icons'
+import JobInfo from "../components/JobInfo";
 
 
 
@@ -38,13 +39,24 @@ let testCards = [
 
 const SwipeScreen = () => {
     const swipeRef = useRef(null);
-    const [jobs, setJobs] = useState([]);
-    const [card, setCards] = useState(true);
 
-    const handleSwipedAll = () => {
-        card(false);
-      };
-   
+    const [showModal, setShowModal] = useState(null);
+    const [selectedJob, setSelectedJob] = useState({
+      closeModal // add closeModal function to selectedJob state
+    });
+    const onClicked = () => { 
+    setSelectedJob({
+    }); 
+    setShowModal(true);
+    };
+    const closeModal = () => { 
+    setShowModal(false);
+    };
+
+    const [jobs, setJobs] = useState([]);
+
+    const [card, setCards] = useState(false);
+
 
     const fetchJobs = async () => {
         try {
@@ -67,7 +79,6 @@ const SwipeScreen = () => {
 
 
 
-
     return (
     <SafeAreaView className = 'flex-1 -mt-8'>
     <View className = 'flex-1'>
@@ -80,17 +91,14 @@ const SwipeScreen = () => {
         cardIndex = {0}        /*Start from card 0 in the deck*/
         animateCardOpacity
         verticalSwipe = {false}
+       
         onSwipedLeft={()=>{
             console.log('Swiped NOPE')
             
         }}
         onSwipedRight={() => {
-            console.log('Swiped LIKE')
-           
+            console.log('Swiped LIKE') 
         }}
-     
-
-        onSwipedAll={handleSwipedAll}
         overlayLabels={{        /*LIKE and NOPE signs*/
             left: {
                 title: 'NOPE',
@@ -112,10 +120,7 @@ const SwipeScreen = () => {
             },
         }}
         renderCard={(card) => card ? (
-        <Pressable onPress={() => {
-            console.log("clicked on card")
-            close
-          }}>
+        <Pressable onPress={onClicked}>
             <View key = {card.id} 
                 style = {{backgroundColor: 'rgb(244 244 245)', height: '87%', borderRadius: 15, shadowColor: '#000', shadowOffset: {width:0, height: 2}, shadowOpacity: 0.25, shadoRadius: 3, elevation: 2}}
                 >
@@ -131,12 +136,10 @@ const SwipeScreen = () => {
                         <Text className=" flex-1 text-xl">{card.location}</Text>
                     </View>
                 </View>
-            
             </View>
         </Pressable>
          ) : (
 
-            
             <View style = {{position: 'relative', justifyContent: 'center', alignContent: 'center', alignItems: 'center', backgroundColor: 'rgb(244 244 245)', height: '75%', borderRadius: 15, shadowColor: '#000', shadowOffset: {width:0, height: 2}, shadowOpacity: 0.25, shadoRadius: 3, elevation: 2}}>
                 <Text className = 'font-bold pb-5'>No more companies</Text>
                 <Entypo name='emoji-sad' size={70}/>
@@ -147,22 +150,30 @@ const SwipeScreen = () => {
         />
     </View>
 
-        <View className = 'flex flex-row justify-evenly bg-white pb-3'>
-            <TouchableOpacity 
-            onPress={() =>swipeRef.current.swipeLeft()}
-            style={{ alignItems: 'center', justifyContent: 'center', borderRadius: 50, width: 75, height: 75, backgroundColor: 'rgb(254 202 202)' 
-            }}
-            >
-                <Entypo name='cross' size={35}/>
-            </TouchableOpacity>
+    {/* LIKE/NOPE buttons*/}
+    <View className = 'flex flex-row justify-evenly bg-white pb-3'>
+        <TouchableOpacity 
+        onPress={() =>swipeRef.current.swipeLeft()}
+        style={{ alignItems: 'center', justifyContent: 'center', borderRadius: 50, width: 75, height: 75, backgroundColor: 'rgb(254 202 202)' }}>
+            <Entypo name='cross' size={35}/>
+        </TouchableOpacity>
 
-            <TouchableOpacity 
-            onPress={() =>swipeRef.current.swipeRight()}
-            style={{ alignItems: 'center', justifyContent: 'center', borderRadius: 50, width: 75, height: 75, backgroundColor: 'rgb(187 247 208)' }}>
-                <AntDesign name='heart' size={30}/>
+        <TouchableOpacity 
+        onPress={() =>swipeRef.current.swipeRight()}
+        style={{ alignItems: 'center', justifyContent: 'center', borderRadius: 50, width: 75, height: 75, backgroundColor: 'rgb(187 247 208)' }}>
+            <AntDesign name='heart' size={30}/>
+        </TouchableOpacity>
+    </View>
+
+    {/* Modal with additional info when clicking a card*/}
+    <Modal visible={showModal} animationType='slide'>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        {selectedJob && <JobInfo {...selectedJob} closeModal={closeModal} />}
+            <TouchableOpacity onPress={closeModal}>
             </TouchableOpacity>
         </View>
-    
+    </Modal>
+
     </SafeAreaView> 
     );
 };
