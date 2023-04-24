@@ -84,21 +84,25 @@ const InterestComponent = ({finishedEmit}) => {
 
 
     return (
-        <View className="flex-1  justify-evenly bg-ligtblue w-full flex-col">
-            <Text>Kompetenser: {answer.userCompenencies}
-            </Text>
-            <Text>Letar efter: {answer.lookingForPreferences} </Text>
-            <Text className="font-bold text-3xl"> What are you looking for? </Text>
+        <View className="flex-1 w-full  flex-col">
+            <View className="flex-0 justify-center items-center">
+                <Text className="mt-24" >Kompetenser: {answer.userCompenencies}
+                </Text>
+                <Text>Letar efter: {answer.lookingForPreferences} </Text>
+                <Text className="text-3xl mt-16"> What are you looking for? </Text>
+            </View>
+
 
             { lookingForFilled ? (
                 <View>
-                {userCompetencies.map((userCompetencies) => (
+                {userCompetencies.map((currElement, index) => (
                         <InterestAndCompetenceButtonComponent
-                            text={userCompetencies}
+                            text={currElement}
+                            index={index}
                             addToLookingFor={userCompetenciesAdd}
                         />
                     ))}
-                    <View>
+                    <View className="mt-32">
                         <Button title={"Finish"}
                         onPress={() => finishButton()}
                         >
@@ -107,16 +111,17 @@ const InterestComponent = ({finishedEmit}) => {
                 </View>
             ) : (
                 <View>
-                    {lookingFor.map((lookingFor) => (
+                    {lookingFor.map((currElement, index) => (
                         <InterestAndCompetenceButtonComponent
-                            text={lookingFor}
+                            text={currElement}
+                            index={index}
                             addToLookingFor={userLookingForAdd}
                         />
                     ))}
                 </View>
             )}
 
-            <View className="flex-0 flex-row justify-center">
+            <View className="flex-0 flex-row justify-center mt-16">
                 <Button title={"previous"}
                 onPress={() => previousButton()}
                 >

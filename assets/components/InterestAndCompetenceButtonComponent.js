@@ -1,7 +1,7 @@
 import {Text, TouchableOpacity, View} from "react-native";
 import React, {useState} from "react";
 
-const InterestAndCompetenceButtonComponent = ({text, addToLookingFor}) => {
+const InterestAndCompetenceButtonComponent = ({text, addToLookingFor, index}) => {
 
     [interestAdded, setInterestAdded] = useState(false);
 
@@ -15,13 +15,31 @@ const InterestAndCompetenceButtonComponent = ({text, addToLookingFor}) => {
         //setInterestAdded(true);
     }
 
+    function isEven(n) {
+        return n % 2 == 0;
+    }
+
     return(
-        <View className="bg-pink w-full h-24">
-            <TouchableOpacity onPress={() => addInterestToProfile(text)}>
+        <View className="">
+        {isEven(index) ? (
+        <View className="flex-0 bg-pink w-2/5 h-12 flex-row ml-12
+        rounded-3xl border justify-center items-center mt-14">
+            <TouchableOpacity className="mr-4" onPress={() => addInterestToProfile(text)}>
                 <Text>
-                    {text}
+                    {text} {index}
                 </Text>
             </TouchableOpacity>
+        </View>
+        ) : (
+        <View className="flex-0 bg-lightgreen w-2/5 h-12 flex-row-reverse mr-12
+        absolute right-0 rounded-3xl border justify-center items-center mt-1">
+            <TouchableOpacity className="mr-4" onPress={() => addInterestToProfile(text)}>
+                <Text>
+                    {text} {index} 
+                </Text>
+            </TouchableOpacity>
+        </View>
+        )}
         </View>
         )
 }
