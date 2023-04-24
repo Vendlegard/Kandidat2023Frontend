@@ -88,7 +88,7 @@ const LoginScreen = ({ updateLoggedInState, updateRegisterState }) => {
                     <View className="w-20 h-20 bg-profileScreen opacity-70 rounded-full -mb-5 ml-2"></View>
                     <View className="w-14 h-14 bg-purple opacity-90 rounded-full mb-20 ml-12"></View>
                     </View>
-            <Text className = 'font-raleway text-4xl m-4'> Please sign in</Text>
+            <Text className = 'text-4xl m-4'> Please sign in</Text>
 
             
             <TextInput
@@ -109,20 +109,20 @@ const LoginScreen = ({ updateLoggedInState, updateRegisterState }) => {
 
             {/* */}
             <View>
-                <TouchableOpacity onPress={() => forgotPassword()}>
-                    <Text className="font-raleway text-xl"> Forgot password?</Text>
+                <TouchableOpacity className= "m-4" onPress={() => forgotPassword()}>
+                    <Text style={{fontSize: 20, color: '#A9A9A9'}} > Forgot password?</Text>
                 </TouchableOpacity>
             </View>
 
-            <View className="flex justify-center items-center">
-                        <TouchableOpacity className="bg-black w-20 h-8 justify-center items-center rounded-xl mt-4 mb-10" onPress={() => authenticateUser(emailAdressAuth,passwordAuth)}>
-                            <Text className="text-white text-sm">LOGIN</Text>
-                        </TouchableOpacity>
+            <View >
+                    <TouchableOpacity className="bg-black w-20 h-9 justify-center items-center rounded-xl mt-5 mb-10" onPress={() => authenticateUser(emailAdressAuth,passwordAuth)}>
+                        <Text className="text-white text-sm">LOGIN</Text>
+                    </TouchableOpacity>
             </View>
 
-            <View className="absolute bottom-10 justify-center items-center mb-10" >
-                <Text className="text-xl "> Don't have an account yet? </Text>
-                <TouchableOpacity className="bg-black w-20 h-8 justify-center items-center rounded-xl m-4"onPress={() => handleRegister()}>
+            <View className="items-center -mb-10">
+                <Text style={{fontSize: 20, color: '#A9A9A9', margin: '5%'}} > Don't have an account yet? </Text>
+                <TouchableOpacity className="bg-black w-20 h-9 justify-center items-center rounded-xl mt-2"onPress={() => handleRegister()}>
                     <Text className="text-white text-sm">SIGNUP</Text>
                 </TouchableOpacity>
             </View>
