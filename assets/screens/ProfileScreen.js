@@ -98,7 +98,7 @@ const ProfileScreen = ({userInfo}) => {
                             {/* Profile Picture and Name */}
                             <View className="flex-col justify-center items-center mt-12">
                                 <Image source={profile} style={{ width: 100, height: 100 }}></Image>
-                                <Text className="font-railway text-lg font-bold m-4">Victoria Berinder</Text>
+                                <Text className="font-railway text-lg font-bold m-4">{userInfo.firstName} {userInfo.lastName}</Text>
                             </View>
 
                             {/* Profile Bubbles */}
@@ -120,7 +120,7 @@ const ProfileScreen = ({userInfo}) => {
                                 <Image className="w-8 h-8 ml-3" source={schoolPic}></Image>
                                 <TextInput
                                     style={{ borderWidth: 0, fontSize: 16, color: 'black' }}
-                                    placeholder="Uppsala Universitet"
+                                    placeholder={userInfo.university}
                                     placeholderTextColor="black"
                                 />
                             </View>
@@ -134,7 +134,7 @@ const ProfileScreen = ({userInfo}) => {
                                 <Image className="w-8 h-8 ml-3" source={coursePic}></Image>
                                 <TextInput
                                     style={{ borderWidth: 0, fontSize: 16, color: 'black' }}
-                                    placeholder="Civilingenjör i system i teknik och samhälle"
+                                    placeholder={userInfo.education}
                                     placeholderTextColor="black"
                                 />
                             </View>
@@ -231,14 +231,14 @@ const ProfileScreen = ({userInfo}) => {
                     <View className="justify-center items-center ">
                         <Image source={profile} style={{ width: 100, height: 100 }} className="-mt-10"></Image>
                         <Text className="font-railway text-lg font-bold m-2"> {userInfo.firstName} {userInfo.lastName}</Text>
-                        <Text className="font-railway text-sm">Civilingenjör i system i teknik och samhälle</Text>
+                        <Text className="font-railway text-sm">{userInfo.education}</Text>
                     </View>
 
                     {/* Input Lärosäte  */}
                     <View className="flex-2 m-3 flex-row items-center justify-space">
                         <View className="items-center justify-center m-8">
                             <Text className="text-x1 font-bold">Lärosäte</Text>
-                            <Text className="text-x1">Uppsala Universitet</Text>
+                            <Text className="text-x1">{userInfo.university}</Text>
                         </View>
                         <View className="m-5 flex-col-reverse items-center bg-green-200">
                             <View className="h-20 border-l border-gray dark:border-gray">
@@ -247,7 +247,7 @@ const ProfileScreen = ({userInfo}) => {
 
                         {/* Input Termin */}
                         <View className="items-center justify-center m-8">
-                            <Text className="text-x1 font-bold">Temin</Text>
+                            <Text className="text-x1 font-bold">Termin</Text>
                             <Text className="text-x1">6/10</Text>
                         </View>
                     </View>
