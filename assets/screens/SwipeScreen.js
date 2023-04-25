@@ -67,8 +67,7 @@ const SwipeScreen = () => {
                 },
             });
             const data = await response.json();
-            console.log(data.images);
-            setJobs(data.jobs)
+            setJobs(data.jobs);
         } catch (error) {
             console.error(error);
         }
@@ -126,15 +125,15 @@ const SwipeScreen = () => {
             <View key = {card.id} 
                 style = {{backgroundColor: 'rgb(244 244 245)', height: '87%', borderRadius: 15, shadowColor: '#000', shadowOffset: {width:0, height: 2}, shadowOpacity: 0.25, shadoRadius: 3, elevation: 2}}
                 >
-                <Image style={{flex: 1, justifyContent: 'center', height: '30%', margin: '5%', borderRadius: 5}} source={{uri: card.link}}/>
-                <Text className = 'font-bold text-4xl mt-5 text-center'>{card.title}</Text>
+                <Image style={{flex: 1, justifyContent: 'center', height: '30%', margin: '5%', borderRadius: 5}} source={{uri: card.employerImage}}/>
+                <Text className = 'font-bold text-4xl mt-5 text-center'>{card.jobType}</Text>
                 <Text className = 'text-xl mt-5 text-center'>{card.jobDescription}</Text>
                 
                 <View className ="flex-1 flex-row">
                      <View className = "flex-1 items-end mt-5 pt-12">
                         <Entypo name='location-pin' size={54}/>
                     </View>
-                    <View className = "flex-1 items-center mt-5 pt-12 mr-10 pr-10"> 
+                    <View className = "flex-1 items-center mt-5 pt-12 mr-10 pr-10">
                         <Text className=" flex-1 text-xl">{card.location}</Text>
                     </View>
                 </View>
