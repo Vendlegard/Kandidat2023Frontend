@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {View, Text, TextInput, Button, TouchableOpacity}  from "react-native";
+import {View, Text, TextInput, TouchableOpacity}  from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -23,6 +23,8 @@ const LoginScreen = ({ updateLoggedInState, updateRegisterState, updateUserInfo 
 
     const [userData, setuserData] = useState( {});
 
+    const [loginCount, setLoginCount] = useState(0);
+
 
 
     const onChangeEmailAdressAuth = (text) => {
@@ -31,6 +33,11 @@ const LoginScreen = ({ updateLoggedInState, updateRegisterState, updateUserInfo 
     const onChangePasswordAuth = (text) => {
         setPasswordAuth(text);
     }
+
+    const onChangeUserData = (data) => {
+        setuserData(data);
+    }
+
 
     const authenticateUser = async (emailAddressToSend,passwordToSend) => {
         try {
@@ -48,10 +55,14 @@ const LoginScreen = ({ updateLoggedInState, updateRegisterState, updateUserInfo 
             const token = data.message;
             setToken(token);
             storeToken(token);
-            //console.log(data);
-            setuserData(data.userInfo);
-            //console.log(userData);
-            updateUserInfo(data.userInfo);
+            let userDataTemp = await data.userInfo;
+            onChangeUserData(userDataTemp);
+            updateUserInfo(userDataTemp);
+            console.log("authenticateUser called in LoginScreen.js with the value", userData);
+            setLoginCount(loginCount + 1);
+            if(loginCount > 0){
+                updateLoggedInState(true);
+            }
         } catch (error) {
             console.error(error);
         }
@@ -84,6 +95,10 @@ const LoginScreen = ({ updateLoggedInState, updateRegisterState, updateUserInfo 
         console.log("handleRegister was pressed")
         updateRegisterState(true);
     }
+
+    const handleLogin = async (emailAddressToSend, passwordToSend) => {
+        await authenticateUser(emailAddressToSend, passwordToSend);
+    };
 
     return (
 
@@ -130,7 +145,7 @@ const LoginScreen = ({ updateLoggedInState, updateRegisterState, updateUserInfo 
             </View>
 
             <View >
-                    <TouchableOpacity className="bg-black w-20 h-9 justify-center items-center rounded-xl mt-5 mb-10" onPress={() => authenticateUser(emailAdressAuth,passwordAuth)}>
+                    <TouchableOpacity className="bg-black w-20 h-9 justify-center items-center rounded-xl mt-5 mb-10" onPress={() => handleLogin(emailAdressAuth,passwordAuth)}>
                         <Text className="text-white text-sm">LOGIN</Text>
                     </TouchableOpacity>
             </View>

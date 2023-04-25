@@ -11,7 +11,7 @@ import profile from '../images/profile.png'
 import { LinearGradient } from 'expo-linear-gradient';
 
 
-const ProfileScreen = () => {
+const ProfileScreen = ({userInfo}) => {
     const [isProfileEdited, setIsProfileEdited] = useState(false);
     // const bubble1Position = useRef(new Animated.ValueXY({ x: 0, y: 0 })).current;
     // const bubble2Position = useRef(new Animated.ValueXY({ x: 10, y: 30 })).current;
@@ -230,7 +230,7 @@ const ProfileScreen = () => {
                     {/* Namn, bild och universitetsprogram main ProfileScreen */}
                     <View className="justify-center items-center ">
                         <Image source={profile} style={{ width: 100, height: 100 }} className="-mt-10"></Image>
-                        <Text className="font-railway text-lg font-bold m-2">Victoria Berinder</Text>
+                        <Text className="font-railway text-lg font-bold m-2"> {userInfo.firstName} {userInfo.lastName}</Text>
                         <Text className="font-railway text-sm">Civilingenjör i system i teknik och samhälle</Text>
                     </View>
 

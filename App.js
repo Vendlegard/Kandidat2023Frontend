@@ -49,7 +49,9 @@ export default function App() {
 
         <View className="flex-1 bg-amber-100">
             {loggedIn ? (
-                <BottomNavigation/>
+                <BottomNavigation userInfo={userInfo}
+
+                />
             ) : registerStatus ? (
                 <RegisterScreen
                     updateRegisterState={updateRegisterStatus}
