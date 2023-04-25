@@ -1,13 +1,31 @@
 import React, {useState} from "react";
-import {View, Text, TextInput, Button, TouchableOpacity}  from "react-native";
+import {View, Text, TextInput, TouchableOpacity}  from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-const LoginScreen = ({ updateLoggedInState, updateRegisterState }) => {
+/*
+email: "",
+        firstName: "",
+        lastName: "",
+        education: "",
+        university: "",
+        semester: 1,
+        competence: [],
+        interests: []
+ */
+
+
+const LoginScreen = ({ updateLoggedInState, updateRegisterState, updateUserInfo }) => {
     const [serverResponse, setServerResponse] = useState("");
     const [emailAdressAuth, setEmailAdressAuth] = useState("");
     const [passwordAuth, setPasswordAuth] = useState("");
     const [token, setToken] = useState("");
+
+    const [userData, setuserData] = useState( {});
+
+    const [loginCount, setLoginCount] = useState(0);
+
+
 
     const onChangeEmailAdressAuth = (text) => {
         setEmailAdressAuth(text);
@@ -15,6 +33,11 @@ const LoginScreen = ({ updateLoggedInState, updateRegisterState }) => {
     const onChangePasswordAuth = (text) => {
         setPasswordAuth(text);
     }
+
+    const onChangeUserData = (data) => {
+        setuserData(data);
+    }
+
 
     const authenticateUser = async (emailAddressToSend,passwordToSend) => {
         try {
@@ -29,13 +52,17 @@ const LoginScreen = ({ updateLoggedInState, updateRegisterState }) => {
                 }),
             });
             const data = await response.json();
-            const token = data.message; 
-            /* om vi får tillbaka något, betyder det alltså att användaren finns och är autentiserad? */
+            const token = data.message;
             setToken(token);
             storeToken(token);
-            /*det nedan ska göras om användaren är autentiserad, annars säg typ "fel användarnamen eller 
-            lösenord och föreslå glömt lösenord eller registrera konto" */
-            updateLoggedInState(true)
+            let userDataTemp = await data.userInfo;
+            onChangeUserData(userDataTemp);
+            updateUserInfo(userDataTemp);
+            console.log("authenticateUser called in LoginScreen.js with the value", userData);
+            setLoginCount(loginCount + 1);
+            if(loginCount > 0){
+                updateLoggedInState(true);
+            }
         } catch (error) {
             console.error(error);
         }
@@ -60,48 +87,84 @@ const LoginScreen = ({ updateLoggedInState, updateRegisterState }) => {
 
         }
     }
-
+    function forgotPassword(){
+        console.log("forgot password was pressed")
+    }
 
     function handleRegister() {
         console.log("handleRegister was pressed")
         updateRegisterState(true);
     }
 
+    const handleLogin = async (emailAddressToSend, passwordToSend) => {
+        await authenticateUser(emailAddressToSend, passwordToSend);
+    };
+
     return (
 
         <View className="flex-1 justify-center items-center">
-            <Text className = 'font-raleway text-5xl m-4'> Sign in</Text>
+
+             {/* Profile Bubbles */}
+                <View className="absolute top-0 right-0">
+            {/* ProfileScreen Bubble */}
+                    <View className="w-28 h-28 bg-profileScreen opacity-70 rounded-full mt-12 mr-8"></View>
+
+            {/* Pink Bubble */}
+                    
+
+            {/* Gray Bubble */}
+                </View>
+                <View className="absolute bottom-0 left-0">
+                    <View className="w-20 h-20 bg-profileScreen opacity-70 rounded-full -mb-5 ml-2"></View>
+                    <View className="w-14 h-14 bg-purple opacity-90 rounded-full mb-20 ml-12"></View>
+                    </View>
+            <Text className = 'text-4xl m-4'> Please sign in</Text>
 
             
             <TextInput
-                className="font-railway w-3/4 text-xl mb-5 border-2 mt-5 rounded bg-purple"
-                placeholder="exempel.adress@swipe2work.com"
+                style = {{fontSize: 22, width: "75%", height: "5%", margin: "5%", borderRadius: 12,  backgroundColor: "#E6E6FA", 
+                shadowOffset: {width:0, height: 2}, shadowColor: '#000', shadowOpacity: 0.25, shadowRadius: 3, elevation: 2}}
+                placeholder="Email"
                 onChangeText={onChangeEmailAdressAuth}
                 value={emailAdressAuth}
             />
-            <TextInput className="font-railway w-3/4 text-xl mt-5 border-2 rounded bg-purple"
-                       placeholder="************"
-                       onChangeText={onChangePasswordAuth}
-                       value={passwordAuth}
-                       secureTextEntry={true}
+            <TextInput 
+                style = {{fontSize: 22 ,width: "75%", height: "5%", margin: "5%", borderRadius: 12,  backgroundColor: "#E6E6FA", 
+                shadowOffset: {width:0, height: 2}, shadowColor: '#000', shadowOpacity: 0.25, shadowRadius: 3, elevation: 2}}
+                placeholder="Password"
+                onChangeText={onChangePasswordAuth}
+                value={passwordAuth}
+                secureTextEntry={true}
             />
 
             {/* */}
-            <Button title="Login" onPress={() => authenticateUser(emailAdressAuth,passwordAuth)}/>
-        
             <View>
+                <TouchableOpacity className= "m-4" onPress={() => forgotPassword()}>
+                    <Text style={{fontSize: 20, color: '#A9A9A9'}} > Forgot password?</Text>
+                </TouchableOpacity>
+            </View>
+
+            <View >
+                    <TouchableOpacity className="bg-black w-20 h-9 justify-center items-center rounded-xl mt-5 mb-10" onPress={() => handleLogin(emailAdressAuth,passwordAuth)}>
+                        <Text className="text-white text-sm">LOGIN</Text>
+                    </TouchableOpacity>
+            </View>
+
+            <View className="items-center -mb-10">
+                <Text style={{fontSize: 20, color: '#A9A9A9', margin: '5%'}} > Don't have an account yet? </Text>
+                <TouchableOpacity className="bg-black w-20 h-9 justify-center items-center rounded-xl mt-2"onPress={() => handleRegister()}>
+                    <Text className="text-white text-sm">SIGNUP</Text>
+                </TouchableOpacity>
+            </View>
+
+            {/*<View>
                 <Text> Authentication Status: {token} </Text>
                 <TouchableOpacity onPress={() => getToken()}>
                     <Text>Get Token</Text>
                 </TouchableOpacity>
-            </View>
+    </View>*/}
 
-            <View>
-                <Text> Här reggar vi någon </Text>
-                <TouchableOpacity onPress={() => handleRegister()}>
-                    <Text>Regga knapp</Text>
-                </TouchableOpacity>
-            </View>
+          
 
 
         </View>

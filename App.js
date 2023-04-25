@@ -22,6 +22,32 @@ export default function App() {
         setRegisterStatus(value);
     };
 
+    const [firstTimeLoggingIn, setFirstTimeLoggingIn] = useState(false);
+
+    const [userInfo, setUserInfo] = useState({
+        firstName: "Victoria",
+        lastName: "Berinder",
+        education: "Civilingenjör i System I teknik och samhälle",
+        userEmail: "vickan@mail.com",
+        university: "Uppsala Universitet",
+        semester: 5,
+    });
+
+    const updateFirstTimeLoggingIn = (value) => {
+        setFirstTimeLoggingIn(value);
+    }
+
+    const updateUserInfo = (value) => {
+        setUserInfo(value);
+        console.log("updateUserInfo called in app.js with the value", userInfo);
+    }
+
+    function finished(){
+        console.log("finshed called in app.js");
+        setLoggedIn(true);
+    }
+
+
 
 
     return (
@@ -30,20 +56,29 @@ export default function App() {
 
         <View className="flex-1 bg-amber-100">
             {loggedIn ? (
-                <BottomNavigation/>
+                <BottomNavigation userInfo={userInfo}
+
+                />
             ) : registerStatus ? (
                 <RegisterScreen
-                updateRegisterState={updateRegisterStatus}/>
+                    updateRegisterState={updateRegisterStatus}
+                    firstTimeLoggingIn={updateFirstTimeLoggingIn}
+                />
+            ) : firstTimeLoggingIn ? (
+                <CompetenceScreen
+                finishedToApp={finished}
+                />
             ) : (
                 <LoginScreen
                     updateLoggedInState={updateLoggedInState}
                     updateRegisterState={updateRegisterStatus}
+                    updateUserInfo={updateUserInfo}
                 />
             )}
         </View>
 
 
 
-        
+
     );
 }
