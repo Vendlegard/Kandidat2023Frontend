@@ -67,6 +67,7 @@ const SwipeScreen = () => {
                 },
             });
             const data = await response.json();
+            console.log(data);
             setJobs(data)
         } catch (error) {
             console.error(error);
@@ -74,7 +75,9 @@ const SwipeScreen = () => {
     };
 
     useState(() => {
+        console.log("fetch Jobs called")
         fetchJobs();
+        console.log("the jobs should be: ", jobs);
     }, []);
 
 
@@ -86,7 +89,7 @@ const SwipeScreen = () => {
         ref = {swipeRef}
         infinite={false}
         containerStyle={{backgroundColor: '#FFFFFF'}}
-        cards = {testCards}
+        cards = {jobs}
         stackSize = {3} /* Amount of cards (companies) in the deck*/
         cardIndex = {0}        /*Start from card 0 in the deck*/
         animateCardOpacity
