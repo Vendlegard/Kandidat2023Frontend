@@ -57,6 +57,8 @@ const SwipeScreen = () => {
 
     const [card, setCards] = useState(false);
 
+    const [cardIndex, setCardIndex] = useState(0);
+
 
     const fetchJobs = async () => {
         try {
@@ -94,11 +96,12 @@ const SwipeScreen = () => {
         verticalSwipe = {false}
        
         onSwipedLeft={()=>{
-            console.log('Swiped NOPE')
-            
+            setCardIndex(cardIndex + 1);
+            console.log('Swiped NOPE on', jobs[cardIndex].jobName);
         }}
         onSwipedRight={() => {
-            console.log('Swiped LIKE') 
+            setCardIndex(cardIndex + 1);
+            console.log('Swiped LIKE on ', jobs[cardIndex].jobName);
         }}
         overlayLabels={{        /*LIKE and NOPE signs*/
             left: {
