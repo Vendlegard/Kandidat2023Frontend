@@ -89,11 +89,7 @@ const LikeScreen = () => {
                     experience="Erfarenhet krävs"
                 />
                 <JobCard
-<<<<<<< HEAD
-                   // jobIcon={vattenfallPic}
-=======
                     jobIcon={vattenfallPic}
->>>>>>> 2fcb5cefe6232631cc78835a6caf202a6c367799
                     jobTitle="Sommarjobb"
                     employer="Vattenfall"
                     location="Stockholm"
@@ -103,11 +99,8 @@ const LikeScreen = () => {
                     experience="Erfarenhet krävs"
                 />
                 <JobCard
-<<<<<<< HEAD
                     //jobIcon={consid}
-=======
                     jobIcon={consid}
->>>>>>> 2fcb5cefe6232631cc78835a6caf202a6c367799
                     jobTitle="Traineeprogram"
                     employer="Consid"
                     location="Uppsala"
