@@ -123,7 +123,7 @@ const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn}) => {
 
             <TextInput
                 style = {{fontSize: 20, width: "75%", height: "4%", margin: "3%", borderRadius: 12,  backgroundColor: "#E6E6FA", 
-                shadowColor: '#000', shadowOpacity: 0.25, shadowRadius: 3}}
+                shadowOffset: {width:0, height: 2}, shadowColor: '#000', shadowOpacity: 0.25, shadowRadius: 3}}
                 placeholder="First name"
                 onChangeText={onChangeFirstName}
                 value={firstName}
@@ -132,7 +132,7 @@ const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn}) => {
 
             <TextInput
                 style = {{fontSize: 20, width: "75%", height: "4%", margin: "3%", borderRadius: 12,  backgroundColor: "#E6E6FA", 
-                shadowColor: '#000', shadowOpacity: 0.25, shadowRadius: 3}}
+                shadowOffset: {width:0, height: 2}, shadowColor: '#000', shadowOpacity: 0.25, shadowRadius: 3}}
                 placeholder="Last name"
                 onChangeText={onChangeLastName}
                 value={lastName}
@@ -141,7 +141,7 @@ const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn}) => {
 
             <TextInput
                 style = {{fontSize: 20, width: "75%", height: "4%", margin: "3%", borderRadius: 12,  backgroundColor: "#E6E6FA", 
-                shadowColor: '#000', shadowOpacity: 0.25, shadowRadius: 3}}
+                shadowOffset: {width:0, height: 2}, shadowColor: '#000', shadowOpacity: 0.25, shadowRadius: 3}}
                 placeholder="University"
                 onChangeText={onChangeUniversity}
                 value={university}
@@ -150,7 +150,7 @@ const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn}) => {
 
             <TextInput
                 style = {{fontSize: 20, width: "75%", height: "4%", margin: "3%", borderRadius: 12,  backgroundColor: "#E6E6FA", 
-                shadowColor: '#000', shadowOpacity: 0.25, shadowRadius: 3}}
+                shadowOffset: {width:0, height: 2}, shadowColor: '#000', shadowOpacity: 0.25, shadowRadius: 3}}
                 placeholder="Education"
                 onChangeText={onChangeEducation}
                 value={education}
@@ -159,14 +159,14 @@ const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn}) => {
 
             <TextInput
                 style = {{fontSize: 20, width: "75%", height: "4%", margin: "3%", borderRadius: 12,  backgroundColor: "#E6E6FA", 
-                shadowColor: '#000', shadowOpacity: 0.25, shadowRadius: 3}}
+                shadowOffset: {width:0, height: 2}, shadowColor: '#000', shadowOpacity: 0.25, shadowRadius: 3}}
                 placeholder="Email adress"
                 onChangeText={onChangeEmailAdress}
                 value={emailAdress}
             />
             <TextInput
                 style = {{fontSize: 20, width: "75%", height: "4%", margin: "3%", borderRadius: 12,  backgroundColor: "#E6E6FA", 
-                shadowColor: '#000', shadowOpacity: 0.25, shadowRadius: 3}}
+                shadowOffset: {width:0, height: 2}, shadowColor: '#000', shadowOpacity: 0.25, shadowRadius: 3}}
                 placeholder="Password"
                 onChangeText={onChangePassword}
                 value={password}

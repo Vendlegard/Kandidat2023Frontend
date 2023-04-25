@@ -31,6 +31,7 @@ const LoginScreen = ({ updateLoggedInState, updateRegisterState }) => {
             });
             const data = await response.json();
             const token = data.message; 
+
             /* om vi får tillbaka något, betyder det alltså att användaren finns och är autentiserad? */
             setToken(token);
             storeToken(token);
@@ -93,14 +94,14 @@ const LoginScreen = ({ updateLoggedInState, updateRegisterState }) => {
             
             <TextInput
                 style = {{fontSize: 22, width: "75%", height: "5%", margin: "5%", borderRadius: 12,  backgroundColor: "#E6E6FA", 
-                shadowColor: '#000', shadowOpacity: 0.25, shadowRadius: 3}}
+                shadowOffset: {width:0, height: 2}, shadowColor: '#000', shadowOpacity: 0.25, shadowRadius: 3, elevation: 2}}
                 placeholder="Email"
                 onChangeText={onChangeEmailAdressAuth}
                 value={emailAdressAuth}
             />
             <TextInput 
                 style = {{fontSize: 22 ,width: "75%", height: "5%", margin: "5%", borderRadius: 12,  backgroundColor: "#E6E6FA", 
-                shadowColor: '#000', shadowOpacity: 0.25, shadowRadius: 3}}
+                shadowOffset: {width:0, height: 2}, shadowColor: '#000', shadowOpacity: 0.25, shadowRadius: 3, elevation: 2}}
                 placeholder="Password"
                 onChangeText={onChangePasswordAuth}
                 value={passwordAuth}
