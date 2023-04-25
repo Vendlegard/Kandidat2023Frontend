@@ -12,7 +12,7 @@ import RegisterScreen from "./assets/screens/RegisterScreen";
 
 export default function App() {
 
-    const [loggedIn, setLoggedIn] = useState(false);
+    const [loggedIn, setLoggedIn] = useState(true);
     const updateLoggedInState = (value) => {
         setLoggedIn(value);
     };
@@ -24,7 +24,14 @@ export default function App() {
 
     const [firstTimeLoggingIn, setFirstTimeLoggingIn] = useState(false);
 
-    const [userInfo, setUserInfo] = useState({});
+    const [userInfo, setUserInfo] = useState({
+        firstName: "Victoria",
+        lastName: "Berinder",
+        education: "Civilingenjör i System I teknik och samhälle",
+        userEmail: "vickan@mail.com",
+        university: "Uppsala Universitet",
+        semester: 5,
+    });
 
     const updateFirstTimeLoggingIn = (value) => {
         setFirstTimeLoggingIn(value);
