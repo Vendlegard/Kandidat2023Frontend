@@ -25,6 +25,7 @@ const InterestComponent = ({finishedEmit}) => {
     [lookingFor, setLookingFor] = useState(["Sommarjobb", "Deltid", "Trainee", "Internship", "Exjobb", "Timanställning"]);
     [userLookingFor, setUserLookingFor] = useState([]);
     [userCompetencies, setUserCompetencies] = useState(["C#", "Java", "Python"]);
+    [dontRun, setdontRun] = useState(true);
 
 
     [answer, setanswer] = useState({
@@ -73,10 +74,33 @@ const InterestComponent = ({finishedEmit}) => {
     }
 
     function finishButton(){
+        if(dontRun){
+            return;
+        }
         console.log("här går en sql Call iväg och när responsen ok går vi tillbaka till appens första sida");
-        setfinished(true);
-        finishedEmit();
+       // setfinished(true);
+       // finishedEmit();
+        writeCompAndInterest("Vickanmejl", answer.userCompenencies, answer.lookingForPreferences);
     }
+
+    const writeCompAndInterest = async (emailAddressToSend, competenciesToSend, interestsToSend) => {
+        try {
+            const response = await fetch("http://127.0.0.1:8000/api/writeCompAndInt", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    email: emailAddressToSend,
+                    competencies: competenciesToSend,
+                    interests: interestsToSend,
+                }),
+            });
+            const data = await response.json();
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
 
 
@@ -84,21 +108,25 @@ const InterestComponent = ({finishedEmit}) => {
 
 
     return (
-        <View className="flex-1  justify-evenly bg-ligtblue w-full flex-col">
-            <Text>Kompetenser: {answer.userCompenencies}
-            </Text>
-            <Text>Letar efter: {answer.lookingForPreferences} </Text>
-            <Text className="font-bold text-3xl"> What are you looking for? </Text>
+        <View className="flex-1 w-full  flex-col">
+            <View className="flex-0 justify-center items-center">
+                <Text className="mt-24" >Kompetenser: {answer.userCompenencies}
+                </Text>
+                <Text>Letar efter: {answer.lookingForPreferences} </Text>
+                <Text className="text-3xl mt-16"> What are you looking for? </Text>
+            </View>
+
 
             { lookingForFilled ? (
                 <View>
-                {userCompetencies.map((userCompetencies) => (
+                {userCompetencies.map((currElement, index) => (
                         <InterestAndCompetenceButtonComponent
-                            text={userCompetencies}
+                            text={currElement}
+                            index={index}
                             addToLookingFor={userCompetenciesAdd}
                         />
                     ))}
-                    <View>
+                    <View className="mt-32">
                         <Button title={"Finish"}
                         onPress={() => finishButton()}
                         >
@@ -107,16 +135,17 @@ const InterestComponent = ({finishedEmit}) => {
                 </View>
             ) : (
                 <View>
-                    {lookingFor.map((lookingFor) => (
+                    {lookingFor.map((currElement, index) => (
                         <InterestAndCompetenceButtonComponent
-                            text={lookingFor}
+                            text={currElement}
+                            index={index}
                             addToLookingFor={userLookingForAdd}
                         />
                     ))}
                 </View>
             )}
 
-            <View className="flex-0 flex-row justify-center">
+            <View className="flex-0 flex-row justify-center mt-16">
                 <Button title={"previous"}
                 onPress={() => previousButton()}
                 >

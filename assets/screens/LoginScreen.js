@@ -3,6 +3,7 @@ import {View, Text, TextInput, Button, TouchableOpacity}  from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
+
 const LoginScreen = ({ updateLoggedInState, updateRegisterState }) => {
     const [serverResponse, setServerResponse] = useState("");
     const [emailAdressAuth, setEmailAdressAuth] = useState("");
@@ -60,7 +61,9 @@ const LoginScreen = ({ updateLoggedInState, updateRegisterState }) => {
 
         }
     }
-
+    function forgotPassword(){
+        console.log("forgot password was pressed")
+    }
 
     function handleRegister() {
         console.log("handleRegister was pressed")
@@ -70,38 +73,68 @@ const LoginScreen = ({ updateLoggedInState, updateRegisterState }) => {
     return (
 
         <View className="flex-1 justify-center items-center">
-            <Text className = 'font-raleway text-5xl m-4'> Sign in</Text>
+
+             {/* Profile Bubbles */}
+                <View className="absolute top-0 right-0">
+            {/* ProfileScreen Bubble */}
+                    <View className="w-28 h-28 bg-profileScreen opacity-70 rounded-full mt-12 mr-8"></View>
+
+            {/* Pink Bubble */}
+                    
+
+            {/* Gray Bubble */}
+                </View>
+                <View className="absolute bottom-0 left-0">
+                    <View className="w-20 h-20 bg-profileScreen opacity-70 rounded-full -mb-5 ml-2"></View>
+                    <View className="w-14 h-14 bg-purple opacity-90 rounded-full mb-20 ml-12"></View>
+                    </View>
+            <Text className = 'text-4xl m-4'> Please sign in</Text>
 
             
             <TextInput
-                className="font-railway w-3/4 text-xl mb-5 border-2 mt-5 rounded bg-purple"
-                placeholder="exempel.adress@swipe2work.com"
+                style = {{fontSize: 22, width: "75%", height: "5%", margin: "5%", borderRadius: 12,  backgroundColor: "#E6E6FA", 
+                shadowColor: '#000', shadowOpacity: 0.25, shadowRadius: 3}}
+                placeholder="Email"
                 onChangeText={onChangeEmailAdressAuth}
                 value={emailAdressAuth}
             />
-            <TextInput className="font-railway w-3/4 text-xl mt-5 border-2 rounded bg-purple"
-                       placeholder="************"
-                       onChangeText={onChangePasswordAuth}
-                       value={passwordAuth}
-                       secureTextEntry={true}
+            <TextInput 
+                style = {{fontSize: 22 ,width: "75%", height: "5%", margin: "5%", borderRadius: 12,  backgroundColor: "#E6E6FA", 
+                shadowColor: '#000', shadowOpacity: 0.25, shadowRadius: 3}}
+                placeholder="Password"
+                onChangeText={onChangePasswordAuth}
+                value={passwordAuth}
+                secureTextEntry={true}
             />
 
             {/* */}
-            <Button title="Login" onPress={() => authenticateUser(emailAdressAuth,passwordAuth)}/>
-        
             <View>
+                <TouchableOpacity className= "m-4" onPress={() => forgotPassword()}>
+                    <Text style={{fontSize: 20, color: '#A9A9A9'}} > Forgot password?</Text>
+                </TouchableOpacity>
+            </View>
+
+            <View >
+                    <TouchableOpacity className="bg-black w-20 h-9 justify-center items-center rounded-xl mt-5 mb-10" onPress={() => authenticateUser(emailAdressAuth,passwordAuth)}>
+                        <Text className="text-white text-sm">LOGIN</Text>
+                    </TouchableOpacity>
+            </View>
+
+            <View className="items-center -mb-10">
+                <Text style={{fontSize: 20, color: '#A9A9A9', margin: '5%'}} > Don't have an account yet? </Text>
+                <TouchableOpacity className="bg-black w-20 h-9 justify-center items-center rounded-xl mt-2"onPress={() => handleRegister()}>
+                    <Text className="text-white text-sm">SIGNUP</Text>
+                </TouchableOpacity>
+            </View>
+
+            {/*<View>
                 <Text> Authentication Status: {token} </Text>
                 <TouchableOpacity onPress={() => getToken()}>
                     <Text>Get Token</Text>
                 </TouchableOpacity>
-            </View>
+    </View>*/}
 
-            <View>
-                <Text> Här reggar vi någon </Text>
-                <TouchableOpacity onPress={() => handleRegister()}>
-                    <Text>Regga knapp</Text>
-                </TouchableOpacity>
-            </View>
+          
 
 
         </View>

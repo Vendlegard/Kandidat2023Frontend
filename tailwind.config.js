@@ -8,12 +8,11 @@ module.exports = {
       'red': '#ec5288',
       'black': '#000000',
       'gray': '#A9A9A9',
-      "lightblue": '#5072A7',
+      "profileScreen": '#B3EADF',
       'white': '#FFFFFF',
       'pink': '#FFC0CB',
       'purple': '#E6E6FA',
-      'lightgray': '#BFBFBF',
-      'lightergray': '#d8d8d8',
+      'lightgray': '#BFBFBF'
     }
   },
   plugins: [],

@@ -17,12 +17,12 @@ export default function App() {
         setLoggedIn(value);
     };
 
-    const [registerStatus, setRegisterStatus] = useState(false);
+    const [registerStatus, setRegisterStatus] = useState(true);
     const updateRegisterStatus = (value) => {
         setRegisterStatus(value);
     };
 
-    const [firstTimeLoggingIn, setFirstTimeLoggingIn] = useState(true);
+    const [firstTimeLoggingIn, setFirstTimeLoggingIn] = useState(false);
 
     const updateFirstTimeLoggingIn = (value) => {
         setFirstTimeLoggingIn(value);
