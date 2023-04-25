@@ -13,7 +13,7 @@ const Tab = createBottomTabNavigator();
 
 
 
-const Navigator = () => {
+const Navigator = ({userInfo}) => {
 
 
     const [loggedIn, setLoggedIn] = useState(false);
@@ -35,7 +35,12 @@ const Navigator = () => {
                         <Ionicons name = 'heart' size = {30} color={'#6b7280'}/>
                     )
                 }} />
-                <Tab.Screen name="Profile" component={ProfileScreen} options={{
+                <Tab.Screen name="Profile"
+
+                            children = {() => <ProfileScreen userInfo={userInfo}/>}
+
+
+                            options={{
                     tabBarIcon: ({color, size}) => (
                         <Ionicons name = 'person-circle-sharp' size = {30} color={'#6b7280'}/>
                     )

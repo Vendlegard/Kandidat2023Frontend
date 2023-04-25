@@ -26,10 +26,12 @@ const JobCard = ({ jobIcon, jobTitle, employer, location, date, wage, duration, 
     setShowModal(false);
   };
 
+  
+
     return (
     <>
       <TouchableOpacity onPress={onPressHandler}>
-        <View className="flex-1 flex-row h-28 mb-4 ml-4 mr-4 mt-3 font-railway" style={{ backgroundColor: 'rgb(230,230,230)', height: '75%', borderRadius: 15, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.35, shadoRadius: 3, elevation: 2 }} >
+        <View className="flex-1 flex-row h-2 ml-4 mr-4 mt-3 " style={{ backgroundColor: '#eaf0f8', height: '75%', borderRadius: 15, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.35, shadowRadius: 3, elevation: 2 }} >
           <View className=" w-3/12 h-28 justify-center">
             <Image source={jobIcon} className="w-20 h-16 ml-3" />
           </View>

@@ -1,14 +1,31 @@
 import React, {useState} from "react";
-import {View, Text, TextInput, Button, TouchableOpacity}  from "react-native";
+import {View, Text, TextInput, TouchableOpacity}  from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
+/*
+email: "",
+        firstName: "",
+        lastName: "",
+        education: "",
+        university: "",
+        semester: 1,
+        competence: [],
+        interests: []
+ */
 
-const LoginScreen = ({ updateLoggedInState, updateRegisterState }) => {
+
+const LoginScreen = ({ updateLoggedInState, updateRegisterState, updateUserInfo }) => {
     const [serverResponse, setServerResponse] = useState("");
     const [emailAdressAuth, setEmailAdressAuth] = useState("");
     const [passwordAuth, setPasswordAuth] = useState("");
     const [token, setToken] = useState("");
+
+    const [userData, setuserData] = useState( {});
+
+    const [loginCount, setLoginCount] = useState(0);
+
+
 
     const onChangeEmailAdressAuth = (text) => {
         setEmailAdressAuth(text);
@@ -16,6 +33,11 @@ const LoginScreen = ({ updateLoggedInState, updateRegisterState }) => {
     const onChangePasswordAuth = (text) => {
         setPasswordAuth(text);
     }
+
+    const onChangeUserData = (data) => {
+        setuserData(data);
+    }
+
 
     const authenticateUser = async (emailAddressToSend,passwordToSend) => {
         try {
@@ -30,14 +52,17 @@ const LoginScreen = ({ updateLoggedInState, updateRegisterState }) => {
                 }),
             });
             const data = await response.json();
-            const token = data.message; 
-
-            /* om vi får tillbaka något, betyder det alltså att användaren finns och är autentiserad? */
+            const token = data.message;
             setToken(token);
             storeToken(token);
-            /*det nedan ska göras om användaren är autentiserad, annars säg typ "fel användarnamen eller 
-            lösenord och föreslå glömt lösenord eller registrera konto" */
-            updateLoggedInState(true)
+            let userDataTemp = await data.userInfo;
+            onChangeUserData(userDataTemp);
+            updateUserInfo(userDataTemp);
+            console.log("authenticateUser called in LoginScreen.js with the value", userData);
+            setLoginCount(loginCount + 1);
+            if(loginCount > 0){
+                updateLoggedInState(true);
+            }
         } catch (error) {
             console.error(error);
         }
@@ -70,6 +95,10 @@ const LoginScreen = ({ updateLoggedInState, updateRegisterState }) => {
         console.log("handleRegister was pressed")
         updateRegisterState(true);
     }
+
+    const handleLogin = async (emailAddressToSend, passwordToSend) => {
+        await authenticateUser(emailAddressToSend, passwordToSend);
+    };
 
     return (
 
@@ -116,7 +145,7 @@ const LoginScreen = ({ updateLoggedInState, updateRegisterState }) => {
             </View>
 
             <View >
-                    <TouchableOpacity className="bg-black w-20 h-9 justify-center items-center rounded-xl mt-5 mb-10" onPress={() => authenticateUser(emailAdressAuth,passwordAuth)}>
+                    <TouchableOpacity className="bg-black w-20 h-9 justify-center items-center rounded-xl mt-5 mb-10" onPress={() => handleLogin(emailAdressAuth,passwordAuth)}>
                         <Text className="text-white text-sm">LOGIN</Text>
                     </TouchableOpacity>
             </View>

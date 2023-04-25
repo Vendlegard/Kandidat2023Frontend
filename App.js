@@ -12,20 +12,34 @@ import RegisterScreen from "./assets/screens/RegisterScreen";
 
 export default function App() {
 
-    const [loggedIn, setLoggedIn] = useState(false);
+    const [loggedIn, setLoggedIn] = useState(true);
     const updateLoggedInState = (value) => {
         setLoggedIn(value);
     };
 
-    const [registerStatus, setRegisterStatus] = useState(true);
+    const [registerStatus, setRegisterStatus] = useState(false);
     const updateRegisterStatus = (value) => {
         setRegisterStatus(value);
     };
 
     const [firstTimeLoggingIn, setFirstTimeLoggingIn] = useState(false);
 
+    const [userInfo, setUserInfo] = useState({
+        firstName: "Victoria",
+        lastName: "Berinder",
+        education: "Civilingenjör i System I teknik och samhälle",
+        userEmail: "vickan@mail.com",
+        university: "Uppsala Universitet",
+        semester: 5,
+    });
+
     const updateFirstTimeLoggingIn = (value) => {
         setFirstTimeLoggingIn(value);
+    }
+
+    const updateUserInfo = (value) => {
+        setUserInfo(value);
+        console.log("updateUserInfo called in app.js with the value", userInfo);
     }
 
     function finished(){
@@ -35,13 +49,16 @@ export default function App() {
 
 
 
+
     return (
 
 
 
         <View className="flex-1 bg-amber-100">
             {loggedIn ? (
-                <BottomNavigation/>
+                <BottomNavigation userInfo={userInfo}
+
+                />
             ) : registerStatus ? (
                 <RegisterScreen
                     updateRegisterState={updateRegisterStatus}
@@ -55,6 +72,7 @@ export default function App() {
                 <LoginScreen
                     updateLoggedInState={updateLoggedInState}
                     updateRegisterState={updateRegisterStatus}
+                    updateUserInfo={updateUserInfo}
                 />
             )}
         </View>
