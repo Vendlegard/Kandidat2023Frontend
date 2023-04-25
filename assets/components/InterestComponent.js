@@ -25,7 +25,7 @@ const InterestComponent = ({finishedEmit}) => {
     [lookingFor, setLookingFor] = useState(["Sommarjobb", "Deltid", "Trainee", "Internship", "Exjobb", "Timanställning"]);
     [userLookingFor, setUserLookingFor] = useState([]);
     [userCompetencies, setUserCompetencies] = useState(["C#", "Java", "Python"]);
-    [dontRun, setdontRun] = useState(true);
+    [dontRun, setdontRun] = useState(false);
 
 
     [answer, setanswer] = useState({
@@ -78,8 +78,8 @@ const InterestComponent = ({finishedEmit}) => {
             return;
         }
         console.log("här går en sql Call iväg och när responsen ok går vi tillbaka till appens första sida");
-       // setfinished(true);
-       // finishedEmit();
+       setfinished(true);
+       finishedEmit();
         writeCompAndInterest("Vickanmejl", answer.userCompenencies, answer.lookingForPreferences);
     }
 

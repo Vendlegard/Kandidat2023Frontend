@@ -17,21 +17,29 @@ export default function App() {
         setLoggedIn(value);
     };
 
-    const [registerStatus, setRegisterStatus] = useState(true);
+    const [registerStatus, setRegisterStatus] = useState(false);
     const updateRegisterStatus = (value) => {
         setRegisterStatus(value);
     };
 
     const [firstTimeLoggingIn, setFirstTimeLoggingIn] = useState(false);
 
+    const [userInfo, setUserInfo] = useState({});
+
     const updateFirstTimeLoggingIn = (value) => {
         setFirstTimeLoggingIn(value);
+    }
+
+    const updateUserInfo = (value) => {
+        setUserInfo(value);
+        console.log("updateUserInfo called in app.js with the value", userInfo);
     }
 
     function finished(){
         console.log("finshed called in app.js");
         setLoggedIn(true);
     }
+
 
 
 
@@ -55,6 +63,7 @@ export default function App() {
                 <LoginScreen
                     updateLoggedInState={updateLoggedInState}
                     updateRegisterState={updateRegisterStatus}
+                    updateUserInfo={updateUserInfo}
                 />
             )}
         </View>

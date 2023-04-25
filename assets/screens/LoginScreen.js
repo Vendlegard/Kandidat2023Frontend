@@ -3,12 +3,27 @@ import {View, Text, TextInput, Button, TouchableOpacity}  from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
+/*
+email: "",
+        firstName: "",
+        lastName: "",
+        education: "",
+        university: "",
+        semester: 1,
+        competence: [],
+        interests: []
+ */
 
-const LoginScreen = ({ updateLoggedInState, updateRegisterState }) => {
+
+const LoginScreen = ({ updateLoggedInState, updateRegisterState, updateUserInfo }) => {
     const [serverResponse, setServerResponse] = useState("");
     const [emailAdressAuth, setEmailAdressAuth] = useState("");
     const [passwordAuth, setPasswordAuth] = useState("");
     const [token, setToken] = useState("");
+
+    const [userData, setuserData] = useState( {});
+
+
 
     const onChangeEmailAdressAuth = (text) => {
         setEmailAdressAuth(text);
@@ -30,13 +45,13 @@ const LoginScreen = ({ updateLoggedInState, updateRegisterState }) => {
                 }),
             });
             const data = await response.json();
-            const token = data.message; 
-            /* om vi får tillbaka något, betyder det alltså att användaren finns och är autentiserad? */
+            const token = data.message;
             setToken(token);
             storeToken(token);
-            /*det nedan ska göras om användaren är autentiserad, annars säg typ "fel användarnamen eller 
-            lösenord och föreslå glömt lösenord eller registrera konto" */
-            updateLoggedInState(true)
+            //console.log(data);
+            setuserData(data.userInfo);
+            //console.log(userData);
+            updateUserInfo(data.userInfo);
         } catch (error) {
             console.error(error);
         }
