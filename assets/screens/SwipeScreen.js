@@ -89,7 +89,7 @@ const SwipeScreen = ({userInfo}) => {
     };
 
     useState(() => {
-        console.log("fetch Jobs called")
+        console.log("fetch Jobs called");
         fetchJobs();
     }, []);
 

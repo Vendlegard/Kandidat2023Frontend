@@ -17,6 +17,9 @@ export default function App() {
     const updateLoggedInState = (value) => {
         console.log("update LoggedInState called in App.js with the value", value);
         setLoggedIn(value);
+        if(value === false ){
+            AsyncStorage.removeItem("@token");
+        }
     };
     const loggedOut = (value) => {
         setLoggedIn(value);
@@ -99,6 +102,19 @@ export default function App() {
         console.log("fetch Jobs called")
         authWithToken();
     }, []);
+
+    const clearToken = async () => {
+        try {
+            await AsyncStorage.removeItem('@token');
+            if(value !== null) {
+                console.log(value)
+            }
+            sendingToken(value);
+        } catch(e) {
+            console.log(e);
+
+        }
+    }
 
 
 
