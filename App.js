@@ -12,7 +12,7 @@ import RegisterScreen from "./assets/screens/RegisterScreen";
 
 export default function App() {
 
-    const [loggedIn, setLoggedIn] = useState(true);
+    const [loggedIn, setLoggedIn] = useState(false);
     const updateLoggedInState = (value) => {
         setLoggedIn(value);
     };

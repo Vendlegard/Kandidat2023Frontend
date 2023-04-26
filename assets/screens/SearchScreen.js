@@ -1,205 +1,90 @@
-import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity} from "react-native";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useState } from 'react';
+import { StyleSheet, Text, TextInput, View, FlatList } from 'react-native';
 
+const jobs = [
+  { id: 1, title: 'Software Engineer', description: 'Develop software applications', salary: '20,000 - 30,000' },
+  { id: 2, title: 'Product Manager', description: 'Manage product development lifecycle', salary: '25,000 - 30,000' },
+  { id: 3, title: 'Data Analyst', description: 'Analyze and interpret complex data sets', salary: '20,000 - 25,000' },
+  { id: 4, title: 'Frontend Developer', description: 'Develop and implement frontend code', salary: '25,000 - 30,000' },
+];
 
-const SearchScreen = () => {
-    const [serverResponse, setServerResponse] = useState("");
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [university, setUniversity] = useState("");
-    const [education, setEducation] = useState(""); // lägga till termin och kanske bild i user table?
-    const [emailAdress, setEmailAdress] = useState("");
-    const [password, setPassword] = useState("");
-    const [emailAdressAuth, setEmailAdressAuth] = useState("");
-    const [passwordAuth, setPasswordAuth] = useState("");
-    const [token, setToken] = useState("");
+export default function App() {
+  const [query, setQuery] = useState('');
+  const [filteredJobs, setFilteredJobs] = useState(jobs);
 
-    
+  const handleSearch = text => {
+    setQuery(text);
 
-    const onChangeEmailAdressAuth = (text) => {
-        setEmailAdressAuth(text);
-    }
-    const onChangePasswordAuth = (text) => {
-        setPasswordAuth(text);
-    }
-    const onChangeEmailAdress = (text) => {
-        setEmailAdress(text);
-    }
-    const onChangePassword = (text) => {
-        setPassword(text);
-    }
-    const onChangeFirstName = (text) => {
-        setFirstName(text);
-    }
-    const onChangeLastName = (text) => {
-        setLastName(text);
-    }
-    const onChangeUniversity = (text) => {
-        setUniversity(text);
-    }
-    const onChangeEducation = (text) => {
-        setEducation(text);
-    }
-
-
-    const registerUser = async (emailAddressToSend, passwordToSend, firstNameToSend, lastNameToSend, UniversityToSend, EducationToSend) => {
-        try {
-            const response = await fetch("http://127.0.0.1:8000/api/testResponse", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    email: emailAddressToSend,
-                    password: passwordToSend,
-                    firstName: firstNameToSend,
-                    lastName: lastNameToSend,
-                    university: UniversityToSend,
-                    education: EducationToSend,
-                }),
-            });
-            const data = await response.json();
-            setServerResponse(data.message);
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
-    const authenticateUser = async (emailAddressToSend,passwordToSend) => {
-        try {
-            const response = await fetch("http://127.0.0.1:8000/api/authenticate", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    email: emailAddressToSend,
-                    password: passwordToSend,
-                }),
-            });
-            const data = await response.json();
-            const token = data.message;
-            setToken(token);
-            storeToken(token);
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
-
-    const storeToken = async (value) => {
-        try {
-            await AsyncStorage.setItem('@token', value)
-        } catch (e) {
-            // saving error
-        }
-    }
-
-    const getToken = async () => {
-        try {
-            const value = await AsyncStorage.getItem('@token')
-            if(value !== null) {
-                console.log(value)
-            }
-        } catch(e) {
-            console.log(e);
-
-        }
-    }
-
-    return (
-        <View className="flex-1 justify-evenly">
-
-            <View>
-            <Text> first name: {firstName}, last name: {lastName}</Text>
-            <TextInput
-                    style={{ height: 40, borderColor: "blue", borderWidth: 1 }}
-                    placeholder="First name"
-                    onChangeText={onChangeFirstName}
-                    value={firstName}
-                >
-                </TextInput>
-            
-                <TextInput
-                    style={{ height: 40, borderColor: "blue", borderWidth: 1 }}
-                    placeholder="Last name"
-                    onChangeText={onChangeLastName}
-                    value={lastName}
-                >
-                </TextInput>
-
-                <TextInput
-                    style={{ height: 40, borderColor: "blue", borderWidth: 1 }}
-                    placeholder="University"
-                    onChangeText={onChangeUniversity}
-                    value={university}
-                >
-                </TextInput>
-
-                <TextInput
-                    style={{ height: 40, borderColor: "blue", borderWidth: 1 }}
-                    placeholder="Education"
-                    onChangeText={onChangeEducation}
-                    value={education}
-                >
-                </TextInput>
-                
-                <Text> email sent is: {emailAdress}, password sent is: {password}</Text>
-                <TextInput
-                    style={{ height: 40, borderColor: "blue", borderWidth: 1 }}
-                    placeholder="Email adress"
-                    onChangeText={onChangeEmailAdress}
-                    value={emailAdress}
-                />
-                <TextInput
-                    style={{ height: 40, borderColor: "blue", borderWidth: 1 }}
-                    placeholder="Password"
-                    onChangeText={onChangePassword}
-                    value={password}
-                >
-                </TextInput>
-                
-                <TouchableOpacity onPress={() => registerUser(emailAdress, password, firstName, lastName, university, education)}>
-                    <Text>Send email and password to the server</Text>
-                </TouchableOpacity>
-                {serverResponse !== "" && ( // render the server response if it's not an empty string
-                    <Text>Server response: {serverResponse}</Text>
-                )}
-            </View>
-
-            <View>
-                <Text> email sent is: {emailAdressAuth}, password sent is: {passwordAuth}</Text>
-                <TextInput
-                    style={{ height: 40, borderColor: "blue", borderWidth: 1 }}
-                    placeholder="Email adress"
-                    onChangeText={onChangeEmailAdressAuth}
-                    value={emailAdressAuth}
-                />
-                <TextInput
-                    style={{ height: 40, borderColor: "blue", borderWidth: 1 }}
-                    placeholder="Password"
-                    onChangeText={onChangePasswordAuth}
-                    value={passwordAuth}
-                >
-                </TextInput>
-
-                <TouchableOpacity
-                    onPress={() => authenticateUser(emailAdressAuth,passwordAuth)}
-                >
-                    <Text> Test authentication with stored credentials</Text>
-                </TouchableOpacity>
-            </View>
-
-            <View>
-                <Text> Authentication Status: {token} </Text>
-                <TouchableOpacity onPress={() => getToken()}>
-                    <Text>Get Token</Text>
-                </TouchableOpacity>
-            </View>
-
-        </View>
+    const filteredData = jobs.filter(job =>
+      job.title.toLowerCase().includes(text.toLowerCase()) ||
+      job.description.toLowerCase().includes(text.toLowerCase()) ||
+      job.salary.toLowerCase().includes(text.toLowerCase())
     );
-};
 
-export default SearchScreen;
+    setFilteredJobs(filteredData);
+  };
+
+  return (
+    <View style={styles.container}>
+      <TextInput
+        style={styles.searchBox}
+        onChangeText={handleSearch}
+        value={query}
+        placeholder="Search for jobs..."
+      />
+      <FlatList
+        data={filteredJobs}
+        renderItem={({ item }) => (
+          <View style={styles.jobContainer}>
+            <Text style={styles.jobTitle}>{item.title}</Text>
+            <Text style={styles.jobDescription}>{item.description}</Text>
+            <Text style={styles.jobSalary}>{item.salary}</Text>
+          </View>
+        )}
+        keyExtractor={item => item.id.toString()}
+      />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#f2f2f2',
+    padding: 10,
+  },
+  searchBox: {
+    backgroundColor: 'white',
+    padding: 10,
+    marginBottom: 10,
+    borderRadius: 10,
+  },
+  jobContainer: {
+    backgroundColor: 'white',
+    borderRadius: 10,
+    padding: 10,
+    marginBottom: 10,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+
+    elevation: 3,
+  },
+  jobTitle: {
+    fontWeight: 'bold',
+  },
+  jobDescription: {
+    marginBottom: 5,
+  },
+  jobSalary: {
+    color: 'green',
+  },
+});
+
+

@@ -83,7 +83,7 @@ const LikeScreen = () => {
                     experience="Erfarenhet krävs"
                 />
                 <JobCard
-                    jobIcon={AFRY}
+                    //jobIcon={AFRY}
                     jobTitle="Deltid"
                     employer="AFRY"
                     location="Uppsala"
@@ -103,6 +103,7 @@ const LikeScreen = () => {
                     experience="Erfarenhet krävs"
                 />
                 <JobCard
+                    //jobIcon={consid}
                     jobIcon={consid}
                     jobTitle="Traineeprogram"
                     employer="Consid"
