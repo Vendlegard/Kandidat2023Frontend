@@ -25,6 +25,7 @@ export default function App() {
     const [firstTimeLoggingIn, setFirstTimeLoggingIn] = useState(false);
 
     const [userInfo, setUserInfo] = useState({
+        userID: 1,
         firstName: "Victoria",
         lastName: "Berinder",
         education: "Civilingenjör i System I teknik och samhälle",

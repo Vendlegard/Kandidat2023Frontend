@@ -25,7 +25,12 @@ const Navigator = ({userInfo}) => {
     return (
         <NavigationContainer className = 'b'>
             <Tab.Navigator>
-                <Tab.Screen name = 'Swipe' component={SwipeScreen} options={{
+                <Tab.Screen name = 'Swipe'
+
+
+                            children = {() => <SwipeScreen userInfo={userInfo}/>}
+
+                            options={{
                     tabBarIcon: ({color, size, name}) => (
                         <MaterialIcons name = 'work' size = {30} color={'#6b7280'}/>
                     )
