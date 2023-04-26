@@ -52,7 +52,7 @@ const LoginScreen = ({ updateLoggedInState, updateRegisterState, updateUserInfo 
                 }),
             });
             const data = await response.json();
-            const token = data.message;
+            const token = data.token;
             setToken(token);
             storeToken(token);
             let userDataTemp = await data.userInfo;
@@ -69,6 +69,7 @@ const LoginScreen = ({ updateLoggedInState, updateRegisterState, updateUserInfo 
     };
 
     const storeToken = async (value) => {
+        console.log("storeToken called in LoginScreen.js with the value", value);
         try {
             await AsyncStorage.setItem('@token', value)
         } catch (e) {
@@ -99,6 +100,7 @@ const LoginScreen = ({ updateLoggedInState, updateRegisterState, updateUserInfo 
     const handleLogin = async (emailAddressToSend, passwordToSend) => {
         await authenticateUser(emailAddressToSend, passwordToSend);
     };
+
 
     return (
 

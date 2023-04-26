@@ -37,7 +37,7 @@ let testCards = [
 ];
 
 
-const SwipeScreen = () => {
+const SwipeScreen = ({userInfo}) => {
     const swipeRef = useRef(null);
 
     const [showModal, setShowModal] = useState(null);
@@ -59,6 +59,19 @@ const SwipeScreen = () => {
 
     const [cardIndex, setCardIndex] = useState(0);
 
+    const [likedIDs, setLikedIDs] = useState([]);
+    const [notLikedIDs , setNotLikedIDs] = useState([]);
+
+    const [likedID, setLikedID] = useState(null);
+
+    const onPushLikedIDs = (id) => {
+        setLikedIDs([...likedIDs, id]);
+    }
+
+    const onPushNotLikedIDs = (id) => {
+        setNotLikedIDs([...notLikedIDs, id]);
+    }
+
 
     const fetchJobs = async () => {
         try {
@@ -76,9 +89,30 @@ const SwipeScreen = () => {
     };
 
     useState(() => {
-        console.log("fetch Jobs called")
+        console.log("fetch Jobs called");
         fetchJobs();
     }, []);
+
+    const storeLiked = async (likesToSend, userIDofUser) => {
+        try {
+            const response = await fetch("http://127.0.0.1:8000/api/likedJob", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(
+                    {
+                        "liked": likesToSend,
+                        "id"   : userIDofUser
+                    }
+                )
+            });
+            const data = await response.json();
+            console.log(data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
 
 
@@ -100,14 +134,20 @@ const SwipeScreen = () => {
                 return;
             }
             setCardIndex(cardIndex + 1);
-            console.log('Swiped NOPE on', jobs[cardIndex].jobName);
+            console.log('Swiped NOPE on', jobs[cardIndex].jobName, "with the ID", jobs[cardIndex].jobID );
+            onPushNotLikedIDs(jobs[cardIndex].jobID);
+            console.log(notLikedIDs, "are the not liked jobs", "and the length of the array is", notLikedIDs.length);
         }}
         onSwipedRight={() => {
             if(cardIndex == jobs.length - 1){
                 return;
             }
             setCardIndex(cardIndex + 1);
-            console.log('Swiped LIKE on ', jobs[cardIndex].jobName);
+            console.log('Swiped LIKE on ', jobs[cardIndex].jobName , "with the ID", jobs[cardIndex].jobID);
+            //onPushLikedIDs(jobs[cardIndex].jobID);
+            setLikedID(jobs[cardIndex].jobID);
+            //console.log(likedIDs, "are the liked hjobs");
+            storeLiked(likedID, userInfo.userID);
         }}
         overlayLabels={{        /*LIKE and NOPE signs*/
             left: {
@@ -173,6 +213,9 @@ const SwipeScreen = () => {
         style={{ alignItems: 'center', justifyContent: 'center', borderRadius: 50, width: 75, height: 75, backgroundColor: 'rgb(187 247 208)' }}>
             <AntDesign name='heart' size={30}/>
         </TouchableOpacity>
+          <View>
+            <Text> {userInfo.userID}</Text>
+        </View>
     </View>
 
     {/* Modal with additional info when clicking a card*/}
@@ -184,7 +227,7 @@ const SwipeScreen = () => {
         </View>
     </Modal>
 
-    </SafeAreaView> 
+    </SafeAreaView>
     );
 };
 
