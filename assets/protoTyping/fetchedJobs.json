@@ -1,0 +1,48 @@
+[
+    {
+        "id": 1,
+        "jobIcon": "https://sebgroup.com/ImageVault/publishedmedia/nkuwms2up8mjzxmomo6p/SEB_Logotypes.jpg",
+        "jobTitle": "Extrajobb",
+        "employer": "SEB",
+        "date": "2023-02-11",
+        "location": "Stockholm",
+        "wage": "144 kr/h",
+        "duration": "8 veckor",
+        "experience": "Erfarenhet krävs"
+    },
+    {
+        "id": 2,
+        "jobIcon": "https://awlogo.azureedge.net/logos/7da315d8-3a59-49da-a5c7-8499f8bb72e7.png",
+        "jobTitle": "Deltid",
+        "employer": "AFRY",
+        "date": "2023-02-11",
+        "location": "Uppsala",
+        "wage": "150 kr/h",
+        "duration": "Tillsvidare",
+        "experience": "Erfarenhet krävs"
+    },
+    {
+        "id": 3,
+        "jobIcon": "https://via.tt.se/data/images/00386/69dd7020-4267-4d39-aeb1-51c9c4aaa4ca.png",
+        "jobTitle": "Sommarjobb",
+        "employer": "Consid",
+        "date": "2023-02-11",
+        "location": "Stockholm",
+        "wage": "150 kr/h",
+        "duration": "10 veckor",
+        "experience": "Erfarenhet krävs" 
+    },
+    {
+        "id": 4,
+        "jobIcon": "https://brandslogos.com/wp-content/uploads/images/large/abb-logo.png",
+        "jobTitle": "Traineeprogram",
+        "employer": "ABB",
+        "date": "2023-02-11",
+        "location": "Västerås",
+        "wage": "160 kr/h",
+        "duration": "30 veckor",
+        "experience": "Erfarenhet krävs"
+    }
+   
+  
+]
