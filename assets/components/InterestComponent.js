@@ -113,7 +113,7 @@ const InterestComponent = ({finishedEmit}) => {
                 <Text className="mt-24" >Kompetenser: {answer.userCompenencies}
                 </Text>
                 <Text>Letar efter: {answer.lookingForPreferences} </Text>
-                <Text className="text-3xl mt-16"> What are you looking for? </Text>
+                <Text className="text-3xl mt-16 mb-5"> What are you looking for? </Text>
             </View>
 
 
