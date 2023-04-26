@@ -96,10 +96,16 @@ const SwipeScreen = () => {
         verticalSwipe = {false}
        
         onSwipedLeft={()=>{
+            if(cardIndex == jobs.length - 1){
+                return;
+            }
             setCardIndex(cardIndex + 1);
             console.log('Swiped NOPE on', jobs[cardIndex].jobName);
         }}
         onSwipedRight={() => {
+            if(cardIndex == jobs.length - 1){
+                return;
+            }
             setCardIndex(cardIndex + 1);
             console.log('Swiped LIKE on ', jobs[cardIndex].jobName);
         }}
