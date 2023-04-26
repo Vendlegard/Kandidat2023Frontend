@@ -6,13 +6,14 @@ import LoginScreen from "./assets/screens/LoginScreen";
 import { NavigationContainer } from '@react-navigation/native';
 import CompetenceScreen from "./assets/screens/CompetenceScreen";
 import RegisterScreen from "./assets/screens/RegisterScreen";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 
 
 export default function App() {
 
-    const [loggedIn, setLoggedIn] = useState(true);
+    const [loggedIn, setLoggedIn] = useState(false);
     const updateLoggedInState = (value) => {
         setLoggedIn(value);
     };
@@ -34,6 +35,10 @@ export default function App() {
         semester: 5,
     });
 
+    const onChangeUserData = (data) => {
+        setUserInfo(data);
+    }
+
     const updateFirstTimeLoggingIn = (value) => {
         setFirstTimeLoggingIn(value);
     }
@@ -43,10 +48,52 @@ export default function App() {
         console.log("updateUserInfo called in app.js with the value", userInfo);
     }
 
+
     function finished(){
         console.log("finshed called in app.js");
         setLoggedIn(true);
     }
+
+    const sendingToken = async (token) => {
+        try {
+            const response = await fetch("http://127.0.0.1:8000/api/authWithToken", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    token: token
+                }),
+            });
+            const data = await response.json();
+            let userDataTemp = await data.userInfo;
+            onChangeUserData(userDataTemp);
+            updateUserInfo(userDataTemp);
+            console.log("authenticateUser called in App.js with the value", userDataTemp);
+            updateLoggedInState(true);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+
+    const authWithToken = async () => {
+        try {
+            const value = await AsyncStorage.getItem('@token')
+            if(value !== null) {
+                console.log(value)
+            }
+            sendingToken(value);
+        } catch(e) {
+            console.log(e);
+
+        }
+    }
+
+    useState(() => {
+        console.log("fetch Jobs called")
+        authWithToken();
+    }, []);
 
 
 
