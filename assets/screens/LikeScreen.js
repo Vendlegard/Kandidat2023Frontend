@@ -3,6 +3,7 @@ import {View, TextInput, Text, ScrollView, TouchableOpacity} from "react-native"
 import JobCard from "../components/JobCard";
 import SEB from "../images/SEB.jpeg";
 import { AntDesign, Ionicons, Entypo, MaterialIcons } from '@expo/vector-icons'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import vattenfallPic from '../images/vattenfallPic.png'
 import AFRY from '../images/AFRY.png'
 import consid from '../images/consid.png'
@@ -23,6 +24,8 @@ const LikeScreen = () => {
     const handleSetJobs = (object) => {
         setJobsToLoad(object);
     }
+
+    
 
 
 
@@ -49,6 +52,58 @@ const LikeScreen = () => {
             console.error(error);
         }
     };
+
+    let testCards = [
+        {
+            title: "Internship",
+            desc: "Vi söker dig som studerar ekonomi för att delta i vårt traineeprogram",
+            location: "Solna kommun, Stockholms län",
+            photoURL: "https://sebgroup.com/ImageVault/publishedmedia/nkuwms2up8mjzxmomo6p/SEB_Logotypes.jpg",
+            idJobs: 123,
+        },
+        {
+            title: "Sommarjobb",
+            desc: "Ingenjörsstudent sökes till sommarjobb",
+            location: "Uppsala, Uppsala län",
+            photoURL: "https://cached-images.bonnier.news/gcs/di-bilder-prod/media/44de0244a8cd1b93ed81ce44af590011.jpg",
+            idJobs: 456,
+        },
+        {
+            title: "Sommarjobb",
+            desc: "Prova på att vara konsult för sommaren",
+            location: "Västerås, Västerås län",
+            photoURL: "https://www.swecogroup.com/wp-content/uploads/sites/2/2021/03/sweco_black.png",
+            idJobs: 789,
+        },
+        {idJobs: 9, title: 'Credit Analyst', location: 'Stockholm', desc: 'Analysera risk med oss i sommar', photoURL: 'https://sebgroup.com/siteassets/sebgroup.com/press-and-news/seb_k_45mm150dpi.jpg'}, 
+        {idJobs: 10, title: 'Telekommunikation i Marocko', location: 'Distans', desc: 'Vi söker dig som är duktig tekniskt och vill analysera 5G nät i Marocko parallelt med studierna ', photoURL: 'https://cdn.everythingrf.com/live/984_ericsson_200.jpg'}, 
+        {idJobs: 11, title: 'Telekommunikation i Santiago', location: 'Distans', desc: 'Vi söker dig som är duktig tekniskt och vill analysera 5G nät i Santiago parallelt med studierna ', photoURL: 'https://cdn.everythingrf.com/live/984_ericsson_200.jpg'}, 
+        {idJobs: 12, title: 'Riskanalytiker inom industri', location: 'Luleå',  desc: 'Jobba som riskanalyiker inom industrin i sommar, välbetalt sommarjobb', photoURL: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/SANDVIK.svg/1200px-SANDVIK.svg.png'}
+    ];
+
+    
+
+    const getJobs = async () => {
+        try {
+            console.log("for loopen borde kört")
+            for(let i=0; i<testCards.length; i++) {
+                let id = testCards[i].idJobs;
+                let idToGet = id.toString();
+                let printThis = await AsyncStorage.getItem(idToGet);
+                console.log(printThis);
+              }
+            //const jobDesc = await AsyncStorage.getItem("appData")
+           // console.log({jobDesc})
+           AsyncStorage.clear();
+        }
+        catch (error){
+            console.log(error)
+            console.log('gick ej att hämta desc')
+        }
+    }
+    useState(() => {
+            getJobs();
+        }, []);
 
 
     return (

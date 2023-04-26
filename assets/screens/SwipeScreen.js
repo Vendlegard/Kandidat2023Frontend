@@ -1,12 +1,10 @@
 import React, {useState, useRef} from "react";
 import {View, Text, SafeAreaView, Image, Pressable, Modal} from "react-native";
-import SEB from "../images/SEB.jpeg";
-import vattenfall from "../images/vattenfall.jpeg";
-import sweco from "../images/sweco.png"
 import Swiper from "react-native-deck-swiper";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { AntDesign, Entypo } from '@expo/vector-icons'
 import JobInfo from "../components/JobInfo";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
@@ -33,7 +31,11 @@ let testCards = [
         location: "Västerås, Västerås län",
         photoURL: "https://www.swecogroup.com/wp-content/uploads/sites/2/2021/03/sweco_black.png",
         idJobs: 789,
-    }
+    },
+    {idJobs: 9, title: 'Credit Analyst', location: 'Stockholm', desc: 'Analysera risk med oss i sommar', photoURL: 'https://sebgroup.com/siteassets/sebgroup.com/press-and-news/seb_k_45mm150dpi.jpg'}, 
+    {idJobs: 10, title: 'Telekommunikation i Marocko', location: 'Distans', desc: 'Vi söker dig som är duktig tekniskt och vill analysera 5G nät i Marocko parallelt med studierna ', photoURL: 'https://cdn.everythingrf.com/live/984_ericsson_200.jpg'}, 
+    {idJobs: 11, title: 'Telekommunikation i Santiago', location: 'Distans', desc: 'Vi söker dig som är duktig tekniskt och vill analysera 5G nät i Santiago parallelt med studierna ', photoURL: 'https://cdn.everythingrf.com/live/984_ericsson_200.jpg'}, 
+    {idJobs: 12, title: 'Riskanalytiker inom industri', location: 'Luleå',  desc: 'Jobba som riskanalyiker inom industrin i sommar, välbetalt sommarjobb', photoURL: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/SANDVIK.svg/1200px-SANDVIK.svg.png'}
 ];
 
 
@@ -57,6 +59,8 @@ const SwipeScreen = () => {
 
     const [card, setCards] = useState(false);
 
+    const [cardIndex, setCardIndex] = useState(0);
+
 
     const fetchJobs = async () => {
         try {
@@ -77,6 +81,36 @@ const SwipeScreen = () => {
         fetchJobs();
     }, []);
 
+    const saveJobs = async (testCards) => {
+        try{
+        let idToRead = testCards[cardIndex].idJobs;
+        let idToStore = idToRead.toString();
+        await AsyncStorage.setItem(idToStore, JSON.stringify(testCards[cardIndex]));
+        console.log('Gick bra att spara jobb')
+        } catch(error){
+            console.log(error)
+            console.log('Gick ej bra att spara jobb')
+        }
+    }
+    const getJobs = async () => {
+        try {
+            console.log("for loopen borde kört")
+            for(let i=0; i<testCards.length; i++) {
+                let id = testCards[i].idJobs;
+                let idToGet = id.toString();
+                let printThis = await AsyncStorage.getItem(idToGet);
+                console.log(printThis);
+              }
+            //const jobDesc = await AsyncStorage.getItem("appData")
+           // console.log({jobDesc})
+           AsyncStorage.clear();
+        }
+        catch (error){
+            console.log(error)
+            console.log('gick ej att hämta desc')
+        }
+    }
+
 
 
     return (
@@ -92,12 +126,15 @@ const SwipeScreen = () => {
         animateCardOpacity
         verticalSwipe = {false}
        
+       
         onSwipedLeft={()=>{
-            console.log('Swiped NOPE')
-            
+            setCardIndex(cardIndex + 1);
+            console.log('Swiped NOPE on', testCards[cardIndex].desc);
         }}
         onSwipedRight={() => {
-            console.log('Swiped LIKE') 
+            saveJobs(testCards)
+            setCardIndex(cardIndex + 1);
+            console.log('Swiped LIKE on ', testCards[cardIndex].desc);
         }}
         overlayLabels={{        /*LIKE and NOPE signs*/
             left: {
@@ -160,6 +197,12 @@ const SwipeScreen = () => {
 
         <TouchableOpacity 
         onPress={() =>swipeRef.current.swipeRight()}
+        style={{ alignItems: 'center', justifyContent: 'center', borderRadius: 50, width: 75, height: 75, backgroundColor: 'rgb(187 247 208)' }}>
+            <AntDesign name='heart' size={30}/>
+        </TouchableOpacity>
+
+        <TouchableOpacity 
+        onPress={getJobs}
         style={{ alignItems: 'center', justifyContent: 'center', borderRadius: 50, width: 75, height: 75, backgroundColor: 'rgb(187 247 208)' }}>
             <AntDesign name='heart' size={30}/>
         </TouchableOpacity>
