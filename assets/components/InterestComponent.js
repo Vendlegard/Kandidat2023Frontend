@@ -16,8 +16,9 @@
 ] */
 
 import React, {useState} from "react";
-import {View, Text, TextInput, Button, TouchableOpacity}  from "react-native";
+import {View, Text, TextInput, Button, TouchableOpacity, Image}  from "react-native";
 import InterestAndCompetenceButtonComponent from "./InterestAndCompetenceButtonComponent";
+import leftArrow from '../images/leftArrow.png';
 
 //create a basic component
 const InterestComponent = ({finishedEmit}) => {
@@ -109,16 +110,25 @@ const InterestComponent = ({finishedEmit}) => {
 
     return (
         <View className="flex-1 w-full  flex-col">
+            <TouchableOpacity className="flex-1 absolute top-0 left-0 mt-20 ml-5" onPress={() => previousButton()}>
+                <View style={{ position: 'relative' }}>
+                    <Image source={leftArrow} className="w-11 h-8"></Image>
+                </View>
+            </TouchableOpacity>
+
             <View className="flex-0 justify-center items-center">
                 <Text className="mt-24" >Kompetenser: {answer.userCompenencies}
                 </Text>
                 <Text>Letar efter: {answer.lookingForPreferences} </Text>
-                <Text className="text-3xl mt-16 mb-5"> What are you looking for? </Text>
+                
             </View>
 
 
             { lookingForFilled ? (
                 <View>
+                    <View className ="justify-center items-center">
+                    <Text className="text-3xl mt-16 mb-5"> What are your competencies? </Text>
+                </View>
                 {userCompetencies.map((currElement, index) => (
                         <InterestAndCompetenceButtonComponent
                             text={currElement}
@@ -135,6 +145,9 @@ const InterestComponent = ({finishedEmit}) => {
                 </View>
             ) : (
                 <View>
+                    <View className ="justify-center items-center">
+                    <Text className="text-3xl mt-16 mb-5"> What are you looking for? </Text>
+                    </View>
                     {lookingFor.map((currElement, index) => (
                         <InterestAndCompetenceButtonComponent
                             text={currElement}
@@ -149,7 +162,7 @@ const InterestComponent = ({finishedEmit}) => {
                 <Button title={"previous"}
                 onPress={() => previousButton()}
                 >
-                </Button>
+                    </Button>
                 <Button title={"next"}
                         onPress={() => nextButton()}
                 >
