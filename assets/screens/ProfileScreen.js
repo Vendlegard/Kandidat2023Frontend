@@ -11,7 +11,7 @@ import profile from '../images/profile.png'
 import { LinearGradient } from 'expo-linear-gradient';
 
 
-const ProfileScreen = ({userInfo}) => {
+const ProfileScreen = ({userInfo, isLoggedOut}) => {
     const [isProfileEdited, setIsProfileEdited] = useState(false);
     // const bubble1Position = useRef(new Animated.ValueXY({ x: 0, y: 0 })).current;
     // const bubble2Position = useRef(new Animated.ValueXY({ x: 10, y: 30 })).current;
@@ -29,9 +29,13 @@ const ProfileScreen = ({userInfo}) => {
     };
 
     const handleLogout = () => {
-        setIsProfileEdited(false);
+        console.log("Logout button pressed");
+        isLoggedOut(false);
         // Add navigation logic here to navigate to the logout screen or perform logout action
     };
+
+
+
     // useEffect(() => {
     //     Animated.loop(
     //         Animated.sequence([

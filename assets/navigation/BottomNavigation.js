@@ -13,13 +13,16 @@ const Tab = createBottomTabNavigator();
 
 
 
-const Navigator = ({userInfo}) => {
+const Navigator = ({userInfo, isLoggedOut}) => {
 
 
     const [loggedIn, setLoggedIn] = useState(false);
     const updateLoggedInState = (value) => {
-        setLoggedIn(value);
+        console.log("updateLoggedInState called in BottomNavigation.js with the value", value);
+        isLoggedOut(value);
     };
+
+
 
 
     return (
@@ -42,7 +45,9 @@ const Navigator = ({userInfo}) => {
                 }} />
                 <Tab.Screen name="Profile"
 
-                            children = {() => <ProfileScreen userInfo={userInfo}/>}
+                            children = {() => <ProfileScreen
+                                isLoggedOut={updateLoggedInState}
+                                userInfo={userInfo}/>}
 
 
                             options={{

@@ -101,6 +101,7 @@ const LoginScreen = ({ updateLoggedInState, updateRegisterState, updateUserInfo 
         await authenticateUser(emailAddressToSend, passwordToSend);
     };
 
+
     return (
 
         <View className="flex-1 justify-center items-center">

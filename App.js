@@ -15,8 +15,12 @@ export default function App() {
 
     const [loggedIn, setLoggedIn] = useState(false);
     const updateLoggedInState = (value) => {
+        console.log("update LoggedInState called in App.js with the value", value);
         setLoggedIn(value);
     };
+    const loggedOut = (value) => {
+        setLoggedIn(value);
+    }
 
     const [registerStatus, setRegisterStatus] = useState(false);
     const updateRegisterStatus = (value) => {
@@ -53,6 +57,7 @@ export default function App() {
         console.log("finshed called in app.js");
         setLoggedIn(true);
     }
+
 
     const sendingToken = async (token) => {
         try {
@@ -105,6 +110,7 @@ export default function App() {
         <View className="flex-1 bg-amber-100">
             {loggedIn ? (
                 <BottomNavigation userInfo={userInfo}
+                                  isLoggedOut={updateLoggedInState}
 
                 />
             ) : registerStatus ? (
