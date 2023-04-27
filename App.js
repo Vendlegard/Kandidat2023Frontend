@@ -18,6 +18,7 @@ export default function App() {
         console.log("update LoggedInState called in App.js with the value", value);
         setLoggedIn(value);
         if(value === false ){
+            setFirstTimeLoggingIn(false);
             AsyncStorage.removeItem("@token");
         }
     };

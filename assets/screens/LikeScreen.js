@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {View, TextInput, Text, ScrollView, TouchableOpacity} from "react-native";
+import {View, TextInput, Text, ScrollView, TouchableOpacity, Button} from "react-native";
 import JobCard from "../components/JobCard";
 import SEB from "../images/SEB.jpeg";
 import { AntDesign, Ionicons, Entypo, MaterialIcons } from '@expo/vector-icons'
@@ -23,6 +23,7 @@ const LikeScreen = () => {
     const handleSetJobs = (object) => {
         setJobsToLoad(object);
     }
+    const [jobs, setJobs] = useState([]);
 
 
 
@@ -30,25 +31,35 @@ const LikeScreen = () => {
 
     const fetchJobs = async () => {
         try {
-            const response = await fetch("http://127.0.0.1:8000/api/fetchJobs");
+            const response = await fetch("http://127.0.0.1:8000/api/fetchJobs", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
             const data = await response.json();
-            setServerResponse(data.message); // set the server response as state
-            var listOfJobs = data.message;
-            setJobsToLoad([]);
-            for ( let i = 0; i<listOfJobs.length; i++){
-                let objectToPush = { 
-                    employer : "",
-                    jobName: ""
-                }
-                objectToPush.jobName = listOfJobs[i][0];
-                objectToPush.employer = listOfJobs[i][1];
-                setJobsToLoad(previousJobs => [...previousJobs, objectToPush]);
-            }
-            console.log(jobsToLoad.length);
+            console.log(data.jobs[0]);
+            setJobs(data.jobs);
         } catch (error) {
             console.error(error);
         }
     };
+
+
+    useState(
+        () => {
+            console.log("fetch Jobs called")
+            fetchJobs();
+        }
+    )
+
+
+
+
+
+
+
+
 
 
     return (
@@ -62,54 +73,26 @@ const LikeScreen = () => {
                     />
          </View>
         <ScrollView className="">
+            <Button title={"test"} onPress={console.log("hej")}></Button>
             <View className="m-2">
-                <TouchableOpacity onPress={fetchJobs}>
-                    <Text>{serverResponse}</Text>
-                    <Text> Get jobs</Text>
-                </TouchableOpacity>
-
-                <JobCard
-                    jobIcon={SEB}
-                    jobTitle="Extrajobb"
-                    employer="SEB"
-                    location="Stockholm"
-                    date="2023-02-11"
-                    wage="144 kr/h"
-                    duration="8 veckor"
-                    experience="Erfarenhet krävs"
-                />
-                <JobCard
-                    //jobIcon={AFRY}
-                    jobTitle="Deltid"
-                    employer="AFRY"
-                    location="Uppsala"
-                    date="2023-02-11"
-                    wage="150 kr/h"
-                    duration="8 veckor"
-                    experience="Erfarenhet krävs"
-                />
-                <JobCard
-                    jobIcon={vattenfallPic}
-                    jobTitle="Sommarjobb"
-                    employer="Vattenfall"
-                    location="Stockholm"
-                    date="2023-02-11"
-                    wage="140 kr/h"
-                    duration="6 veckor"
-                    experience="Erfarenhet krävs"
-                />
-                <JobCard
-                    //jobIcon={consid}
-                    jobIcon={consid}
-                    jobTitle="Traineeprogram"
-                    employer="Consid"
-                    location="Uppsala"
-                    date="2023-02-11"
-                    wage="170 kr/h"
-                    duration="30 veckor"
-                    experience="Erfarenhet krävs"
-                />
-                
+                {jobs.map((job, index) => {
+                    if (index === 1 || index === 3) { // only render second and fifth jobs
+                        return (
+                            <JobCard
+                                key={index}
+                                jobIcon={job.employerImage}
+                                jobTitle={job.jobType}
+                                employer="SEB"
+                                location={job.location}
+                                date="2023-08-12"
+                                wage="170kr/h"
+                                duration="8 veckor"
+                                experience="Erfarenhet krävs"
+                            />
+                        );
+                    }
+                    return null; // don't render other jobs
+                })}
                 
             </View>
         </ScrollView>
