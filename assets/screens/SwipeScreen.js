@@ -62,7 +62,7 @@ const SwipeScreen = ({userInfo}) => {
     const [likedIDs, setLikedIDs] = useState([]);
     const [notLikedIDs , setNotLikedIDs] = useState([]);
 
-    const [likedID, setLikedID] = useState(null);
+    const [likedID, setLikedID] = useState("");
 
     const onPushLikedIDs = (id) => {
         setLikedIDs([...likedIDs, id]);
@@ -143,11 +143,12 @@ const SwipeScreen = ({userInfo}) => {
                 return;
             }
             setCardIndex(cardIndex + 1);
-            console.log('Swiped LIKE on ', jobs[cardIndex].jobName , "with the ID", jobs[cardIndex].jobID);
+            console.log('user with id: ', userInfo.userID, 'Swiped LIKE on ', jobs[cardIndex].jobName , "with the ID", jobs[cardIndex].jobID);
             //onPushLikedIDs(jobs[cardIndex].jobID);
             setLikedID(jobs[cardIndex].jobID);
+            console.log('detta är det gillade jobbet: ',jobs[cardIndex].jobID)
             //console.log(likedIDs, "are the liked hjobs");
-            storeLiked(likedID, userInfo.userID);
+            storeLiked(jobs[cardIndex].jobID, userInfo.userID);
         }}
         overlayLabels={{        /*LIKE and NOPE signs*/
             left: {
