@@ -29,17 +29,17 @@ const LikeScreen = () => {
 
     const [serverResponse, setServerResponse] = useState("");
 
-    const fetchJobs = async () => {
+    const fetchLikedJobs = async () => {
         try {
-            const response = await fetch("http://127.0.0.1:8000/api/fetchJobs", {
+            const response = await fetch("http://127.0.0.1:8000/api/fetchLikedJobs", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
                 },
             });
             const data = await response.json();
-            console.log(data.jobs[0]);
-            setJobs(data.jobs);
+            console.log(data.liked_jobs);
+            handleSetJobs(data.liked_jobs)
         } catch (error) {
             console.error(error);
         }
@@ -48,8 +48,8 @@ const LikeScreen = () => {
 
     useState(
         () => {
-            console.log("fetch Jobs called")
-            fetchJobs();
+            console.log("fetchLikedJobs called")
+            fetchLikedJobs();
         }
     )
 
@@ -74,27 +74,7 @@ const LikeScreen = () => {
          </View>
         <ScrollView className="">
             <Button title={"test"} onPress={console.log("hej")}></Button>
-            <View className="m-2">
-                {jobs.map((job, index) => {
-                    if (index === 1 || index === 3) { // only render second and fifth jobs
-                        return (
-                            <JobCard
-                                key={index}
-                                jobIcon={job.employerImage}
-                                jobTitle={job.jobType}
-                                employer="SEB"
-                                location={job.location}
-                                date="2023-08-12"
-                                wage="170kr/h"
-                                duration="8 veckor"
-                                experience="Erfarenhet krävs"
-                            />
-                        );
-                    }
-                    return null; // don't render other jobs
-                })}
-                
-            </View>
+
         </ScrollView>
         </View>
     );
