@@ -64,13 +64,6 @@ const SwipeScreen = ({userInfo}) => {
 
     const [likedID, setLikedID] = useState("");
 
-    const onPushLikedIDs = (id) => {
-        setLikedIDs([...likedIDs, id]);
-    }
-
-    const onPushNotLikedIDs = (id) => {
-        setNotLikedIDs([...notLikedIDs, id]);
-    }
 
 
     const fetchJobs = async () => {
@@ -114,6 +107,27 @@ const SwipeScreen = ({userInfo}) => {
         }
     };
 
+    const storeDisliked = async (likesToSend, userIDofUser) => {
+        try {
+            const response = await fetch("http://127.0.0.1:8000/api/dislikedJob", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(
+                    {
+                        "disliked": likesToSend,
+                        "id"   : userIDofUser
+                    }
+                )
+            });
+            const data = await response.json();
+            console.log(data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
 
 
     return (
@@ -135,8 +149,7 @@ const SwipeScreen = ({userInfo}) => {
             }
             setCardIndex(cardIndex + 1);
             console.log('Swiped NOPE on', jobs[cardIndex].jobName, "with the ID", jobs[cardIndex].jobID );
-            onPushNotLikedIDs(jobs[cardIndex].jobID);
-            console.log(notLikedIDs, "are the not liked jobs", "and the length of the array is", notLikedIDs.length);
+            storeDisliked(jobs[cardIndex].jobID, userInfo.userID);
         }}
         onSwipedRight={() => {
             if(cardIndex == jobs.length - 1){
@@ -144,8 +157,6 @@ const SwipeScreen = ({userInfo}) => {
             }
             setCardIndex(cardIndex + 1);
             console.log('user with id: ', userInfo.userID, 'Swiped LIKE on ', jobs[cardIndex].jobName , "with the ID", jobs[cardIndex].jobID);
-            //onPushLikedIDs(jobs[cardIndex].jobID);
-            setLikedID(jobs[cardIndex].jobID);
             console.log('detta är det gillade jobbet: ',jobs[cardIndex].jobID)
             //console.log(likedIDs, "are the liked hjobs");
             storeLiked(jobs[cardIndex].jobID, userInfo.userID);
