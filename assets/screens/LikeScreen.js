@@ -112,21 +112,33 @@ const LikeScreen = ({userInfo}) => {
                         value={searchText}
                     />
          </View>
-            <View className="mt-8 flex-0 w-full h-12 justify-center
-            items-center flex-row justify-evenly">
+            <View className="mt-8 flex-0 w-full h-12 ml-4
+            items-center flex-row ">
                 <TouchableOpacity onPress={handleShowLikedJobs}>
                 <View className=" h-10 justify-center items-center w-24 rounded-3xl border-2">
                     {showLikedJobs ?
-                        <AntDesign name="heart" size={24} color="black" />
-                        : <AntDesign name="hearto" size={24} color="black" />
+
+
+                        <View className="bg-pink">
+                        <Text>Gillad</Text>
+                        </View>
+                        :
+                        <View>
+                        <Text>Gillad</Text>
+                        </View>
                     }
                 </View>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={handleShowLikedJobs}>
-                <View className=" h-10 justify-center items-center w-24 rounded-3xl border-2">
+                <View className=" h-10 justify-center items-center w-24 rounded-3xl border-2 ml-2">
                     {showLikedJobs ?
-                        <AntDesign name="hearto" size={24} color="black" />
-                        : <AntDesign name="heart" size={24} color="black" />
+                        <View>
+                        <Text>Ej gillad</Text>
+                        </View>
+                        :
+                        <View className="bg-pink">
+                        <Text> Ej gillad</Text>
+                        </View>
                     }
                 </View>
                 </TouchableOpacity>
