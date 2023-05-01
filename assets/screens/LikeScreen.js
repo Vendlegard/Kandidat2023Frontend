@@ -139,7 +139,7 @@ const LikeScreen = ({userInfo}) => {
                             <Text>Ej gillade </Text>
                         </View>
                         :
-                        <View className="h-10 w-24 rounded-3xl bg-pink
+                        <View className="h-10 w-24 rounded-3xl bg-pink ml-3
                         border-2 flex-0 justify-center items-center">
                             <Text>Ej gillade</Text>
                         </View>
@@ -161,6 +161,7 @@ const LikeScreen = ({userInfo}) => {
                             wage={"300kr/h"}
                             duration={"3 months"}
                             experience={"1 year"}
+                            liked={true}
                         ></JobCard>
                     ))}
                 </View>
@@ -176,6 +177,7 @@ const LikeScreen = ({userInfo}) => {
                                     wage={"300kr/h"}
                                     duration={"3 months"}
                                     experience={"1 year"}
+                                    liked={false}
                                 ></JobCard>
                             ))}
                 </View>

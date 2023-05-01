@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity, Modal } from 'react-native';
 import JobInfo from './JobInfo';
 
-const JobCard = ({ jobIcon, jobTitle, employer, location, date, wage, duration, experience }) => {
+const JobCard = ({ jobIcon, jobTitle, employer, location, date, wage, duration, experience, liked}) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedJob, setSelectedJob] = useState({
     jobIcon,
@@ -26,12 +26,11 @@ const JobCard = ({ jobIcon, jobTitle, employer, location, date, wage, duration, 
     setShowModal(false);
   };
 
-  const [heartPressed, setHeartPressed] = useState(false);
+  const [heartPressed, setHeartPressed] = useState(liked);
     const heartPressHandler = () => {
-        setHeartPressed(!heartPressed);
         console.log("heart pressed is now : " + heartPressed)
+        setHeartPressed(!heartPressed)
     }
-
   
 
     return (
