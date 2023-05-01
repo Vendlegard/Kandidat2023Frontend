@@ -112,9 +112,27 @@ const LikeScreen = ({userInfo}) => {
                         value={searchText}
                     />
          </View>
+            <View className="mt-8 flex-0 w-full h-12 justify-center
+            items-center flex-row justify-evenly">
+                <TouchableOpacity onPress={handleShowLikedJobs}>
+                <View className=" h-10 justify-center items-center w-24 rounded-3xl border-2">
+                    {showLikedJobs ?
+                        <AntDesign name="heart" size={24} color="black" />
+                        : <AntDesign name="hearto" size={24} color="black" />
+                    }
+                </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={handleShowLikedJobs}>
+                <View className=" h-10 justify-center items-center w-24 rounded-3xl border-2">
+                    {showLikedJobs ?
+                        <AntDesign name="hearto" size={24} color="black" />
+                        : <AntDesign name="heart" size={24} color="black" />
+                    }
+                </View>
+                </TouchableOpacity>
+            </View>
         <ScrollView className="">
-            <Button title={"Visa gillade / ogillade"} onPress={handleShowLikedJobs}
-            ></Button>
+
 
             { showLikedJobs ?
                 <View>

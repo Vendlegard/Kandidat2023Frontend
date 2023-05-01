@@ -26,6 +26,12 @@ const JobCard = ({ jobIcon, jobTitle, employer, location, date, wage, duration, 
     setShowModal(false);
   };
 
+  const [heartPressed, setHeartPressed] = useState(false);
+    const heartPressHandler = () => {
+        setHeartPressed(!heartPressed);
+        console.log("heart pressed is now : " + heartPressed)
+    }
+
   
 
     return (
@@ -40,7 +46,12 @@ const JobCard = ({ jobIcon, jobTitle, employer, location, date, wage, duration, 
             <View className="flex-1 flex-row justify-between">
               <Text className="text-lg ml-4 font-bold">{jobTitle}</Text>
               <View className="px-1 pt-1">
-                <AntDesign name='hearto' size={30} />
+                <TouchableOpacity onPress={heartPressHandler}>
+                {
+                    heartPressed ? <AntDesign name='heart' size={30} /> :
+                        <AntDesign name='hearto' size={30} />
+                }
+                </TouchableOpacity>
               </View>
             </View>
             <View className="flex-1 flex-row">
