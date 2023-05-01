@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {View, TextInput, Text, ScrollView, TouchableOpacity, Button} from "react-native";
 import JobCard from "../components/JobCard";
 import SEB from "../images/SEB.jpeg";
@@ -6,6 +6,8 @@ import { AntDesign, Ionicons, Entypo, MaterialIcons } from '@expo/vector-icons'
 import vattenfallPic from '../images/vattenfallPic.png'
 import AFRY from '../images/AFRY.png'
 import consid from '../images/consid.png'
+import { useFocusEffect } from '@react-navigation/native';
+
 
 
 
@@ -76,20 +78,23 @@ const LikeScreen = ({userInfo}) => {
 
     useState(
         () => {
-            console.log("fetchLikedJobs called")
             fetchLikedJobs();
         }
     )
 
     useState(
         () => {
-            console.log("fetchDislikedJobs called")
             fetchDislikedJobs();
         }
     )
 
-
-
+    useFocusEffect(
+        React.useCallback(() => {
+            fetchLikedJobs();
+            fetchDislikedJobs();
+            setShowLikedJobs(true);
+        }, [])
+    );
 
 
 
