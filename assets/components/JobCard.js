@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, Modal} from 'react-native';
 import JobInfo from './JobInfo';
 
-const JobCard = ({ jobIcon, jobTitle, employer, location, date, wage, duration, experience, liked}) => {
+const JobCard = ({ jobIcon, jobTitle, employer, location, date, wage, duration, experience, liked, jobID, userID}) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedJob, setSelectedJob] = useState({
     jobIcon,
@@ -18,7 +18,7 @@ const JobCard = ({ jobIcon, jobTitle, employer, location, date, wage, duration, 
   });
 
   const onPressHandler = () => {
-    setSelectedJob({ jobIcon, jobTitle, employer, location, date, wage, duration, experience });
+    setSelectedJob({jobIcon, jobTitle, employer, location, date, wage, duration, experience });
     setShowModal(true);
   };
 
@@ -32,10 +32,59 @@ const JobCard = ({ jobIcon, jobTitle, employer, location, date, wage, duration, 
     setHeartPressed(liked);
     }, [liked]);
 
+  const storeLiked = async (likesToSend, userIDofUser) => {
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/likedJob", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(
+            {
+              "liked": likesToSend,
+              "id"   : userIDofUser
+            }
+        )
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const storeDisliked = async (likesToSend, userIDofUser) => {
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/dislikedJob", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(
+            {
+              "disliked": likesToSend,
+              "id"   : userIDofUser
+            }
+        )
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+
+
 
     const heartPressHandler = () => {
-        console.log("heart pressed is now : " + heartPressed)
-        setHeartPressed(!heartPressed)
+        setHeartPressed(!heartPressed);
+        if(heartPressed){
+          storeDisliked(jobID, userID);
+        }
+        if(!heartPressed){
+            storeLiked(jobID, userID);
+        }
     }
 
 
