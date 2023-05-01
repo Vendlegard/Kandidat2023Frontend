@@ -75,6 +75,28 @@ const LikeScreen = () => {
         <ScrollView className="">
             <Button title={"test"} onPress={console.log("hej")}></Button>
 
+            <JobCard
+                jobIcon={"https://www.unicus.com/wp-content/uploads/2018/08/seb-logo-3.png"}
+                jobTitle={"Frontend Developer"}
+                employer={"SEB"}
+                location={"Stockholm"}
+                date={"2021-05-01"}
+                wage={"300kr/h"}
+                duration={"3 months"}
+                experience={"1 year"} />
+
+            {jobsToLoad.map((job) => (
+                <JobCard
+                    jobIcon={job.employerImage}
+                    jobTitle={job.jobName}
+                    location={job.location}
+                    date={"2021-05-01"}
+                    wage={"300kr/h"}
+                    duration={"3 months"}
+                    experience={"1 year"}
+                ></JobCard>
+            ))}
+
         </ScrollView>
         </View>
     );
