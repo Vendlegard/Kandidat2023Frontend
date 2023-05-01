@@ -96,6 +96,16 @@ const LikeScreen = ({userInfo}) => {
         }, [])
     );
 
+    const likedJobsWithLikedProp = likedJobs.map((job) => ({
+        ...job,
+        liked: true
+    }));
+
+    const dislikedJobsWithLikedProp = dislikedJobs.map((job) => ({
+        ...job,
+        liked: false
+    }));
+
 
 
 
@@ -152,7 +162,7 @@ const LikeScreen = ({userInfo}) => {
 
             { showLikedJobs ?
                 <View>
-                    {likedJobs.map((job) => (
+                    {likedJobsWithLikedProp.map((job) => (
                         <JobCard
                             jobIcon={job.employerImage}
                             jobTitle={job.jobName}
@@ -161,14 +171,15 @@ const LikeScreen = ({userInfo}) => {
                             wage={"300kr/h"}
                             duration={"3 months"}
                             experience={"1 year"}
-                            liked={true}
+                            liked={job.liked}
                         ></JobCard>
                     ))}
                 </View>
 
 
                 : <View>
-                     {dislikedJobs.map((job) => (
+                     {dislikedJobsWithLikedProp.map((job) =>
+                         (
                                 <JobCard
                                     jobIcon={job.employerImage}
                                     jobTitle={job.jobName}
@@ -177,7 +188,7 @@ const LikeScreen = ({userInfo}) => {
                                     wage={"300kr/h"}
                                     duration={"3 months"}
                                     experience={"1 year"}
-                                    liked={false}
+                                    liked={job.liked}
                                 ></JobCard>
                             ))}
                 </View>

@@ -1,6 +1,6 @@
 import { AntDesign } from '@expo/vector-icons';
-import React, { useState } from 'react';
-import { View, Text, Image, TouchableOpacity, Modal } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, Image, TouchableOpacity, Modal} from 'react-native';
 import JobInfo from './JobInfo';
 
 const JobCard = ({ jobIcon, jobTitle, employer, location, date, wage, duration, experience, liked}) => {
@@ -27,10 +27,21 @@ const JobCard = ({ jobIcon, jobTitle, employer, location, date, wage, duration, 
   };
 
   const [heartPressed, setHeartPressed] = useState(liked);
+
+  useEffect(() => {
+    setHeartPressed(liked);
+    }, [liked]);
+
+
     const heartPressHandler = () => {
         console.log("heart pressed is now : " + heartPressed)
         setHeartPressed(!heartPressed)
     }
+
+
+    console.log("heart pressed is now : " + heartPressed)
+    console.log("liked is now : " + liked)
+
   
 
     return (
