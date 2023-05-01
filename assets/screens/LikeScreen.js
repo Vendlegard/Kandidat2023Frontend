@@ -115,29 +115,33 @@ const LikeScreen = ({userInfo}) => {
             <View className="mt-8 flex-0 w-full h-12 ml-4
             items-center flex-row ">
                 <TouchableOpacity onPress={handleShowLikedJobs}>
-                <View className=" h-10 justify-center items-center w-24 rounded-3xl border-2">
+                <View className="justify-center items-center">
                     {showLikedJobs ?
 
 
-                        <View className="bg-pink">
+                        <View className="h-10 w-24 rounded-3xl bg-pink
+                        border-2 flex-0 justify-center items-center">
                         <Text>Gillad</Text>
                         </View>
                         :
-                        <View>
+                        <View className="h-10 w-24 rounded-3xl
+                        border-2 flex-0 justify-center items-center">
                         <Text>Gillad</Text>
                         </View>
                     }
                 </View>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={handleShowLikedJobs}>
-                <View className=" h-10 justify-center items-center w-24 rounded-3xl border-2 ml-2">
+                <View className="justify-center w-24">
                     {showLikedJobs ?
-                        <View>
-                        <Text>Ej gillad</Text>
+                        <View className="h-10 w-24 rounded-3xl ml-3
+                        border-2 flex-0 justify-center items-center">
+                            <Text>Ej gillade </Text>
                         </View>
                         :
-                        <View className="bg-pink">
-                        <Text> Ej gillad</Text>
+                        <View className="h-10 w-24 rounded-3xl bg-pink
+                        border-2 flex-0 justify-center items-center">
+                            <Text>Ej gillade</Text>
                         </View>
                     }
                 </View>
