@@ -9,7 +9,7 @@ import consid from '../images/consid.png'
 
 
 
-const LikeScreen = () => {
+const LikeScreen = ({userInfo}) => {
 
 
     const [searchText, setSearchText] = useState("");
@@ -18,28 +18,56 @@ const LikeScreen = () => {
         setSearchText(text);
     };
 
-    const [jobsToLoad, setJobsToLoad] = useState([]);
+    const [likedJobs, setLikedJobs] = useState([]);
+    const [dislikedJobs, setDislikedJobs] = useState([]);
 
-    const handleSetJobs = (object) => {
-        setJobsToLoad(object);
+    const handleLikedJobs = (object) => {
+        setLikedJobs(object);
     }
-    const [jobs, setJobs] = useState([]);
+    const handleDislikedJobs = (object) => {
+        setDislikedJobs(object);
+    }
 
+    const [showLikedJobs, setShowLikedJobs] = useState(true);
 
+    const handleShowLikedJobs = () => {
+        setShowLikedJobs(showLikedJobs => !showLikedJobs);
+    }
 
-    const [serverResponse, setServerResponse] = useState("");
 
     const fetchLikedJobs = async () => {
         try {
             const response = await fetch("http://127.0.0.1:8000/api/fetchLikedJobs", {
-                method: "GET",
+                method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
+                body: JSON.stringify({
+                    id: userInfo.userID,
+                }
+                )
             });
             const data = await response.json();
-            console.log(data.liked_jobs);
-            handleSetJobs(data.liked_jobs)
+            handleLikedJobs(data.liked_jobs)
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const fetchDislikedJobs = async () => {
+        try {
+            const response = await fetch("http://127.0.0.1:8000/api/fetchDislikedJobs", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                        id: userInfo.userID,
+                    }
+                )
+            });
+            const data = await response.json();
+            handleDislikedJobs(data.disliked_jobs);
         } catch (error) {
             console.error(error);
         }
@@ -50,6 +78,13 @@ const LikeScreen = () => {
         () => {
             console.log("fetchLikedJobs called")
             fetchLikedJobs();
+        }
+    )
+
+    useState(
+        () => {
+            console.log("fetchDislikedJobs called")
+            fetchDislikedJobs();
         }
     )
 
@@ -73,29 +108,41 @@ const LikeScreen = () => {
                     />
          </View>
         <ScrollView className="">
-            <Button title={"test"} onPress={console.log("hej")}></Button>
+            <Button title={"Visa gillade / ogillade"} onPress={handleShowLikedJobs}
+            ></Button>
 
-            <JobCard
-                jobIcon={"https://www.unicus.com/wp-content/uploads/2018/08/seb-logo-3.png"}
-                jobTitle={"Frontend Developer"}
-                employer={"SEB"}
-                location={"Stockholm"}
-                date={"2021-05-01"}
-                wage={"300kr/h"}
-                duration={"3 months"}
-                experience={"1 year"} />
+            { showLikedJobs ?
+                <View>
+                    {likedJobs.map((job) => (
+                        <JobCard
+                            jobIcon={job.employerImage}
+                            jobTitle={job.jobName}
+                            location={job.location}
+                            date={"2021-05-01"}
+                            wage={"300kr/h"}
+                            duration={"3 months"}
+                            experience={"1 year"}
+                        ></JobCard>
+                    ))}
+                </View>
 
-            {jobsToLoad.map((job) => (
-                <JobCard
-                    jobIcon={job.employerImage}
-                    jobTitle={job.jobName}
-                    location={job.location}
-                    date={"2021-05-01"}
-                    wage={"300kr/h"}
-                    duration={"3 months"}
-                    experience={"1 year"}
-                ></JobCard>
-            ))}
+
+                : <View>
+                     {dislikedJobs.map((job) => (
+                                <JobCard
+                                    jobIcon={job.employerImage}
+                                    jobTitle={job.jobName}
+                                    location={job.location}
+                                    date={"2021-05-01"}
+                                    wage={"300kr/h"}
+                                    duration={"3 months"}
+                                    experience={"1 year"}
+                                ></JobCard>
+                            ))}
+                </View>
+            }
+
+
 
         </ScrollView>
         </View>

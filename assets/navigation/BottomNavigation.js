@@ -38,7 +38,9 @@ const Navigator = ({userInfo, isLoggedOut}) => {
                         <MaterialIcons name = 'work' size = {30} color={'#6b7280'}/>
                     )
                 }} />
-                <Tab.Screen name="Liked" component={LikeScreen} options={{
+                <Tab.Screen name="Liked"
+                            children = {() => <LikeScreen userInfo={userInfo}/>}
+                            options={{
                     tabBarIcon: ({color, size}) => (
                         <Ionicons name = 'heart' size = {30} color={'#6b7280'}/>
                     )

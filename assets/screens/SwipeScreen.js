@@ -80,7 +80,6 @@ const SwipeScreen = ({userInfo}) => {
                 )
             });
             const data = await response.json();
-            console.log(data);
             setJobs(data.jobs);
         } catch (error) {
             console.error(error);
