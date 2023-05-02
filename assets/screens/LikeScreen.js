@@ -7,8 +7,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import vattenfallPic from '../images/vattenfallPic.png'
 import AFRY from '../images/AFRY.png'
 import consid from '../images/consid.png'
-import fetchedJobs from '../protoTyping/fetchedJobs.json'
-
 
 
 const LikeScreen = () => {
@@ -82,6 +80,9 @@ const LikeScreen = () => {
         {idJobs: 12, title: 'Riskanalytiker inom industri', location: 'Luleå',  desc: 'Jobba som riskanalyiker inom industrin i sommar, välbetalt sommarjobb', photoURL: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/SANDVIK.svg/1200px-SANDVIK.svg.png'}
     ];
 
+    const [jobsLiked, setjobsLiked] = useState([]);
+
+
     
 
     const getJobs = async () => {
@@ -91,11 +92,13 @@ const LikeScreen = () => {
                 let id = testCards[i].idJobs;
                 let idToGet = id.toString();
                 let printThis = await AsyncStorage.getItem(idToGet);
+                JSON.parse(printThis);
                 console.log(printThis);
+                if( printThis !== null || printThis !== []){
+                    setjobsLiked(current => [...current, printThis]);
+                }
               }
-            //const jobDesc = await AsyncStorage.getItem("appData")
-           // console.log({jobDesc})
-           AsyncStorage.clear();
+              console.log(jobsLiked);
         }
         catch (error){
             console.log(error)
@@ -124,7 +127,7 @@ const LikeScreen = () => {
                         <Text>Get jobs</Text>
                     </TouchableOpacity>
 
-                    <JobCard jobs={fetchedJobs} />
+                    <JobCard jobs={testCards} />
                 </View>
 
                 {/* <JobCard
