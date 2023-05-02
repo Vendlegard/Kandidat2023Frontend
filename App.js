@@ -6,7 +6,6 @@ import LoginScreen from "./assets/screens/LoginScreen";
 import { NavigationContainer } from '@react-navigation/native';
 import CompetenceScreen from "./assets/screens/CompetenceScreen";
 import RegisterScreen from "./assets/screens/RegisterScreen";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 
@@ -15,15 +14,8 @@ export default function App() {
 
     const [loggedIn, setLoggedIn] = useState(false);
     const updateLoggedInState = (value) => {
-        console.log("update LoggedInState called in App.js with the value", value);
         setLoggedIn(value);
-        if(value === false ){
-            AsyncStorage.removeItem("@token");
-        }
     };
-    const loggedOut = (value) => {
-        setLoggedIn(value);
-    }
 
     const [registerStatus, setRegisterStatus] = useState(false);
     const updateRegisterStatus = (value) => {
@@ -33,7 +25,6 @@ export default function App() {
     const [firstTimeLoggingIn, setFirstTimeLoggingIn] = useState(false);
 
     const [userInfo, setUserInfo] = useState({
-        userID: 1,
         firstName: "Victoria",
         lastName: "Berinder",
         education: "Civilingenjör i System I teknik och samhälle",
@@ -41,10 +32,6 @@ export default function App() {
         university: "Uppsala Universitet",
         semester: 5,
     });
-
-    const onChangeUserData = (data) => {
-        setUserInfo(data);
-    }
 
     const updateFirstTimeLoggingIn = (value) => {
         setFirstTimeLoggingIn(value);
@@ -55,65 +42,9 @@ export default function App() {
         console.log("updateUserInfo called in app.js with the value", userInfo);
     }
 
-
     function finished(){
         console.log("finshed called in app.js");
         setLoggedIn(true);
-    }
-
-
-    const sendingToken = async (token) => {
-        try {
-            const response = await fetch("http://127.0.0.1:8000/api/authWithToken", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    token: token
-                }),
-            });
-            const data = await response.json();
-            let userDataTemp = await data.userInfo;
-            onChangeUserData(userDataTemp);
-            updateUserInfo(userDataTemp);
-            console.log("authenticateUser called in App.js with the value", userDataTemp);
-            updateLoggedInState(true);
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
-
-    const authWithToken = async () => {
-        try {
-            const value = await AsyncStorage.getItem('@token')
-            if(value !== null) {
-                console.log(value)
-            }
-            sendingToken(value);
-        } catch(e) {
-            console.log(e);
-
-        }
-    }
-
-    useState(() => {
-        console.log("fetch Jobs called")
-        authWithToken();
-    }, []);
-
-    const clearToken = async () => {
-        try {
-            await AsyncStorage.removeItem('@token');
-            if(value !== null) {
-                console.log(value)
-            }
-            sendingToken(value);
-        } catch(e) {
-            console.log(e);
-
-        }
     }
 
 
@@ -126,7 +57,6 @@ export default function App() {
         <View className="flex-1 bg-amber-100">
             {loggedIn ? (
                 <BottomNavigation userInfo={userInfo}
-                                  isLoggedOut={updateLoggedInState}
 
                 />
             ) : registerStatus ? (
