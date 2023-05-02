@@ -108,10 +108,9 @@ export default function App() {
 
 
 
-    //useState(() => {
-    //    console.log("fetch Jobs called")
-    //     authWithToken();
-    // }, []); Kommenterar bort så denna inte ska fucka.
+    useState(() => {
+         authWithToken();
+     }, []);
 
     const clearToken = async () => {
         try {
