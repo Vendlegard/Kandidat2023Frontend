@@ -51,6 +51,7 @@ const LikeScreen = () => {
     };
 
 
+    
     return (
         <View className="flex-1 bg-white" style={{ background: 'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(214,234,255,1) 2%, rgba(6,109,182,1) 100%)'}}>
             <View className= "flex-1 justify-center items-center mt-2">
@@ -65,7 +66,6 @@ const LikeScreen = () => {
             <View className="m-2">
                 <TouchableOpacity onPress={fetchJobs}>
                     <Text>{serverResponse}</Text>
-                    <Text> Get jobs</Text>
                 </TouchableOpacity>
 
                 <JobCard
