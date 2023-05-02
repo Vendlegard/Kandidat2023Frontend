@@ -1,15 +1,17 @@
-import React, {useState} from "react";
-import {View, TextInput, Text, ScrollView, TouchableOpacity} from "react-native";
+import React, {useEffect, useState} from "react";
+import {View, TextInput, Text, ScrollView, TouchableOpacity, Button} from "react-native";
 import JobCard from "../components/JobCard";
 import SEB from "../images/SEB.jpeg";
 import { AntDesign, Ionicons, Entypo, MaterialIcons } from '@expo/vector-icons'
 import vattenfallPic from '../images/vattenfallPic.png'
 import AFRY from '../images/AFRY.png'
 import consid from '../images/consid.png'
+import { useFocusEffect } from '@react-navigation/native';
 
 
 
-const LikeScreen = () => {
+
+const LikeScreen = ({userInfo}) => {
 
 
     const [searchText, setSearchText] = useState("");
@@ -18,40 +20,98 @@ const LikeScreen = () => {
         setSearchText(text);
     };
 
-    const [jobsToLoad, setJobsToLoad] = useState([]);
+    const [likedJobs, setLikedJobs] = useState([]);
+    const [dislikedJobs, setDislikedJobs] = useState([]);
 
-    const handleSetJobs = (object) => {
-        setJobsToLoad(object);
+    const handleLikedJobs = (object) => {
+        setLikedJobs(object);
+    }
+    const handleDislikedJobs = (object) => {
+        setDislikedJobs(object);
+    }
+
+    const [showLikedJobs, setShowLikedJobs] = useState(true);
+
+    const handleShowLikedJobs = () => {
+        setShowLikedJobs(showLikedJobs => !showLikedJobs);
     }
 
 
-
-    const [serverResponse, setServerResponse] = useState("");
-
-    const fetchJobs = async () => {
+    const fetchLikedJobs = async () => {
         try {
-            const response = await fetch("http://127.0.0.1:8000/api/fetchJobs");
-            const data = await response.json();
-            setServerResponse(data.message); // set the server response as state
-            var listOfJobs = data.message;
-            setJobsToLoad([]);
-            for ( let i = 0; i<listOfJobs.length; i++){
-                let objectToPush = { 
-                    employer : "",
-                    jobName: ""
+            const response = await fetch("http://127.0.0.1:8000/api/fetchLikedJobs", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    id: userInfo.userID,
                 }
-                objectToPush.jobName = listOfJobs[i][0];
-                objectToPush.employer = listOfJobs[i][1];
-                setJobsToLoad(previousJobs => [...previousJobs, objectToPush]);
-            }
-            console.log(jobsToLoad.length);
+                )
+            });
+            const data = await response.json();
+            handleLikedJobs(data.liked_jobs)
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const fetchDislikedJobs = async () => {
+        try {
+            const response = await fetch("http://127.0.0.1:8000/api/fetchDislikedJobs", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                        id: userInfo.userID,
+                    }
+                )
+            });
+            const data = await response.json();
+            handleDislikedJobs(data.disliked_jobs);
         } catch (error) {
             console.error(error);
         }
     };
 
 
-    
+    useState(
+        () => {
+            fetchLikedJobs();
+        }
+    )
+
+    useState(
+        () => {
+            fetchDislikedJobs();
+        }
+    )
+
+    useFocusEffect(
+        React.useCallback(() => {
+            fetchLikedJobs();
+            fetchDislikedJobs();
+            setShowLikedJobs(true);
+        }, [])
+    );
+
+    const likedJobsWithLikedProp = likedJobs.map((job) => ({
+        ...job,
+        liked: true
+    }));
+
+    const dislikedJobsWithLikedProp = dislikedJobs.map((job) => ({
+        ...job,
+        liked: false
+    }));
+
+
+
+
+
+
+
     return (
         <View className="flex-1 bg-white" style={{ background: 'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(214,234,255,1) 2%, rgba(6,109,182,1) 100%)'}}>
             <View className= "flex-1 justify-center items-center mt-2">
@@ -62,56 +122,84 @@ const LikeScreen = () => {
                         value={searchText}
                     />
          </View>
-        <ScrollView className="">
-            <View className="m-2">
-                <TouchableOpacity onPress={fetchJobs}>
-                    <Text>{serverResponse}</Text>
-                </TouchableOpacity>
+            <View className="mt-8 flex-0 w-full h-12 ml-4
+            items-center flex-row ">
+                <TouchableOpacity onPress={handleShowLikedJobs}>
+                <View className="justify-center items-center">
+                    {showLikedJobs ?
 
-                <JobCard
-                    jobIcon={SEB}
-                    jobTitle="Extrajobb"
-                    employer="SEB"
-                    location="Stockholm"
-                    date="2023-02-11"
-                    wage="144 kr/h"
-                    duration="8 veckor"
-                    experience="Erfarenhet krävs"
-                />
-                <JobCard
-                    //jobIcon={AFRY}
-                    jobTitle="Deltid"
-                    employer="AFRY"
-                    location="Uppsala"
-                    date="2023-02-11"
-                    wage="150 kr/h"
-                    duration="8 veckor"
-                    experience="Erfarenhet krävs"
-                />
-                <JobCard
-                    jobIcon={vattenfallPic}
-                    jobTitle="Sommarjobb"
-                    employer="Vattenfall"
-                    location="Stockholm"
-                    date="2023-02-11"
-                    wage="140 kr/h"
-                    duration="6 veckor"
-                    experience="Erfarenhet krävs"
-                />
-                <JobCard
-                    //jobIcon={consid}
-                    jobIcon={consid}
-                    jobTitle="Traineeprogram"
-                    employer="Consid"
-                    location="Uppsala"
-                    date="2023-02-11"
-                    wage="170 kr/h"
-                    duration="30 veckor"
-                    experience="Erfarenhet krävs"
-                />
-                
-                
+
+                        <View className="h-10 w-24 rounded-3xl bg-pink
+                        border-2 flex-0 justify-center items-center">
+                        <Text>Gillad</Text>
+                        </View>
+                        :
+                        <View className="h-10 w-24 rounded-3xl
+                        border-2 flex-0 justify-center items-center">
+                        <Text>Gillad</Text>
+                        </View>
+                    }
+                </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={handleShowLikedJobs}>
+                <View className="justify-center w-24">
+                    {showLikedJobs ?
+                        <View className="h-10 w-24 rounded-3xl ml-3
+                        border-2 flex-0 justify-center items-center">
+                            <Text>Ej gillade </Text>
+                        </View>
+                        :
+                        <View className="h-10 w-24 rounded-3xl bg-pink ml-3
+                        border-2 flex-0 justify-center items-center">
+                            <Text>Ej gillade</Text>
+                        </View>
+                    }
+                </View>
+                </TouchableOpacity>
             </View>
+        <ScrollView className="">
+
+
+            { showLikedJobs ?
+                <View>
+                    {likedJobsWithLikedProp.map((job) => (
+                        <JobCard
+                            jobIcon={job.employerImage}
+                            userID={userInfo.userID}
+                            jobID={job.jobID}
+                            jobTitle={job.jobName}
+                            location={job.location}
+                            date={"2021-05-01"}
+                            wage={"300kr/h"}
+                            duration={"3 months"}
+                            experience={"1 year"}
+                            liked={job.liked}
+                        ></JobCard>
+                    ))}
+                </View>
+
+
+                : <View>
+                     {dislikedJobsWithLikedProp.map((job) =>
+                         (
+                                <JobCard
+                                    jobID={job.jobID}
+                                    userID={userInfo.userID}
+                                    jobIcon={job.employerImage}
+                                    jobTitle={job.jobName}
+                                    location={job.location}
+                                    date={"2021-05-01"}
+                                    wage={"300kr/h"}
+                                    duration={"3 months"}
+                                    experience={"1 year"}
+                                    liked={job.liked}
+                                ></JobCard>
+                            ))}
+                </View>
+            }
+
+
+
         </ScrollView>
         </View>
     );

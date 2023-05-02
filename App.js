@@ -15,6 +15,10 @@ export default function App() {
     const [loggedIn, setLoggedIn] = useState(false);
     const updateLoggedInState = (value) => {
         setLoggedIn(value);
+        if(value === false ){
+            setFirstTimeLoggingIn(false);
+            AsyncStorage.removeItem("@token");
+        }
     };
 
     const [registerStatus, setRegisterStatus] = useState(false);
