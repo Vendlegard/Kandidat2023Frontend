@@ -81,7 +81,7 @@ const InterestComponent = ({finishedEmit}) => {
         console.log("här går en sql Call iväg och när responsen ok går vi tillbaka till appens första sida");
        setfinished(true);
        finishedEmit();
-        writeCompAndInterest("Vickanmejl", answer.userCompenencies, answer.lookingForPreferences);
+        writeCompAndInterest("Testmejl", answer.userCompenencies, answer.lookingForPreferences);
     }
 
     const writeCompAndInterest = async (emailAddressToSend, competenciesToSend, interestsToSend) => {
