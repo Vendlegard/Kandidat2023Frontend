@@ -40,7 +40,7 @@ const JobCard = ({ jobs }) => {
         <TouchableOpacity onPress={onPressHandler}>
         <View className="flex-1 flex-row h-2 ml-4 mr-4 mt-5 " style={{ backgroundColor: '#eaf0f8', height: '75%', borderRadius: 15, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.35, shadowRadius: 3, elevation: 2 }} >
           <View className=" w-3/12 h-28 justify-center">
-            <Image source={{uri: job.jobIcon}} className="w-18 h-16 ml-3" />
+            <Image source={{uri: job.photoURL}} className="w-18 h-16 ml-3" />
           </View>
 
           <View className="flex-1 flex-col">
@@ -48,20 +48,15 @@ const JobCard = ({ jobs }) => {
         <View className="" key={job.id}>
 
           <View >
-              <Text className="text-lg ml-4 font-bold mt-2">{job.jobTitle}</Text>
+              <Text className="text-lg ml-4 font-bold mt-2">{job.title}</Text>
             </View>
           <View className="px-1 pt-1 -mt-4 justify-end items-end">
                 <AntDesign name='hearto' size={30} />
               </View>
               <View className="flex-1 flex-row">
-              <Text className="text-sm ml-4">{job.employer}</Text>
               <Text className="text-sm ml-4">{job.location}</Text>
-              <Text className="text-sm ml-4">{job.date}</Text>
             </View>
             <View className="flex-1 flex-row">
-              <Text className="text-sm ml-4">{job.wage}</Text>
-              <Text className="text-sm ml-4">{job.duration}</Text>
-              <Text className="text-sm ml-4">{job.experience}</Text>
             </View>
         </View>
         </View>
