@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {View, Text, TextInput, TouchableOpacity}  from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -38,6 +38,10 @@ const LoginScreen = ({ updateLoggedInState, updateRegisterState, updateUserInfo 
         setuserData(data);
     }
 
+    function isObjectEmpty(obj) {
+        return Object.keys(obj).length === 0 && obj.constructor === Object;
+    }
+
 
     const authenticateUser = async (emailAddressToSend,passwordToSend) => {
         try {
@@ -57,19 +61,17 @@ const LoginScreen = ({ updateLoggedInState, updateRegisterState, updateUserInfo 
             storeToken(token);
             let userDataTemp = await data.userInfo;
             onChangeUserData(userDataTemp);
-            updateUserInfo(userDataTemp);
-            console.log("authenticateUser called in LoginScreen.js with the value", userData);
-            setLoginCount(loginCount + 1);
-            if(loginCount > 0){
-                updateLoggedInState(true);
-            }
+            //setLoginCount(loginCount + 1);
+            //if(loginCount > 0){
+               // updateLoggedInState(true);
+            //}
         } catch (error) {
             console.error(error);
         }
     };
 
     const storeToken = async (value) => {
-        console.log("storeToken called in LoginScreen.js with the value", value);
+        //console.log("storeToken called in LoginScreen.js with the value", value);
         try {
             await AsyncStorage.setItem('@token', value)
         } catch (e) {
@@ -97,9 +99,26 @@ const LoginScreen = ({ updateLoggedInState, updateRegisterState, updateUserInfo 
         updateRegisterState(true);
     }
 
-    const handleLogin = async (emailAddressToSend, passwordToSend) => {
-        await authenticateUser(emailAddressToSend, passwordToSend);
-    };
+
+    function handleLogin(emailAddressToSend, passwordToSend)  {
+        authenticateUser(emailAddressToSend, passwordToSend);
+        setIsMounted(true);
+    }
+
+
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect( () =>{
+        if(isMounted){
+           // console.log("userData was updated to from the useEffect: ", userData);
+        }
+        if(!isObjectEmpty(userData)){
+           // console.log("object was not empty as userData : ", userData);
+            updateUserInfo(userData);
+        }
+        }, [userData, isMounted]
+    )
+
 
 
     return (
@@ -120,7 +139,7 @@ const LoginScreen = ({ updateLoggedInState, updateRegisterState, updateUserInfo 
                     <View className="w-20 h-20 bg-profileScreen opacity-70 rounded-full -mb-5 ml-2"></View>
                     <View className="w-14 h-14 bg-purple opacity-90 rounded-full mb-20 ml-12"></View>
                     </View>
-            <Text className = 'text-4xl m-4'> Please sign in</Text>
+            <Text className = 'text-4xl m-4'> Please sign in with {userData.firstName}</Text>
 
             
             <TextInput

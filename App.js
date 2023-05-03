@@ -15,7 +15,6 @@ export default function App() {
 
     const [loggedIn, setLoggedIn] = useState(false);
     const updateLoggedInState = (value) => {
-        console.log("update LoggedInState called in App.js with the value", value);
         setLoggedIn(value);
         if(value === false ){
             setFirstTimeLoggingIn(false);
@@ -42,8 +41,6 @@ export default function App() {
         university: "Uppsala Universitet",
         semester: 5,
     });
-
-    const [userComp, setUserComp] = useState([]);
 
     const onChangeUserData = (data) => {
         setUserInfo(data);
