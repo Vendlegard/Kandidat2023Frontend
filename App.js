@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { View} from 'react-native';
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import BottomNavigation from "./assets/navigation/BottomNavigation";
 import LoginScreen from "./assets/screens/LoginScreen";
 import { NavigationContainer } from '@react-navigation/native';
@@ -116,6 +116,11 @@ export default function App() {
         }
     }
 
+    useEffect( () =>{
+            console.log("userInfo was changed in App.js to : ", userInfo)
+            setLoggedIn(true);
+        }, [userInfo]
+    )
 
 
 
