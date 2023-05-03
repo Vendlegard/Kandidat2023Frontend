@@ -17,7 +17,7 @@ const ProfileScreen = ({userInfo, isLoggedOut}) => {
     // const bubble2Position = useRef(new Animated.ValueXY({ x: 10, y: 30 })).current;
     // const bubble3Position = useRef(new Animated.ValueXY({ x: 50, y: -20 })).current;
 
-
+    const [userComp, setUserComp] = useState([]);
 
     const handleEditProfile = () => {
         setIsProfileEdited(true);
@@ -34,6 +34,32 @@ const ProfileScreen = ({userInfo, isLoggedOut}) => {
         // Add navigation logic here to navigate to the logout screen or perform logout action
     };
 
+    const getUserComp = async () => {
+        try {
+            const response = await fetch("http://127.0.0.1:8000/api/getComp", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    id: userInfo.userID,
+                }
+                )
+            });
+            const data = await response.json();
+            setUserComp(data.comp_list);
+            console.log("här är mina valda kopetenser", data.comp_list);
+            
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    useState(
+        () => {
+            getUserComp();
+        }
+    )
 
 
     // useEffect(() => {
@@ -164,6 +190,7 @@ const ProfileScreen = ({userInfo, isLoggedOut}) => {
 
                             {/* Typ av jobb som sökes */}
                             <View className="flex-row m-3">
+                                <Text> {userComp[0]} </Text>
                                 <Image className="w-8 h-8 ml-3" source={jobPic}></Image>
                                 <TextInput
                                     style={{ borderWidth: 0, fontSize: 16, color: 'black' }}
@@ -178,7 +205,9 @@ const ProfileScreen = ({userInfo, isLoggedOut}) => {
                             </View>
 
                             {/* Kompetenser för användare */}
+                            
                             <View className="flex-row m-3">
+                            <Text>{userComp[0]}</Text>
                                 <Image className="w-8 h-8 ml-3" source={emptyHeart}></Image>
                                 <TextInput
                                     style={{ borderWidth: 0, fontSize: 16, color: 'black' }}
@@ -263,7 +292,7 @@ const ProfileScreen = ({userInfo, isLoggedOut}) => {
                     {/* Input min kompetenser */}
                     <View className="flex-2 m-7 flex-row items-center justify-center">
                         <View className="items-center justify-center">
-                            <Text className="text-x1 font-bold">Mina kompetenser</Text>
+                            <Text className="text-x1 font-bold">Mina kompetenser </Text>
                             <View style={styles.containers}>
                                 <View style={styles.codeBlock}>
                                     <Text style={styles.codeText}>SQL</Text>

@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { View} from 'react-native';
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import BottomNavigation from "./assets/navigation/BottomNavigation";
 import LoginScreen from "./assets/screens/LoginScreen";
 import { NavigationContainer } from '@react-navigation/native';
@@ -54,7 +54,6 @@ export default function App() {
     const updateUserInfo = (value) => {
         setUserInfo(value);
         console.log("updateUserInfo called in app.js with the value", userInfo);
-        console.log("the value we get sent updateUserInfo in app.js is, ", value);
     }
 
 
@@ -62,12 +61,6 @@ export default function App() {
         console.log("finshed called in app.js");
         setLoggedIn(true);
     }
-
-    useEffect( () =>{
-        console.log("userInfo was changed in App.js to : ", userInfo)
-        setLoggedIn(true);
-        }, [userInfo]
-    )
 
 
     const sendingToken = async (token) => {
@@ -106,11 +99,10 @@ export default function App() {
         }
     }
 
-
-
     useState(() => {
-         authWithToken();
-     }, []);
+        console.log("fetch Jobs called")
+        authWithToken();
+    }, []);
 
     const clearToken = async () => {
         try {
@@ -132,7 +124,7 @@ export default function App() {
 
 
 
-        <View className="flex-1">
+        <View className="flex-1 bg-amber-100">
             {loggedIn ? (
                 <BottomNavigation userInfo={userInfo}
                                   isLoggedOut={updateLoggedInState}
