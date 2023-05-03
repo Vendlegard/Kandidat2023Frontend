@@ -18,15 +18,21 @@
 import React, {useState} from "react";
 import {View, Text, TextInput, Button, TouchableOpacity, Image}  from "react-native";
 import leftArrow from '../images/leftArrow.png';
+import {Picker} from "@react-native-picker/picker";
 
 //create a basic component
 const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn}) => {
+
+    const [possibleExamDates, setPossibleExamDates] = useState(["VT2023", "HT2023", "VT2024", "HT2024", "VT2025", "HT2025", "VT2026", "HT2027"]);
+
+
 
     const [serverResponse, setServerResponse] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [university, setUniversity] = useState("");
     const [education, setEducation] = useState(""); // lägga till termin och kanske bild i user table?
+    const [examDate, setExamDate] = useState("");
     const [emailAdress, setEmailAdress] = useState("");
     const [password, setPassword] = useState("");
     const [emailAdressAuth, setEmailAdressAuth] = useState("");
@@ -57,6 +63,9 @@ const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn}) => {
     }
     const onChangeEducation = (text) => {
         setEducation(text);
+    }
+    const onChangeExamDate = (text) => {
+        setExamDate(text);
     }
 
     const registerUser = async (emailAddressToSend, passwordToSend, firstNameToSend, lastNameToSend, UniversityToSend, EducationToSend) => {
@@ -154,6 +163,15 @@ const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn}) => {
                 placeholder="Education"
                 onChangeText={onChangeEducation}
                 value={education}
+            >
+            </TextInput>
+
+            <TextInput
+                style = {{fontSize: 20, width: "75%", height: "4%", margin: "3%", borderRadius: 12,  backgroundColor: "#E6E6FA",
+                    shadowOffset: {width:0, height: 2}, shadowColor: '#000', shadowOpacity: 0.25, shadowRadius: 3}}
+                placeholder="Exam date"
+                onChangeText={onChangeExamDate}
+                value={examDate}
             >
             </TextInput>
 
