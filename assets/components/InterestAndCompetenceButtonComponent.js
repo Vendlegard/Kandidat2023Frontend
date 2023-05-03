@@ -1,7 +1,7 @@
 import {Text, TouchableOpacity, View, styles} from "react-native";
 import React, {useState} from "react";
 
-const InterestAndCompetenceButtonComponent = ({text, addToLookingFor, index}) => {
+const InterestAndCompetenceButtonComponent = ({compOrInterestName, addToLookingFor, index}) => {
 
     const [buttonColor, setButtonColor] = useState('white');
 
@@ -33,18 +33,18 @@ const InterestAndCompetenceButtonComponent = ({text, addToLookingFor, index}) =>
         {isEven(index) ? (
         <View style={{ backgroundColor: buttonColor, activeOpacity: 0.8, underlayColor: '#FFFFFF'}} className="flex-0 w-2/5 h-12 flex-row ml-12
         rounded-3xl border-2 justify-center items-center mt-2">
-            <TouchableOpacity  className="mr-4" onPress={() => addInterestToProfile(text)}>
+            <TouchableOpacity  className="mr-4" onPress={() => addInterestToProfile(compOrInterestName)}>
                 <Text>
-                    {text} {index}
+                    {compOrInterestName}
                 </Text>
             </TouchableOpacity>
         </View>
         ) : (
         <View style={ {backgroundColor: buttonColor}} className="flex-0 w-2/5 h-12 flex-row-reverse
              rounded-3xl border-2 justify-center items-center mr-52 mt-2">
-            <TouchableOpacity className="mr-4" onPress={() => addInterestToProfile(text)}>
+            <TouchableOpacity className="mr-4" onPress={() => addInterestToProfile(compOrInterestName)}>
                 <Text>
-                    {text} {index} 
+                    {compOrInterestName} 
                 </Text>
             </TouchableOpacity>
         </View>
