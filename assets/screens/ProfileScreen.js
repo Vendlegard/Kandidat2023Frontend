@@ -1,18 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Dimensions, TextInput, Image, Animated } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Dimensions, TextInput, Image, Animated, Modal } from "react-native";
 import Svg, { Path } from 'react-native-svg';
-import profilePicture from '../images/profilePicture.png'
-import schoolPic from '../images/schoolPic.png'
-import jobPic from '../images/jobPic.png'
-import coursePic from '../images/coursePic.png'
-import emptyHeart from '../images/emptyHeart.png'
-import terminPic from '../images/terminPic.png'
 import profile from '../images/profile.png'
 import { LinearGradient } from 'expo-linear-gradient';
+import EditProfile from '../components/EditProfile'
 
 
-const ProfileScreen = ({userInfo}) => {
+const ProfileScreen = ({ userInfo }) => {
     const [isProfileEdited, setIsProfileEdited] = useState(false);
+    const [showModal, setShowModal] = useState(false);
     // const bubble1Position = useRef(new Animated.ValueXY({ x: 0, y: 0 })).current;
     // const bubble2Position = useRef(new Animated.ValueXY({ x: 10, y: 30 })).current;
     // const bubble3Position = useRef(new Animated.ValueXY({ x: 50, y: -20 })).current;
@@ -21,12 +17,17 @@ const ProfileScreen = ({userInfo}) => {
 
     const handleEditProfile = () => {
         setIsProfileEdited(true);
+        setShowModal(true);
     };
 
-    const handleSaveProfile = () => {
-        setIsProfileEdited(false);
-        // Add logic here to save the edited profile data and update the UI accordingly
-    };
+    // const handleSaveProfile = () => {
+    //     setIsProfileEdited(false);
+    //     // Add logic here to save the edited profile data and update the UI accordingly
+    // };
+
+    const closeModal = () => {
+        setShowModal(false);
+      };
 
     const handleLogout = () => {
         setIsProfileEdited(false);
@@ -80,130 +81,10 @@ const ProfileScreen = ({userInfo}) => {
 
 
     return (
-        <View className="flex-1 bg-white">
 
+        <>
+            <View className="flex-1 bg-white">
 
-            {isProfileEdited ? (
-                // RedigeraView - följande dolt nås med knapp "Redigera profil"
-                <LinearGradient
-                    colors={['#e3f1ff', '#ecf1f6', '#ffffff']}
-                    start={{ x: 0, y: 0 }}
-                    end={{ x: 0.5, y: 0.5 }}
-                    style={{ flex: 1 }}
-                >
-                    <View className="flex-1" >
-
-
-                        <View className="flex-row justify-center items-center">
-                            {/* Profile Picture and Name */}
-                            <View className="flex-col justify-center items-center mt-12">
-                                <Image source={profile} style={{ width: 100, height: 100 }}></Image>
-                                <Text className="font-railway text-lg font-bold m-4">{userInfo.firstName} {userInfo.lastName}</Text>
-                            </View>
-
-                            {/* Profile Bubbles */}
-                            <View className="absolute top-0 left-0">
-                                <View className="w-14 h-14 bg-purple rounded-full" style={{ width: 90, height: 90, borderRadius: 25, backgroundColor: '#cfe7ff', position: 'absolute', top: 1, left: 1, opacity: 0.8 }}></View>
-                                <View className="w-14 h-14 bg-purple rounded-full" style={{ width: 70, height: 70, borderRadius: 25, backgroundColor: '#c0ddfa', position: 'absolute', top: 80, left: 40, opacity: 0.7 }}></View>
-                                <View className="w-14 h-14 bg-purple rounded-full" style={{ width: 55, height: 55, borderRadius: 25, backgroundColor: '#e3f1ff', position: 'absolute', top: 40, left: 80, opacity: 1 }}></View>
-                            </View>
-
-                        </View>
-
-
-
-                        {/* Information om användaren med redigeringsmöjlighet */}
-                        <View className="flex-1 flex-col justify-evenly mt-5">
-
-                            {/* Lärosäte */}
-                            <View className="flex-row m-3 ">
-                                <Image className="w-8 h-8 ml-3" source={schoolPic}></Image>
-                                <TextInput
-                                    style={{ borderWidth: 0, fontSize: 16, color: 'black' }}
-                                    placeholder={userInfo.university}
-                                    placeholderTextColor="black"
-                                />
-                            </View>
-                            <View className="ml-7">
-                                <View className="h-px bg-gray border-0 dark:bg-gray w-10/12">
-                                </View>
-                            </View>
-
-                            {/* Program på Universitet */}
-                            <View className="flex-row m-3">
-                                <Image className="w-8 h-8 ml-3" source={coursePic}></Image>
-                                <TextInput
-                                    style={{ borderWidth: 0, fontSize: 16, color: 'black' }}
-                                    placeholder={userInfo.education}
-                                    placeholderTextColor="black"
-                                />
-                            </View>
-                            <View className="ml-7">
-                                <View className="h-px bg-gray border-0 dark:bg-gray w-10/12">
-                                </View>
-                            </View>
-
-                            {/* Termin som tas */}
-                            <View className="flex-row m-3">
-                                <Image className="w-8 h-8 ml-3" source={terminPic}></Image>
-                                <TextInput
-                                    style={{ borderWidth: 0, fontSize: 16, color: 'black' }}
-                                    placeholder="Termin 6/10"
-                                    placeholderTextColor="black"
-                                />
-                            </View>
-
-                            <View className="ml-7">
-                                <View className="h-px bg-gray border-0 dark:bg-gray w-10/12">
-                                </View>
-                            </View>
-
-                            {/* Typ av jobb som sökes */}
-                            <View className="flex-row m-3">
-                                <Image className="w-8 h-8 ml-3" source={jobPic}></Image>
-                                <TextInput
-                                    style={{ borderWidth: 0, fontSize: 16, color: 'black' }}
-                                    placeholder="Sommarjobb, Trainee"
-                                    placeholderTextColor="black"
-                                />
-                            </View>
-
-                            <View className="ml-7">
-                                <View className="h-px bg-gray border-0 dark:bg-gray w-10/12">
-                                </View>
-                            </View>
-
-                            {/* Kompetenser för användare */}
-                            <View className="flex-row m-3">
-                                <Image className="w-8 h-8 ml-3" source={emptyHeart}></Image>
-                                <TextInput
-                                    style={{ borderWidth: 0, fontSize: 16, color: 'black' }}
-                                    placeholder="SQL, React, Javascript"
-                                    placeholderTextColor="black"
-                                />
-                            </View>
-                        </View>
-                        <View >
-                            <View className="w-14 h-14 bg-purple rounded-full" style={{ width: 75, height: 75, borderRadius: 25, backgroundColor: '#cfe7ff', position: 'absolute', top: -15, right: 8, opacity: 0.6 }}></View>
-                            <View className="w-14 h-14 bg-purple rounded-full" style={{ width: 50, height: 50, borderRadius: 25, backgroundColor: '#c0ddfa', position: 'absolute', top: -50, right: 5, opacity: 0.7 }}></View>
-                        </View>
-
-                        {/* Knapp för att spara redigerad profil */}
-                        <View className="flex justify-center items-center">
-                            <TouchableOpacity className="bg-black w-16 h-8 flex justify-center items-center rounded m-4 mb-10" onPress={handleSaveProfile}>
-                                <Text className="text-white text-sm">Spara</Text>
-                            </TouchableOpacity>
-                        </View>
-
-                    </View>
-                 </LinearGradient>
-
-
-                // Slut dold redigeringsview
-
-            ) : (
-
-                // Styling av "våg" toppen av sidan
                 <View className="flex-1">
                     <View style={styles.container}>
                         <View style={styles.top}>
@@ -304,8 +185,16 @@ const ProfileScreen = ({userInfo}) => {
                     </View>
 
                 </View>
-            )}
-        </View>
+                <Modal visible={showModal} animationType='slide'>
+                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                        {isProfileEdited && <EditProfile {...isProfileEdited} closeModal={closeModal} />}
+                        <TouchableOpacity onPress={closeModal}>
+
+                        </TouchableOpacity>
+                    </View>
+                </Modal>
+            </View>
+        </>
     );
 };
 
@@ -323,7 +212,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginTop: 10,
-        
+
     },
     codeBlock: {
         borderWidth: 1,
@@ -333,10 +222,10 @@ const styles = StyleSheet.create({
         marginHorizontal: 2,
         alignItems: 'center',
         paddingVertical: 5,
-      },
-      codeText: {
+    },
+    codeText: {
         fontSize: 10,
-      },
+    },
 });
 
 
