@@ -9,9 +9,13 @@ import emptyHeart from '../images/emptyHeart.png'
 import terminPic from '../images/terminPic.png'
 import profile from '../images/profile.png'
 import { LinearGradient } from 'expo-linear-gradient';
+import {useFocusEffect} from "@react-navigation/native";
+import { AntDesign, Ionicons, Entypo, MaterialIcons } from '@expo/vector-icons'
+import CompetenceScreen from "./CompetenceScreen";
+import LoginScreen from "./LoginScreen";
 
 
-const ProfileScreen = ({userInfo, isLoggedOut}) => {
+const ProfileScreen = ({userInfo, isLoggedOut, emitToBottomNav}) => {
     const [isProfileEdited, setIsProfileEdited] = useState(false);
     // const bubble1Position = useRef(new Animated.ValueXY({ x: 0, y: 0 })).current;
     // const bubble2Position = useRef(new Animated.ValueXY({ x: 10, y: 30 })).current;
@@ -20,6 +24,14 @@ const ProfileScreen = ({userInfo, isLoggedOut}) => {
     const [userComp, setUserComp] = useState([]);
 
     const [userInterest, setUserInterest] = useState([]);
+
+    const [editComp, setEditComp] = useState(false);
+
+    const onEditComp = () => {
+        setEditComp(!editComp);
+        console.log("editComp", editComp);
+        emitToBottomNav(editComp);
+    }
 
     const handleEditProfile = () => {
         setIsProfileEdited(true);
@@ -71,6 +83,7 @@ const ProfileScreen = ({userInfo, isLoggedOut}) => {
             });
             const data = await response.json();
             setUserInterest(data.interest_list);
+            console.log("här är mina valda intressen", data.interest_list);
             
         } catch (error) {
             console.error(error);
@@ -88,6 +101,13 @@ const ProfileScreen = ({userInfo, isLoggedOut}) => {
             getUserInterest();
         }
     )
+
+    useFocusEffect(
+        React.useCallback(() => {
+            getUserComp();
+            getUserInterest();
+        }, [])
+    );
 
 
     // useEffect(() => {
@@ -226,6 +246,11 @@ const ProfileScreen = ({userInfo, isLoggedOut}) => {
                                 </View>
                             ))}
                             </View>
+                                <View>
+                                    <TouchableOpacity onPress={() => onEditComp()}>
+                                        <AntDesign name="pluscircleo" size={24} />
+                                    </TouchableOpacity>
+                                </View>
                             </View>
 
                             <View className="ml-7">
@@ -243,6 +268,11 @@ const ProfileScreen = ({userInfo, isLoggedOut}) => {
                                     <Text style={styles.codeText}>{comp}</Text>
                                 </View>
                             ))}
+                                    <View>
+                                        <TouchableOpacity onPress={() => onEditComp()}>
+                                        <AntDesign name="pluscircleo" size={24} />
+                                        </TouchableOpacity>
+                                    </View>
                             </View>
                             </View>
                         </View>
@@ -361,6 +391,7 @@ const ProfileScreen = ({userInfo, isLoggedOut}) => {
                             <Text className="text-white text-sm">Logga ut</Text>
                         </TouchableOpacity>
                     </View>
+
 
                 </View>
             )}

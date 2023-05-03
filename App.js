@@ -28,9 +28,10 @@ export default function App() {
     const [registerStatus, setRegisterStatus] = useState(false);
     const updateRegisterStatus = (value) => {
         setRegisterStatus(value);
+        console.log("in register status, value is: ", value);
     };
 
-    const [firstTimeLoggingIn, setFirstTimeLoggingIn] = useState(false);
+    const [firstTimeLoggingIn, setFirstTimeLoggingIn] = useState(true);
 
     const [userInfo, setUserInfo] = useState({
         userID: 1,
@@ -48,6 +49,14 @@ export default function App() {
 
     const updateFirstTimeLoggingIn = (value) => {
         setFirstTimeLoggingIn(value);
+        console.log("in updateFirsttimeloggingin status, value is: ", value);
+    }
+
+    const goToCompetenceScreen = (value) => {
+        console.log("denna borde blivit kallad från Profile.js i App.js med value", value);
+        setLoggedIn(false);
+        setFirstTimeLoggingIn(true);
+        setRegisterStatus(false);
     }
 
     const updateUserInfo = (value) => {
@@ -132,6 +141,7 @@ export default function App() {
             {loggedIn ? (
                 <BottomNavigation userInfo={userInfo}
                                   isLoggedOut={updateLoggedInState}
+                                  emitToAppJs={goToCompetenceScreen}
 
                 />
             ) : registerStatus ? (
