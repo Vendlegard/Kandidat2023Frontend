@@ -148,6 +148,7 @@ export default function App() {
                 <RegisterScreen
                     updateRegisterState={updateRegisterStatus}
                     firstTimeLoggingIn={updateFirstTimeLoggingIn}
+                    userInfoStore={updateUserInfo}
                 />
             ) : firstTimeLoggingIn ? (
                 <CompetenceScreen

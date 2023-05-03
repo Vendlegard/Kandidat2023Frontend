@@ -62,8 +62,6 @@ const ProfileScreen = ({userInfo, isLoggedOut, emitToBottomNav}) => {
             });
             const data = await response.json();
             setUserComp(data.comp_list);
-            console.log("här är mina valda kopetenser", data.comp_list);
-            
         } catch (error) {
             console.error(error);
         }
@@ -83,8 +81,6 @@ const ProfileScreen = ({userInfo, isLoggedOut, emitToBottomNav}) => {
             });
             const data = await response.json();
             setUserInterest(data.interest_list);
-            console.log("här är mina valda intressen", data.interest_list);
-            
         } catch (error) {
             console.error(error);
         }
