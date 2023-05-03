@@ -13,7 +13,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function App() {
 
-    const [loggedIn, setLoggedIn] = useState(false);
+    const [loggedIn, setLoggedIn] = useState(true);
     const updateLoggedInState = (value) => {
         console.log("update LoggedInState called in App.js with the value", value);
         setLoggedIn(value);
