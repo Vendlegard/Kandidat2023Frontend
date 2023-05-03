@@ -13,37 +13,16 @@ const Tab = createBottomTabNavigator();
 
 export const FirstStack = () => {
   return (
-    <Tab.Navigator screenOptions={({ route }) => ({
-        headerShown: false,
-        tabBarShowLabel: false,
-        tabBarStyle: {
-            backgroundColor: '#BDE3FF',
-        },
-        tabBarActiveTintColor: 'black',
-        //tabBarInactiveTintColor: 'red',
-        tabBarIcon: ({focused, color, size}) => {
-            let IconName; 
-            if (route.name === 'Like') {
-                IconName = focused ? 'like' : 'like-outline'
-            }
-            else if (route.name === 'Search') {
-                IconName = focused ? 'search' : 'search-outline'
-            }
-            else if (route.name === 'Swipe') {
-                IconName = focused ? 'swipe' : 'swipe-outline'
-            }
-            else if (route.name === 'Profile') {
-                IconName = focused ? 'person' : 'person-outline'
-            }
-            return <Ionicons name={IconName} size={focused? 35: size} color={color}/>
-        }
 
-    })}>
-      <Tab.Screen name="Like" component={LikeScreen} />
-      <Tab.Screen name="Search" component={SearchScreen} />
-      <Tab.Screen name="Swipe" component={SwipeScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
-
-    </Tab.Navigator>
+    <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Screen name="SwipeScreen" component={SwipeScreen} />
+      <Stack.Screen name="HomePage" component={HomeTabs} />
+      <Stack.Screen name="OrganizationLoginPage" component={OrganizationLoginPage}/>
+      <Stack.Screen name="SignUp" component={SignUp}/>
+ 
+    </Stack.Navigator>
   );
 }
+
+
+
