@@ -6,7 +6,8 @@ import { AntDesign } from '@expo/vector-icons';
 import leftArrow from '../images/leftArrow.png'
 import { LinearGradient } from 'expo-linear-gradient';
 
-const JobInfo = ({ jobs, closeModal }) => {
+const JobInfo = ({ jobIcon, jobTitle, employer, location, date, closeModal }) => {
+
 
 
   return (
@@ -17,9 +18,7 @@ const JobInfo = ({ jobs, closeModal }) => {
       style={{ flex: 1 }}
     >
 
-      
-      {jobs.map((job) => (
-        <View key={job.id}>
+        <View>
         <View className=" mt-20 w-full">
         <TouchableOpacity onPress={closeModal}>
           <View style={{ position: 'relative' }}>
@@ -31,36 +30,25 @@ const JobInfo = ({ jobs, closeModal }) => {
         <View>
         
           <View className="justify-center items-center">
-          <Image source={{uri: job.jobIcon}} className="w-20 h-20" />
+          <Image source={{uri: jobIcon}} className="w-20 h-20" />
         </View>
         <View className="justify-center items-center mt-5">
-          <Text className="text-lg font-bold"> Välkommer till oss på {job.employer}</Text>
+          <Text className="text-lg font-bold"> Välkommer till oss på </Text>
         </View>
         <View className="mt-5 px-5">
           <View className="flex flex-row mb-1">
             <AntDesign name='clockcircleo' size={16} />
-            <Text className="ml-2">{job.jobTitle}</Text>
+            <Text className="ml-2">{jobTitle}</Text>
           </View>
           <View className="flex flex-row mb-1">
             <AntDesign name='questioncircleo' size={16} />
-            <Text className="ml-2">{job.location}</Text>
+            <Text className="ml-2">{location}</Text>
           </View>
           <View className="flex flex-row mb-1">
             <AntDesign name='hearto' size={16} />
-            <Text className="ml-2">{job.date}</Text>
+            <Text className="ml-2">{date}</Text>
           </View>
-          <View className="flex flex-row mb-1">
-            <AntDesign name='staro' size={16} />
-            <Text className="ml-2">{job.wage}</Text>
-          </View>
-          <View className="flex flex-row mb-1">
-            <AntDesign name='smileo' size={16} />
-            <Text className="ml-2">{job.duration}</Text>
-          </View>
-          <View className="flex flex-row mb-1">
-            <AntDesign name='hearto' size={16} />
-            <Text className="ml-2">{job.experience}</Text>
-          </View>
+         
 
         </View>
         
@@ -112,7 +100,7 @@ const JobInfo = ({ jobs, closeModal }) => {
 
   </View>
   </View>
-      ))}
+      
    
     </LinearGradient>
   );
