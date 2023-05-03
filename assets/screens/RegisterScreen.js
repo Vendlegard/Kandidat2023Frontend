@@ -102,6 +102,8 @@ const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn, userInfoStore}
             storeToken(token);
             let userDataTemp = await data.userInfo;
             onChangeUserData(userDataTemp);
+            userInfoStore(userDataTemp);
+            console.log("authenticate user was called from registerUser and userDataTemp is: ", userDataTemp);
         } catch (error) {
             console.error(error);
         }

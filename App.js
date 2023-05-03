@@ -59,9 +59,19 @@ export default function App() {
         setRegisterStatus(false);
     }
 
+
+    const [comesFromLogin, setComesFromLogin] = useState(false);
+
     const updateUserInfo = (value) => {
         setUserInfo(value);
+        setComesFromLogin(true);
         console.log("updateUserInfo called in app.js with the value", userInfo);
+    }
+
+    const updateUserInfoFromRegister = (value) => {
+        setUserInfo(value);
+        setComesFromLogin(false);
+        console.log("updateUserInfo called in app.js funcitoon updateUserInfoFromRegister with the value", userInfo);
     }
 
 
@@ -127,7 +137,9 @@ export default function App() {
 
     useEffect( () =>{
             console.log("userInfo was changed in App.js to : ", userInfo)
-            setLoggedIn(true);
+            if(comesFromLogin === true){
+                setLoggedIn(true);
+            }
         }, [userInfo]
     )
 
@@ -148,7 +160,7 @@ export default function App() {
                 <RegisterScreen
                     updateRegisterState={updateRegisterStatus}
                     firstTimeLoggingIn={updateFirstTimeLoggingIn}
-                    userInfoStore={updateUserInfo}
+                    userInfoStore={updateUserInfoFromRegister}
                 />
             ) : firstTimeLoggingIn ? (
                 <CompetenceScreen
