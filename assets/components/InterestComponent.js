@@ -21,7 +21,7 @@ import InterestAndCompetenceButtonComponent from "./InterestAndCompetenceButtonC
 import leftArrow from '../images/leftArrow.png';
 
 //create a basic component
-const InterestComponent = ({finishedEmit}) => {
+const InterestComponent = ({finishedEmit, userInfo}) => {
 
     [lookingFor, setLookingFor] = useState(["Sommarjobb", "Deltid", "Trainee", "Internship", "Exjobb", "Timanställning"]);
     [userLookingFor, setUserLookingFor] = useState([]);
@@ -81,7 +81,7 @@ const InterestComponent = ({finishedEmit}) => {
         console.log("här går en sql Call iväg och när responsen ok går vi tillbaka till appens första sida");
        setfinished(true);
        finishedEmit();
-        writeCompAndInterest("Testmejl", answer.userCompenencies, answer.lookingForPreferences);
+        writeCompAndInterest(userInfo.userEmail, answer.userCompenencies, answer.lookingForPreferences);
     }
 
     const writeCompAndInterest = async (emailAddressToSend, competenciesToSend, interestsToSend) => {

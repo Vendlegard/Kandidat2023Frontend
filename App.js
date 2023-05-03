@@ -142,6 +142,7 @@ export default function App() {
             ) : firstTimeLoggingIn ? (
                 <CompetenceScreen
                 finishedToApp={finished}
+                userInfo={userInfo}
                 />
             ) : (
                 <LoginScreen
