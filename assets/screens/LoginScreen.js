@@ -61,10 +61,6 @@ const LoginScreen = ({ updateLoggedInState, updateRegisterState, updateUserInfo 
             storeToken(token);
             let userDataTemp = await data.userInfo;
             onChangeUserData(userDataTemp);
-            //setLoginCount(loginCount + 1);
-            //if(loginCount > 0){
-               // updateLoggedInState(true);
-            //}
         } catch (error) {
             console.error(error);
         }

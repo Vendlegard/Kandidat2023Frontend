@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { View} from 'react-native';
-import React, {useState, useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import BottomNavigation from "./assets/navigation/BottomNavigation";
 import LoginScreen from "./assets/screens/LoginScreen";
 import { NavigationContainer } from '@react-navigation/native';
@@ -15,7 +15,6 @@ export default function App() {
 
     const [loggedIn, setLoggedIn] = useState(true);
     const updateLoggedInState = (value) => {
-        console.log("update LoggedInState called in App.js with the value", value);
         setLoggedIn(value);
         if(value === false ){
             setFirstTimeLoggingIn(false);
@@ -29,9 +28,10 @@ export default function App() {
     const [registerStatus, setRegisterStatus] = useState(false);
     const updateRegisterStatus = (value) => {
         setRegisterStatus(value);
+        console.log("in register status, value is: ", value);
     };
 
-    const [firstTimeLoggingIn, setFirstTimeLoggingIn] = useState(false);
+    const [firstTimeLoggingIn, setFirstTimeLoggingIn] = useState(true);
 
     const [userInfo, setUserInfo] = useState({
         userID: 1,
@@ -49,12 +49,19 @@ export default function App() {
 
     const updateFirstTimeLoggingIn = (value) => {
         setFirstTimeLoggingIn(value);
+        console.log("in updateFirsttimeloggingin status, value is: ", value);
+    }
+
+    const goToCompetenceScreen = (value) => {
+        console.log("denna borde blivit kallad från Profile.js i App.js med value", value);
+        setLoggedIn(false);
+        setFirstTimeLoggingIn(true);
+        setRegisterStatus(false);
     }
 
     const updateUserInfo = (value) => {
         setUserInfo(value);
         console.log("updateUserInfo called in app.js with the value", userInfo);
-        console.log("the value we get sent updateUserInfo in app.js is, ", value);
     }
 
 
@@ -62,12 +69,6 @@ export default function App() {
         console.log("finshed called in app.js");
         setLoggedIn(true);
     }
-
-    useEffect( () =>{
-        console.log("userInfo was changed in App.js to : ", userInfo)
-        setLoggedIn(true);
-        }, [userInfo]
-    )
 
 
     const sendingToken = async (token) => {
@@ -106,11 +107,10 @@ export default function App() {
         }
     }
 
-
-
     useState(() => {
-         authWithToken();
-     }, []);
+        console.log("fetch Jobs called")
+        authWithToken();
+    }, []);
 
     const clearToken = async () => {
         try {
@@ -125,6 +125,11 @@ export default function App() {
         }
     }
 
+    useEffect( () =>{
+            console.log("userInfo was changed in App.js to : ", userInfo)
+            setLoggedIn(true);
+        }, [userInfo]
+    )
 
 
 
@@ -132,20 +137,23 @@ export default function App() {
 
 
 
-        <View className="flex-1">
+        <View className="flex-1 bg-amber-100">
             {loggedIn ? (
                 <BottomNavigation userInfo={userInfo}
                                   isLoggedOut={updateLoggedInState}
+                                  emitToAppJs={goToCompetenceScreen}
 
                 />
             ) : registerStatus ? (
                 <RegisterScreen
                     updateRegisterState={updateRegisterStatus}
                     firstTimeLoggingIn={updateFirstTimeLoggingIn}
+                    userInfoStore={updateUserInfo}
                 />
             ) : firstTimeLoggingIn ? (
                 <CompetenceScreen
                 finishedToApp={finished}
+                userInfo={userInfo}
                 />
             ) : (
                 <LoginScreen
