@@ -50,20 +50,31 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f2f2f2',
+    backgroundColor: '#FFFFFF',
     padding: 10,
   },
   searchBox: {
-    backgroundColor: 'white',
+    backgroundColor: '#f6f6f6',
     padding: 10,
-    marginBottom: 10,
+    marginBottom: 15,
+    marginTop: 5,
     borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+
+    elevation: 3,
   },
   jobContainer: {
-    backgroundColor: 'white',
+    backgroundColor: '#f6f6f6',
     borderRadius: 10,
     padding: 10,
     marginBottom: 10,
+    marginTop: 10,
     flexDirection: 'column',
     justifyContent: 'space-between',
     shadowColor: '#000',

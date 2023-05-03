@@ -114,29 +114,21 @@ const LikeScreen = ({userInfo}) => {
 
     return (
         <View className="flex-1 bg-white" style={{ background: 'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(214,234,255,1) 2%, rgba(6,109,182,1) 100%)'}}>
-            <View className= "flex-1 justify-center items-center mt-2">
-                    <TextInput
-                        style={{ backgroundColor: '#eaf0f8', width: "75%", height: "35%", borderRadius: 10, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.35, shadoRadius: 3, elevation: 2, padding: 10}} 
-                        placeholder="Search jobs"
-                        onChangeText={handleSearchTextChange}
-                        value={searchText}
-                    />
-         </View>
-            <View className="mt-8 flex-0 w-full h-12 ml-4
-            items-center flex-row ">
+            <View className="mt-8 flex-0 w-full h-12 justify-center
+            flex-row " style={{  borderRadius: 15, shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.25, shadowRadius: 2, elevation: 2}}>
                 <TouchableOpacity onPress={handleShowLikedJobs}>
-                <View className="justify-center items-center">
+                <View className="">
                     {showLikedJobs ?
 
 
-                        <View className="h-10 w-24 rounded-3xl bg-pink
-                        border-2 flex-0 justify-center items-center">
-                        <Text>Gillad</Text>
+                        <View className="h-10 w-24 rounded-xl bg-lightgreen
+                         flex-0 justify-center items-center">
+                        <Text className="font-bold">Liked</Text>
                         </View>
                         :
-                        <View className="h-10 w-24 rounded-3xl
-                        border-2 flex-0 justify-center items-center">
-                        <Text>Gillad</Text>
+                        <View className="h-10 w-24 rounded-xl
+                         flex-0 justify-center items-center">
+                        <Text className="font-bold">Liked</Text>
                         </View>
                     }
                 </View>
@@ -144,14 +136,14 @@ const LikeScreen = ({userInfo}) => {
                 <TouchableOpacity onPress={handleShowLikedJobs}>
                 <View className="justify-center w-24">
                     {showLikedJobs ?
-                        <View className="h-10 w-24 rounded-3xl ml-3
-                        border-2 flex-0 justify-center items-center">
-                            <Text>Ej gillade </Text>
+                        <View className="h-10 w-24 rounded-xl ml-3
+                         flex-0 justify-center items-center">
+                            <Text className="font-bold">Not Liked</Text>
                         </View>
                         :
-                        <View className="h-10 w-24 rounded-3xl bg-pink ml-3
-                        border-2 flex-0 justify-center items-center">
-                            <Text>Ej gillade</Text>
+                        <View className="h-10 w-24 rounded-xl bg-lightred ml-3
+                         flex-0 justify-center items-center">
+                            <Text className="font-bold">Not Liked</Text>
                         </View>
                     }
                 </View>
