@@ -19,6 +19,8 @@ const ProfileScreen = ({userInfo, isLoggedOut}) => {
 
     const [userComp, setUserComp] = useState([]);
 
+    const [userInterest, setUserInterest] = useState([]);
+
     const handleEditProfile = () => {
         setIsProfileEdited(true);
     };
@@ -55,9 +57,35 @@ const ProfileScreen = ({userInfo, isLoggedOut}) => {
         }
     };
 
+    const getUserInterest = async () => {
+        try {
+            const response = await fetch("http://127.0.0.1:8000/api/getInterest", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    id: userInfo.userID,
+                }
+                )
+            });
+            const data = await response.json();
+            setUserInterest(data.interest_list);
+            
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     useState(
         () => {
             getUserComp();
+        }
+    )
+
+    useState(
+        () => {
+            getUserInterest();
         }
     )
 
@@ -190,13 +218,14 @@ const ProfileScreen = ({userInfo, isLoggedOut}) => {
 
                             {/* Typ av jobb som sökes */}
                             <View className="flex-row m-3">
-                                <Text> {userComp[0]} </Text>
                                 <Image className="w-8 h-8 ml-3" source={jobPic}></Image>
-                                <TextInput
-                                    style={{ borderWidth: 0, fontSize: 16, color: 'black' }}
-                                    placeholder="Sommarjobb, Trainee"
-                                    placeholderTextColor="black"
-                                />
+                                <View style={styles.containers}>
+                            {userInterest.map((interest) => (
+                                <View style={styles.codeBlock}>
+                                    <Text style={styles.codeText}>{interest}</Text>
+                                </View>
+                            ))}
+                            </View>
                             </View>
 
                             <View className="ml-7">
@@ -207,13 +236,14 @@ const ProfileScreen = ({userInfo, isLoggedOut}) => {
                             {/* Kompetenser för användare */}
                             
                             <View className="flex-row m-3">
-                            <Text>{userComp[0]}</Text>
                                 <Image className="w-8 h-8 ml-3" source={emptyHeart}></Image>
-                                <TextInput
-                                    style={{ borderWidth: 0, fontSize: 16, color: 'black' }}
-                                    placeholder="SQL, React, Javascript"
-                                    placeholderTextColor="black"
-                                />
+                                <View style={styles.containers}>
+                            {userComp.map((comp) => (
+                                <View style={styles.codeBlock}>
+                                    <Text style={styles.codeText}>{comp}</Text>
+                                </View>
+                            ))}
+                            </View>
                             </View>
                         </View>
                         <View >
@@ -293,16 +323,13 @@ const ProfileScreen = ({userInfo, isLoggedOut}) => {
                     <View className="flex-2 m-7 flex-row items-center justify-center">
                         <View className="items-center justify-center">
                             <Text className="text-x1 font-bold">Mina kompetenser </Text>
+                            
                             <View style={styles.containers}>
+                            {userComp.map((comp) => (
                                 <View style={styles.codeBlock}>
-                                    <Text style={styles.codeText}>SQL</Text>
+                                    <Text style={styles.codeText}>{comp}</Text>
                                 </View>
-                                <View style={styles.codeBlock}>
-                                    <Text style={styles.codeText}>Javascript</Text>
-                                </View>
-                                <View style={styles.codeBlock}>
-                                    <Text style={styles.codeText}>React</Text>
-                                </View>
+                            ))}
                             </View>
                         </View>
                     </View>
@@ -316,12 +343,11 @@ const ProfileScreen = ({userInfo, isLoggedOut}) => {
                         <View className="items-center justify-center">
                             <Text className="text-x1 font-bold">Jag söker</Text>
                             <View style={styles.containers}>
+                            {userInterest.map((interest) => (
                                 <View style={styles.codeBlock}>
-                                    <Text style={styles.codeText}>Sommarjobb</Text>
+                                    <Text style={styles.codeText}>{interest}</Text>
                                 </View>
-                                <View style={styles.codeBlock}>
-                                    <Text style={styles.codeText}>Trainee</Text>
-                                </View>
+                            ))}
                             </View>
                         </View>
                     </View>
