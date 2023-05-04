@@ -6,9 +6,13 @@ import { AntDesign, Ionicons, Entypo, MaterialIcons, MaterialCommunityIcons } fr
 import CompetenceScreen from "./CompetenceScreen";
 import LoginScreen from "./LoginScreen";
 import EditProfile from '../components/EditProfile';
+import { useTranslation} from "react-i18next";
+import LanguageSwitcher from "../components/LanguageSwitcher";
+
 
 
 const ProfileScreen = ({ userInfo, isLoggedOut, emitToBottomNav }) => {
+    const { t, i18n } = useTranslation();
     const [isProfileEdited, setIsProfileEdited] = useState(false);
     const [showModal, setShowModal] = useState(false);
     // const bubble1Position = useRef(new Animated.ValueXY({ x: 0, y: 0 })).current;
@@ -159,7 +163,7 @@ const ProfileScreen = ({ userInfo, isLoggedOut, emitToBottomNav }) => {
                 <View className="flex-2 m-3 flex-col">
                     <View className="flex flex-row items-center">
                         <View className="m-8 items-center justify-center">
-                            <Text className="text-x1 font-bold">Lärosäte</Text>
+                            <Text className="text-x1 font-bold">{t('welcomeMessage')}</Text>
                             <Text className="text-x1">{userInfo.university}</Text>
                         </View>
                         <View className="m-5 flex-col-reverse items-center justify-center bg-green-200">

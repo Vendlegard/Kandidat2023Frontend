@@ -8,6 +8,27 @@ import CompetenceScreen from "./assets/screens/CompetenceScreen";
 import RegisterScreen from "./assets/screens/RegisterScreen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import StartScreen from './assets/screens/StartScreen';
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
+import en from './en.json';
+import sv from './sv.json';
+
+i18n.use(initReactI18next).init({
+    resources: {
+        en: {
+            translation: en,
+        },
+        sv: {
+            translation: sv,
+        },
+    },
+    lng: 'sv', // set the default language to English
+    fallbackLng: 'en', // fallback to English if a translation is missing
+    interpolation: {
+        escapeValue: false,
+    },
+});
+
 
 
 
