@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import {View, Text, TextInput, TouchableOpacity}  from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useTranslation} from "react-i18next";
 
 
 /*
@@ -20,6 +21,7 @@ const LoginScreen = ({ updateLoggedInState, updateRegisterState, updateUserInfo 
     const [emailAdressAuth, setEmailAdressAuth] = useState("");
     const [passwordAuth, setPasswordAuth] = useState("");
     const [token, setToken] = useState("");
+    const { t, i18n } = useTranslation();
 
     const [userData, setuserData] = useState( {});
 
@@ -122,7 +124,7 @@ const LoginScreen = ({ updateLoggedInState, updateRegisterState, updateUserInfo 
         <View className="flex-1 justify-center items-center">
 
             
-            <Text className = 'text-4xl m-4'> Please sign in with {userData.firstName}</Text>
+            <Text className = 'text-4xl m-4'> {t('signIn')} {userData.firstName}</Text>
 
             
             <TextInput
@@ -135,7 +137,7 @@ const LoginScreen = ({ updateLoggedInState, updateRegisterState, updateUserInfo 
             <TextInput 
                 style = {{fontSize: 22 ,width: "75%", height: "5%", margin: "5%", borderRadius: 10,  backgroundColor: "#e3f1ff", paddingHorizontal: 6,
                 shadowOffset: {width:0, height: 1}, shadowColor: '#000', shadowOpacity: 0.15, shadowRadius: 3, elevation: 2}}
-                placeholder="Password"
+                placeholder={t('password')}
                 onChangeText={onChangePasswordAuth}
                 value={passwordAuth}
                 secureTextEntry={true}
@@ -143,14 +145,14 @@ const LoginScreen = ({ updateLoggedInState, updateRegisterState, updateUserInfo 
 
             <View className="mt-10" >
                     <TouchableOpacity style={{backgroundColor: 'black', width: 130, height:40, borderWidth:1, borderColor:'808080'}} className="justify-center items-center rounded-xl" onPress={() => handleLogin(emailAdressAuth,passwordAuth)}>
-                        <Text style={{color: 'white'}}>LOGIN</Text>
+                        <Text style={{color: 'white'}}>{t('login')}</Text>
                     </TouchableOpacity>
             </View>
 
             <View className="items-center -mb-10">
-                <Text style={{fontSize: 20, color: '#A9A9A9', marginTop:40, marginBottom:5}} > Don't have an account yet? </Text>
+                <Text style={{fontSize: 20, color: '#A9A9A9', marginTop:40, marginBottom:5}} > {t('noAccount')} </Text>
                 <TouchableOpacity style={{backgroundColor: 'black', width: 130, height:40, borderWidth:1, borderColor:'808080'}} className="justify-center items-center rounded-xl mt-2"onPress={() => handleRegister()}>
-                    <Text style={{color: 'white'}}>SIGN UP</Text>
+                    <Text style={{color: 'white'}}>{t('signup')}</Text>
                 </TouchableOpacity>
             </View>
 

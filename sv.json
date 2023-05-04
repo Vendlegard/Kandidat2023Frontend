@@ -1,3 +1,22 @@
 {
-  "welcomeMessage": "Välkommen till React Native!"
+  "welcomeMessage": "Välkommen till React Native!",
+  "liked": "Gillade",
+  "disliked": "Inte gillade",
+  "graduation":"Examensår",
+  "university": "Universitet",
+  "competences": "Kompetenser",
+  "employment": "Typ av anställning",
+  "showmore": "Visa mer",
+  "logout": "Logga ut",
+  "save": "Spara",
+  "searchJobs": "Sök efter jobb...",
+  "login": "Logga in",
+  "signup": "Skapa konto",
+  "signIn": "Vänligen logga in med",
+  "password": "Lösenord",
+  "noAccount": "Har du inget konto ännu?",
+  "createAccount": "Skapa konto",
+  "firstName": "Förnamn",
+  "lastName": "Efternamn",
+  "education": "Utbildning"
 }

@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { StyleSheet, Text, TextInput, View, FlatList, ScrollView } from 'react-native';
 import JobCard from "../components/JobCard";
+import { useTranslation} from "react-i18next";
 
 
 
@@ -8,6 +9,7 @@ export default function App({userInfo}) {
   const [query, setQuery] = useState('');
   const [allJobs, setALLJobs] = useState([]); // [1
   const [likedJobs, setLikedJobs] = useState([]);
+  const { t, i18n } = useTranslation();
 
   const handleSearch = text => {
     setQuery(text);
@@ -100,7 +102,7 @@ export default function App({userInfo}) {
         style={styles.searchBox}
         onChangeText={handleSearch}
         value={query}
-        placeholder="Search for jobs..."
+        placeholder={t('searchJobs')}
       />
       <ScrollView>
 
