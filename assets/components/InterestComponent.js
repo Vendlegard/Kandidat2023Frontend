@@ -21,7 +21,7 @@ import InterestAndCompetenceButtonComponent from "./InterestAndCompetenceButtonC
 import leftArrow from '../images/leftArrow.png';
 
 //create a basic component
-const InterestComponent = ({finishedEmit}) => {
+const InterestComponent = ({finishedEmit, userInfo}) => {
 
     [allInterests, setAllInterests] = useState([]);
     [userLookingFor, setUserLookingFor] = useState([]);
@@ -71,6 +71,12 @@ const InterestComponent = ({finishedEmit}) => {
 
     function nextButton(){
         console.log(index);
+        setIndex(index + 1);
+        if(index > 0){
+            setfinished(true);
+            finishedEmit();
+            writeCompAndInterest(userInfo.userEmail, answer.userCompenencies, answer.lookingForPreferences);
+        }
         setlookingForFilled(true);
     }
 
@@ -81,7 +87,7 @@ const InterestComponent = ({finishedEmit}) => {
         console.log("här går en sql Call iväg och när responsen ok går vi tillbaka till appens första sida");
        setfinished(true);
        finishedEmit();
-        writeCompAndInterest(userInfo.userEmail, answer.userCompenencies, answer.lookingForPreferences);
+       writeCompAndInterest(userInfo.userEmail, answer.userCompenencies, answer.lookingForPreferences);
     }
 
     const fetchAllComp = async () => {
