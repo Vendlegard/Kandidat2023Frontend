@@ -64,7 +64,9 @@ const Navigator = ({userInfo, isLoggedOut, emitToAppJs}) => {
                         <Ionicons name = 'person-circle-sharp' size = {30} color={'#6b7280'}/>
                     )
                 }} /> 
-                <Tab.Screen name="Search" component={SearchScreen} options={{
+                <Tab.Screen name="Search" 
+                            children = {() => <SearchScreen userInfo={userInfo}/>}
+                            options={{
                     tabBarIcon: ({color, size}) => (
                         <Ionicons name = 'search' size = {30} color={'#6b7280'}/>
                     )

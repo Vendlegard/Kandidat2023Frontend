@@ -18,6 +18,7 @@
 import React, {useEffect, useState} from "react";
 import {View, Text, TextInput, Button, TouchableOpacity, Image}  from "react-native";
 import leftArrow from '../images/leftArrow.png';
+
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 //create a basic component
@@ -169,13 +170,28 @@ const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn, userInfoStore}
                 </View>
             </TouchableOpacity>
 
+            {/* Profile Bubbles */}
+            <View className="absolute top-0 right-0">
+            {/* ProfileScreen Bubble */}
+            <View className="w-28 h-28 bg-profileScreen opacity-70 rounded-full mt-12 mr-8"></View>
+
+            {/* Pink Bubble */}
+                    
+
+            {/* Gray Bubble */}
+            </View>
+            <View className="absolute bottom-0 left-0">
+                <View className="w-20 h-20 bg-profileScreen opacity-70 rounded-full -mb-5 ml-2"></View>
+                <View className="w-14 h-14 bg-purple opacity-90 rounded-full mb-20 ml-12"></View>
+            </View>
+
            
             
             <Text className = 'text-4xl m-4'>Create account</Text>
 
             <TextInput
-                style = {{fontSize: 20, width: "75%", height: "4%", margin: "3%", borderRadius: 12,  backgroundColor: "#e3f1ff", paddingHorizontal: 6, 
-                shadowOffset: {width:0, height: 1}, shadowColor: '#000', shadowOpacity: 0.15, shadowRadius: 3}}
+                style = {{fontSize: 20, width: "75%", height: "4%", margin: "3%", borderRadius: 12,  backgroundColor: "#E6E6FA", 
+                shadowOffset: {width:0, height: 2}, shadowColor: '#000', shadowOpacity: 0.25, shadowRadius: 3}}
                 placeholder="First name"
                 onChangeText={onChangeFirstName}
                 value={firstName}
@@ -183,8 +199,8 @@ const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn, userInfoStore}
             </TextInput>
 
             <TextInput
-                style = {{fontSize: 20, width: "75%", height: "4%", margin: "3%", borderRadius: 12,  backgroundColor: "#e3f1ff", paddingHorizontal: 6,
-                shadowOffset: {width:0, height: 1}, shadowColor: '#000', shadowOpacity: 0.15, shadowRadius: 3}}
+                style = {{fontSize: 20, width: "75%", height: "4%", margin: "3%", borderRadius: 12,  backgroundColor: "#E6E6FA", 
+                shadowOffset: {width:0, height: 2}, shadowColor: '#000', shadowOpacity: 0.25, shadowRadius: 3}}
                 placeholder="Last name"
                 onChangeText={onChangeLastName}
                 value={lastName}
@@ -192,8 +208,8 @@ const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn, userInfoStore}
             </TextInput>
 
             <TextInput
-                style = {{fontSize: 20, width: "75%", height: "4%", margin: "3%", borderRadius: 12,  backgroundColor: "#e3f1ff", paddingHorizontal: 6,
-                shadowOffset: {width:0, height: 1}, shadowColor: '#000', shadowOpacity: 0.15, shadowRadius: 3}}
+                style = {{fontSize: 20, width: "75%", height: "4%", margin: "3%", borderRadius: 12,  backgroundColor: "#E6E6FA", 
+                shadowOffset: {width:0, height: 2}, shadowColor: '#000', shadowOpacity: 0.25, shadowRadius: 3}}
                 placeholder="University"
                 onChangeText={onChangeUniversity}
                 value={university}
@@ -201,8 +217,8 @@ const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn, userInfoStore}
             </TextInput>
 
             <TextInput
-                style = {{fontSize: 20, width: "75%", height: "4%", margin: "3%", borderRadius: 12,  backgroundColor: "#e3f1ff", paddingHorizontal: 6,
-                shadowOffset: {width:0, height: 1}, shadowColor: '#000', shadowOpacity: 0.15, shadowRadius: 3}}
+                style = {{fontSize: 20, width: "75%", height: "4%", margin: "3%", borderRadius: 12,  backgroundColor: "#E6E6FA", 
+                shadowOffset: {width:0, height: 2}, shadowColor: '#000', shadowOpacity: 0.25, shadowRadius: 3}}
                 placeholder="Education"
                 onChangeText={onChangeEducation}
                 value={education}
@@ -210,8 +226,8 @@ const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn, userInfoStore}
             </TextInput>
 
             <TextInput
-                style = {{fontSize: 20, width: "75%", height: "4%", margin: "3%", borderRadius: 12,  backgroundColor: "#e3f1ff", paddingHorizontal: 6,
-                    shadowOffset: {width:0, height: 1}, shadowColor: '#000', shadowOpacity: 0.15, shadowRadius: 3}}
+                style = {{fontSize: 20, width: "75%", height: "4%", margin: "3%", borderRadius: 12,  backgroundColor: "#E6E6FA",
+                    shadowOffset: {width:0, height: 2}, shadowColor: '#000', shadowOpacity: 0.25, shadowRadius: 3}}
                 placeholder="Exam date"
                 onChangeText={onChangeExamDate}
                 value={examDate}
@@ -219,22 +235,22 @@ const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn, userInfoStore}
             </TextInput>
 
             <TextInput
-                style = {{fontSize: 20, width: "75%", height: "4%", margin: "3%", borderRadius: 12,  backgroundColor: "#e3f1ff", paddingHorizontal: 6,
-                shadowOffset: {width:0, height: 1}, shadowColor: '#000', shadowOpacity: 0.15, shadowRadius: 3}}
+                style = {{fontSize: 20, width: "75%", height: "4%", margin: "3%", borderRadius: 12,  backgroundColor: "#E6E6FA", 
+                shadowOffset: {width:0, height: 2}, shadowColor: '#000', shadowOpacity: 0.25, shadowRadius: 3}}
                 placeholder="Email adress"
                 onChangeText={onChangeEmailAdress}
                 value={emailAdress}
             />
             <TextInput
-                style = {{fontSize: 20, width: "75%", height: "4%", margin: "3%", borderRadius: 12,  backgroundColor: "#e3f1ff", paddingHorizontal: 6,
-                shadowOffset: {width:0, height: 1}, shadowColor: '#000', shadowOpacity: 0.15, shadowRadius: 3}}
+                style = {{fontSize: 20, width: "75%", height: "4%", margin: "3%", borderRadius: 12,  backgroundColor: "#E6E6FA", 
+                shadowOffset: {width:0, height: 2}, shadowColor: '#000', shadowOpacity: 0.25, shadowRadius: 3}}
                 placeholder="Password"
                 onChangeText={onChangePassword}
                 value={password}
             >
             </TextInput>
-            <TouchableOpacity style={{width: 130, height:40}} className="bg-black justify-center items-center rounded-xl mt-8 mb-10" onPress={() => registerUser(emailAdress, password, firstName, lastName, university, education)}>
-                <Text className="text-white text-sm">SIGN UP</Text>
+            <TouchableOpacity className="bg-black w-20 h-9 justify-center items-center rounded-xl mt-8 mb-10" onPress={() => registerUser(emailAdress, password, firstName, lastName, university, education)}>
+                <Text className="text-white text-sm">SIGNUP</Text>
             </TouchableOpacity>
             {serverResponse !== "" && ( // render the server response if it's not an empty string
                 <Text>Server response: {serverResponse}</Text>
