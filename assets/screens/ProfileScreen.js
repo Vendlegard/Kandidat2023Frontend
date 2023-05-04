@@ -22,6 +22,8 @@ const ProfileScreen = ({userInfo, isLoggedOut, emitToBottomNav}) => {
     // const bubble3Position = useRef(new Animated.ValueXY({ x: 50, y: -20 })).current;
 
     const [userComp, setUserComp] = useState([]);
+    const [chunkedUserComp, setChunkedUserComp] = useState([]);
+    const [showAllComps, setShowAllComps] = useState(false);
 
     const [userInterest, setUserInterest] = useState([]);
 
@@ -48,6 +50,17 @@ const ProfileScreen = ({userInfo, isLoggedOut, emitToBottomNav}) => {
         // Add navigation logic here to navigate to the logout screen or perform logout action
     };
 
+    function chunk(arr) {
+        const chunks = [];
+        let i = 0;
+        while (i < arr.length) {
+            const chunkSize = Math.floor(Math.random() * 2) + 2; // choose random size between 3 and 5
+            chunks.push(arr.slice(i, i + chunkSize));
+            i += chunkSize;
+        }
+        return chunks;
+    }
+
     const getUserComp = async () => {
         try {
             const response = await fetch("http://127.0.0.1:8000/api/getComp", {
@@ -62,6 +75,9 @@ const ProfileScreen = ({userInfo, isLoggedOut, emitToBottomNav}) => {
             });
             const data = await response.json();
             setUserComp(data.comp_list);
+            console.log("userComp", data.comp_list);
+            console.log("the chunked array of data.comp_list", chunk(data.comp_list));
+            setChunkedUserComp(chunk(data.comp_list));
         } catch (error) {
             console.error(error);
         }
@@ -349,14 +365,24 @@ const ProfileScreen = ({userInfo, isLoggedOut, emitToBottomNav}) => {
                     <View className="flex-2 m-7 flex-row items-center justify-center">
                         <View className="items-center justify-center">
                             <Text className="text-x1 font-bold">Mina kompetenser </Text>
-                            
-                            <View style={styles.containers}>
-                            {userComp.map((comp) => (
-                                <View style={styles.codeBlock}>
-                                    <Text style={styles.codeText}>{comp}</Text>
-                                </View>
-                            ))}
+                            <View>
+                                {chunkedUserComp.map((chunk, index) =>
+                                    index < 1 || showAllComps ? (
+                                        <View style={styles.containers}>
+                                            {chunk.map((comp) => (
+                                                <View style={styles.codeBlock}>
+                                                    <Text style={styles.codeText}>{comp}</Text>
+                                                </View>
+                                            ))}
+                                        </View>
+                                    ) : null
+                                )}
                             </View>
+                            <TouchableOpacity onPress={() => setShowAllComps(!showAllComps)}>
+                                <Text style={styles.toggleButton}>
+                                    <AntDesign name={showAllComps ? 'up' : 'down'} size={16} />{'Visa mer '}
+                                </Text>
+                            </TouchableOpacity>
                         </View>
                     </View>
                     <View className="items-center justify-center">
@@ -407,9 +433,8 @@ const styles = StyleSheet.create({
 
     containers: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
         marginTop: 10,
-        
+        alignItems: 'center',
     },
     codeBlock: {
         borderWidth: 1,
