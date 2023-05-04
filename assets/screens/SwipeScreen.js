@@ -191,7 +191,8 @@ const SwipeScreen = ({userInfo}) => {
             <View key = {card.id} 
                 style = {{backgroundColor: '#f6f6f6', height: '87%', borderRadius: 15, shadowColor: '#000', shadowOffset: {width:0, height: 2}, shadowOpacity: 0.35, shadoRadius: 3, elevation: 2}}
                 >
-                <Image style={{flex: 1, justifyContent: 'center', height: '30%', margin: '5%', borderRadius: 5}} source={{uri: card.employerImage}}/>
+                <Image style={{flex: 1, justifyContent: 'center', height: '30%',
+                    margin: '5%', borderRadius: 5}} source={{uri: card.employerImage}}/>
                 <Text className = 'font-bold text-4xl mt-5 text-center'>{card.jobType}</Text>
                 <Text className = 'text-xl mt-5 text-center'>{card.jobDescription}</Text>
                 

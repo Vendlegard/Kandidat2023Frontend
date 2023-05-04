@@ -21,7 +21,13 @@ import InterestComponent from "../components/InterestComponent";
 
 
 //create a basic component
-const CompetenceScreen = ({finishedToApp}) => {
+const CompetenceScreen = ({finishedToApp, userInfo}) => {
+
+
+    useState(() => {
+        console.log("userInfo in competenceScreen", userInfo);
+        }
+    )
 
     function finishedRecevied(){
         console.log("vi tog emot finished från interestcomponent");
@@ -33,6 +39,7 @@ const CompetenceScreen = ({finishedToApp}) => {
         <View className="flex-1 items-center justify-center">
             <InterestComponent
             finishedEmit={finishedRecevied}
+            userInfo={userInfo}
             />
         </View>
     );

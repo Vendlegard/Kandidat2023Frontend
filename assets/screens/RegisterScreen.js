@@ -15,23 +15,31 @@
     }
 ] */
 
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {View, Text, TextInput, Button, TouchableOpacity, Image}  from "react-native";
 import leftArrow from '../images/leftArrow.png';
+import {Picker} from "@react-native-picker/picker";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 //create a basic component
-const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn}) => {
+const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn, userInfoStore}) => {
+
+    const [possibleExamDates, setPossibleExamDates] = useState(["VT2023", "HT2023", "VT2024", "HT2024", "VT2025", "HT2025", "VT2026", "HT2027"]);
+
+
 
     const [serverResponse, setServerResponse] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [university, setUniversity] = useState("");
     const [education, setEducation] = useState(""); // lägga till termin och kanske bild i user table?
+    const [examDate, setExamDate] = useState("");
     const [emailAdress, setEmailAdress] = useState("");
     const [password, setPassword] = useState("");
     const [emailAdressAuth, setEmailAdressAuth] = useState("");
     const [passwordAuth, setPasswordAuth] = useState("");
     const [token, setToken] = useState("");
+    const [userData, setuserData] = useState( {});
 
 
     const onChangeEmailAdressAuth = (text) => {
@@ -58,6 +66,49 @@ const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn}) => {
     const onChangeEducation = (text) => {
         setEducation(text);
     }
+    const onChangeExamDate = (text) => {
+        setExamDate(text);
+    }
+    const onChangeUserData = (data) => {
+        setuserData(data);
+    }
+    function isObjectEmpty(obj) {
+        return Object.keys(obj).length === 0 && obj.constructor === Object;
+    }
+    const storeToken = async (value) => {
+        //console.log("storeToken called in LoginScreen.js with the value", value);
+        try {
+            await AsyncStorage.setItem('@token', value)
+        } catch (e) {
+            // saving error
+        }
+    }
+
+
+    const authenticateUser = async (emailAddressToSend,passwordToSend) => {
+        try {
+            const response = await fetch("http://127.0.0.1:8000/api/authenticate", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    email: emailAddressToSend,
+                    password: passwordToSend,
+                }),
+            });
+            const data = await response.json();
+            const token = data.token;
+            storeToken(token);
+            let userDataTemp = await data.userInfo;
+            onChangeUserData(userDataTemp);
+            userInfoStore(userDataTemp);
+            console.log("authenticate user was called from registerUser and userDataTemp is: ", userDataTemp);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
 
     const registerUser = async (emailAddressToSend, passwordToSend, firstNameToSend, lastNameToSend, UniversityToSend, EducationToSend) => {
         if(emailAddressToSend === "" || passwordToSend === "" || firstNameToSend === "" || lastNameToSend === "" || UniversityToSend === "" || EducationToSend === "") {
@@ -83,10 +134,27 @@ const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn}) => {
             setServerResponse(data.message);
             firstTimeLoggingIn(true);
             updateRegisterState(false);
+            authenticateUser(emailAddressToSend, passwordToSend);
+            setIsMounted(true);
         } catch (error) {
             console.error(error);
         }
     };
+
+
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect( () =>{
+            if(isMounted){
+                // console.log("userData was updated to from the useEffect: ", userData);
+            }
+            if(!isObjectEmpty(userData)){
+                // console.log("object was not empty as userData : ", userData);
+                updateUserInfo(userData);
+            }
+        }, [userData, isMounted]
+    )
+
 
     function goBackToLogin() {
         updateRegisterState(false);
@@ -154,6 +222,15 @@ const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn}) => {
                 placeholder="Education"
                 onChangeText={onChangeEducation}
                 value={education}
+            >
+            </TextInput>
+
+            <TextInput
+                style = {{fontSize: 20, width: "75%", height: "4%", margin: "3%", borderRadius: 12,  backgroundColor: "#E6E6FA",
+                    shadowOffset: {width:0, height: 2}, shadowColor: '#000', shadowOpacity: 0.25, shadowRadius: 3}}
+                placeholder="Exam date"
+                onChangeText={onChangeExamDate}
+                value={examDate}
             >
             </TextInput>
 

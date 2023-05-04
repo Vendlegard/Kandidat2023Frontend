@@ -88,10 +88,6 @@ const JobCard = ({ jobIcon, jobTitle, employer, location, date, wage, duration, 
   }
 
 
-  console.log("heart pressed is now : " + heartPressed)
-  console.log("liked is now : " + liked)
-
-
 
   return (
     <>

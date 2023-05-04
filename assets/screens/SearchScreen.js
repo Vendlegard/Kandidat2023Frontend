@@ -1,16 +1,12 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, TextInput, View, FlatList } from 'react-native';
+import { StyleSheet, Text, TextInput, View, FlatList, ScrollView } from 'react-native';
+import JobCard from "../components/JobCard";
 
-const jobs = [
-  { id: 1, title: 'Software Engineer', description: 'Develop software applications', salary: '20,000 - 30,000' },
-  { id: 2, title: 'Product Manager', description: 'Manage product development lifecycle', salary: '25,000 - 30,000' },
-  { id: 3, title: 'Data Analyst', description: 'Analyze and interpret complex data sets', salary: '20,000 - 25,000' },
-  { id: 4, title: 'Frontend Developer', description: 'Develop and implement frontend code', salary: '25,000 - 30,000' },
-];
+
 
 export default function App() {
   const [query, setQuery] = useState('');
-  const [filteredJobs, setFilteredJobs] = useState(jobs);
+  const [allJobs, setALLJobs] = useState([]); // [1
 
   const handleSearch = text => {
     setQuery(text);
@@ -24,6 +20,26 @@ export default function App() {
     setFilteredJobs(filteredData);
   };
 
+  const fetchALLJobs = async () => {
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/fetchALLJobs", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      setALLJobs(data.all_jobs);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useState(() => {
+    console.log("fetch Jobs called");
+    fetchALLJobs();
+  }, []);
+
   return (
     <View style={styles.container}>
       <TextInput
@@ -32,17 +48,22 @@ export default function App() {
         value={query}
         placeholder="Search for jobs..."
       />
-      <FlatList
-        data={filteredJobs}
-        renderItem={({ item }) => (
-          <View style={styles.jobContainer}>
-            <Text style={styles.jobTitle}>{item.title}</Text>
-            <Text style={styles.jobDescription}>{item.description}</Text>
-            <Text style={styles.jobSalary}>{item.salary}</Text>
-          </View>
-        )}
-        keyExtractor={item => item.id.toString()}
-      />
+      <ScrollView>
+
+        {allJobs.map(job => (
+          <JobCard
+              jobIcon={job.employerImage}
+              jobID={job.jobID}
+              jobTitle={job.jobName}
+              location={job.location}
+              date={"2021-05-01"}
+              wage={"300kr/h"}
+              duration={"3 months"}
+              experience={"1 year"}
+              liked={false}
+            />
+        ))}
+      </ScrollView>
     </View>
   );
 }
