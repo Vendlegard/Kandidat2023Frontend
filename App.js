@@ -7,6 +7,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import CompetenceScreen from "./assets/screens/CompetenceScreen";
 import RegisterScreen from "./assets/screens/RegisterScreen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import StartScreen from './assets/screens/StartScreen';
 
 
 
@@ -23,6 +24,16 @@ export default function App() {
     };
     const loggedOut = (value) => {
         setLoggedIn(value);
+    }
+    const activateLoggedInScreen = (value) => {
+        console.log("activate logged in scrren ran in App.js, ", value)
+        setStartScreen(value);
+        console.log("logged in variable should be", loggedIn)
+        if(value === false ){
+            setFirstTimeLoggingIn(false);
+            AsyncStorage.removeItem("@token");
+        }
+        setFirstTimeLoggingIn(false);
     }
 
     const [registerStatus, setRegisterStatus] = useState(false);
@@ -143,6 +154,8 @@ export default function App() {
         }, [userInfo]
     )
 
+    const [startScreen, setStartScreen] = useState(true);
+
 
 
     return (
@@ -167,7 +180,13 @@ export default function App() {
                 finishedToApp={finished}
                 userInfo={userInfo}
                 />
-            ) : (
+            ) : startScreen ? (
+                <StartScreen
+                goToLogin ={activateLoggedInScreen}
+                goToCreate={updateRegisterStatus}
+                />
+                
+                ) : (
                 <LoginScreen
                     updateLoggedInState={updateLoggedInState}
                     updateRegisterState={updateRegisterStatus}

@@ -23,9 +23,9 @@ import leftArrow from '../images/leftArrow.png';
 //create a basic component
 const InterestComponent = ({finishedEmit}) => {
 
-    [lookingFor, setLookingFor] = useState(["Sommarjobb", "Deltid", "Trainee", "Internship", "Exjobb", "Timanställning"]);
+    [allInterests, setAllInterests] = useState([]);
     [userLookingFor, setUserLookingFor] = useState([]);
-    [userCompetencies, setUserCompetencies] = useState(["C#", "Java", "Python"]);
+    [allCompetencies, setAllCompetencies] = useState([]);
     [dontRun, setdontRun] = useState(false);
 
 
@@ -36,7 +36,7 @@ const InterestComponent = ({finishedEmit}) => {
 
     [index, setIndex] = useState(0); //låter denna ligga kvar med tanke att man ska ladda från list
     //toLoadFrom men den spårar i react. Nånting med att man måste rendra rätt.
-    [listToLoadFrom, setListToLoadFrom] = useState([lookingFor, userCompetencies]);
+    [listToLoadFrom, setListToLoadFrom] = useState([allInterests, allCompetencies]);
 
 
     [lookingForFilled, setlookingForFilled] = useState(false);
@@ -84,6 +84,56 @@ const InterestComponent = ({finishedEmit}) => {
         writeCompAndInterest(userInfo.userEmail, answer.userCompenencies, answer.lookingForPreferences);
     }
 
+    const fetchAllComp = async () => {
+        try {
+            const response = await fetch("http://127.0.0.1:8000/api/fetchAllComp", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                }
+
+            })
+            const data = await response.json();
+            setAllCompetencies(data.all_comp);
+            console.log("här är alla kompetenser", data.all_comp);
+            }
+        
+         catch (error) {
+            console.error(error);
+        }
+    };
+
+    const fetchAllInterests = async () => {
+        try {
+            const response = await fetch("http://127.0.0.1:8000/api/fetchAllInterests", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                }
+
+            })
+            const data = await response.json();
+            setAllInterests(data.all_interests);
+            console.log("här är alla intressen", data.all_interests);
+            }
+        
+         catch (error) {
+            console.error(error);
+        }
+    };
+
+    useState(
+        () => {
+            fetchAllComp();
+        }
+    )
+
+    useState(
+        () => {
+            fetchAllInterests();
+        }
+    )
+
     const writeCompAndInterest = async (emailAddressToSend, competenciesToSend, interestsToSend) => {
         try {
             const response = await fetch("http://127.0.0.1:8000/api/writeCompAndInt", {
@@ -129,9 +179,9 @@ const InterestComponent = ({finishedEmit}) => {
                     <View className ="justify-center items-center">
                     <Text className="text-3xl mt-16 mb-5"> What are your competencies? </Text>
                 </View>
-                {userCompetencies.map((currElement, index) => (
+                {allCompetencies.map((currElement, index) => (
                         <InterestAndCompetenceButtonComponent
-                            text={currElement}
+                        compOrInterestName={currElement}
                             index={index}
                             addToLookingFor={userCompetenciesAdd}
                         />
@@ -148,9 +198,9 @@ const InterestComponent = ({finishedEmit}) => {
                     <View className ="justify-center items-center">
                     <Text className="text-3xl mt-16 mb-5"> What are you looking for? </Text>
                     </View>
-                    {lookingFor.map((currElement, index) => (
+                    {allInterests.map((currElement, index) => (
                         <InterestAndCompetenceButtonComponent
-                            text={currElement}
+                            compOrInterestName={currElement}
                             index={index}
                             addToLookingFor={userLookingForAdd}
                         />

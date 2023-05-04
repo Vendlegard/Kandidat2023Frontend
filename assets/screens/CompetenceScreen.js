@@ -16,7 +16,7 @@
 ] */
 
 import React, {useState} from "react";
-import {View, Text, TextInput, Button, TouchableOpacity}  from "react-native";
+import {View, Text, TextInput, Button, TouchableOpacity, ScrollView}  from "react-native";
 import InterestComponent from "../components/InterestComponent";
 
 
@@ -37,10 +37,12 @@ const CompetenceScreen = ({finishedToApp, userInfo}) => {
 
     return (
         <View className="flex-1 items-center justify-center">
+            <ScrollView>
             <InterestComponent
             finishedEmit={finishedRecevied}
             userInfo={userInfo}
             />
+            </ScrollView>
         </View>
     );
 
