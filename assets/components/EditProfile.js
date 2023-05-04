@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Image, TextInput } from 'react-native';
+import {View, Text, TouchableOpacity, Image, TextInput, StyleSheet} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import schoolPic from '../images/schoolPic.png'
 import jobPic from '../images/jobPic.png'
@@ -8,7 +8,7 @@ import emptyHeart from '../images/emptyHeart.png'
 import terminPic from '../images/terminPic.png'
 import profile from '../images/profile.png'
 
-const EditProfile = ({ closeModal }) => {
+const EditProfile = ({ closeModal, interests, competencies, userInfo }) => {
     return (
 
 
@@ -21,7 +21,7 @@ const EditProfile = ({ closeModal }) => {
                 </View>
 
                 <View className="justify-center items-center">
-                    <Text className="font-bold text-lg">Victoria Berinder</Text>
+                    <Text className="font-bold text-lg">{userInfo.firstName} {userInfo.lastName}</Text>
                 </View>
 
 
@@ -31,11 +31,7 @@ const EditProfile = ({ closeModal }) => {
 
                     <View className="flex-row m-5 ">
                         <Image className="w-8 h-8 ml-3" source={schoolPic}></Image>
-                        <TextInput
-                            style={{ borderWidth: 0, fontSize: 17, color: 'black' }}
-                            // placeholder={userInfo.university}
-                            placeholderTextColor="black"
-                        />
+                        <Text>{userInfo.university}</Text>
                     </View>
                     <View className="ml-7">
                         <View className="h-px bg-gray border-0 dark:bg-gray w-11/12">
@@ -43,11 +39,9 @@ const EditProfile = ({ closeModal }) => {
                     </View>
                     <View className="flex-row m-5">
                         <Image className="w-8 h-8 ml-3" source={coursePic}></Image>
-                        <TextInput
-                            style={{ borderWidth: 0, fontSize: 17, color: 'black' }}
-                            // placeholder={userInfo.education}
-                            placeholderTextColor="black"
-                        />
+                        <Text>
+                            {userInfo.education}
+                        </Text>
                     </View>
                     <View className="ml-7">
                         <View className="h-px bg-gray border-0 dark:bg-gray w-11/12">
@@ -70,11 +64,13 @@ const EditProfile = ({ closeModal }) => {
 
                     <View className="flex-row m-5">
                         <Image className="w-7 h-7 ml-2" source={jobPic}></Image>
-                        <TextInput
-                            style={{ borderWidth: 0, fontSize: 17, color: 'black' }}
-                            placeholder="Sommarjobb, Trainee"
-                            placeholderTextColor="black"
-                        />
+                        {interests.map((chunk, index) =>
+                                <View style={styles.containers}>
+                                        <View style={styles.codeBlock}>
+                                            <Text style={styles.codeText}>{chunk}</Text>
+                                        </View>
+                                </View>
+)}
                     </View>
 
                     <View className="ml-7">
@@ -84,11 +80,13 @@ const EditProfile = ({ closeModal }) => {
 
                     <View className="flex-row m-5">
                         <Image className="w-7 h-7 ml-3" source={emptyHeart}></Image>
-                        <TextInput
-                            style={{ borderWidth: 0, fontSize: 17, color: 'black' }}
-                            placeholder="SQL, React, Javascript"
-                            placeholderTextColor="black"
-                        />
+                        {competencies.map((chunk, index) =>
+                                <View style={styles.containers}>
+                                        <View style={styles.codeBlock}>
+                                            <Text style={styles.codeText}>{chunk}</Text>
+                                        </View>
+                                </View>
+                        )}
                     </View>
 
                 </View>
@@ -107,6 +105,33 @@ const EditProfile = ({ closeModal }) => {
 
     );
 };
+
+const styles = StyleSheet.create({
+    container: {
+        fles: 1
+    },
+    top: {},
+    bottom: {},
+
+    containers: {
+        flexDirection: 'row',
+        marginTop: 10,
+        alignItems: 'center',
+    },
+    codeBlock: {
+        borderWidth: 1,
+        borderColor: '#95caff',
+        borderRadius: 10,
+        paddingHorizontal: 10,
+        marginHorizontal: 2,
+        alignItems: 'center',
+        paddingVertical: 5,
+        backgroundColor: '#e3f1ff'
+    },
+    codeText: {
+        fontSize: 10,
+    },
+});
 
 export default EditProfile
 
