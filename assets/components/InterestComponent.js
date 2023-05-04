@@ -22,6 +22,7 @@ import leftArrow from '../images/leftArrow.png';
 
 //create a basic component
 const InterestComponent = ({finishedEmit}) => {
+    
 
     [lookingFor, setLookingFor] = useState(["Sommarjobb", "Deltid", "Trainee", "Internship", "Exjobb", "Timanställning"]);
     [userLookingFor, setUserLookingFor] = useState([]);
@@ -110,14 +111,14 @@ const InterestComponent = ({finishedEmit}) => {
 
     return (
         <View className="flex-1 w-full  flex-col">
-            <TouchableOpacity className="flex-1 absolute top-0 left-0 mt-20 ml-5" onPress={() => previousButton()}>
+            <TouchableOpacity className="relative top-0 left-0 mt-20 ml-5" onPress={() => previousButton()}>
                 <View style={{ position: 'relative' }}>
                     <Image source={leftArrow} className="w-11 h-8"></Image>
                 </View>
             </TouchableOpacity>
 
-            <View className="flex-0 justify-center items-center">
-                <Text className="mt-24" >Kompetenser: {answer.userCompenencies}
+            <View className="justify-center items-center">
+                <Text className="" >Kompetenser: {answer.userCompenencies}
                 </Text>
                 <Text>Letar efter: {answer.lookingForPreferences} </Text>
                 
@@ -137,10 +138,10 @@ const InterestComponent = ({finishedEmit}) => {
                         />
                     ))}
                     <View className="mt-32">
-                        <Button title={"Finish"}
+                        <TouchableOpacity title={"Finish"}
                         onPress={() => finishButton()}
                         >
-                        </Button>
+                        </TouchableOpacity>
                     </View>
                 </View>
             ) : (
@@ -159,17 +160,36 @@ const InterestComponent = ({finishedEmit}) => {
             )}
 
             <View className="flex-0 flex-row justify-center mt-16">
-                <Button title={"previous"}
-                onPress={() => previousButton()}
-                >
-                    </Button>
-                <Button title={"next"}
+                <TouchableOpacity style={{width:150, height:40}} className=" bg-black flex justify-center items-center rounded mt-10 m-2"
                         onPress={() => nextButton()}
                 >
-                </Button>
+                    <Text className="text-white text-sm">Continue</Text>
+                </TouchableOpacity>
             </View>
         </View>
     );
 
 }
+
+// const style = StyleSheet.create({
+
+//     button: {
+//         alignItems: 'center',
+//         justifyContent: 'center',
+//         paddingVertical: '12',
+//         paddingHorizontal: '32',
+//         borderRadius: '4',
+//         elevation:'3',
+//         backgroundColor: 'black'
+//     },
+
+//     text: {
+//         fontSize: '15',
+//         lineHeight: '21',
+//         fontWeight: 'bold',
+//         letterSpacing: '0,5',
+//         color: 'white',
+//     }
+
+// })
 export default InterestComponent;
