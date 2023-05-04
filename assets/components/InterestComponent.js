@@ -19,6 +19,7 @@ import React, {useState} from "react";
 import {View, Text, TextInput, Button, TouchableOpacity, Image}  from "react-native";
 import InterestAndCompetenceButtonComponent from "./InterestAndCompetenceButtonComponent";
 import leftArrow from '../images/leftArrow.png';
+import { setStatusBarBackgroundColor } from "expo-status-bar";
 
 //create a basic component
 const InterestComponent = ({finishedEmit, userInfo}) => {
@@ -78,6 +79,7 @@ const InterestComponent = ({finishedEmit, userInfo}) => {
             writeCompAndInterest(userInfo.userEmail, answer.userCompenencies, answer.lookingForPreferences);
         }
         setlookingForFilled(true);
+        
     }
 
     function finishButton(){
@@ -172,13 +174,6 @@ const InterestComponent = ({finishedEmit, userInfo}) => {
                 </View>
             </TouchableOpacity>
 
-            <View className="justify-center items-center">
-                <Text className="" >Kompetenser: {answer.userCompenencies}
-                </Text>
-                <Text>Letar efter: {answer.lookingForPreferences} </Text>
-                
-            </View>
-
 
             { lookingForFilled ? (
                 <View>
@@ -215,10 +210,10 @@ const InterestComponent = ({finishedEmit, userInfo}) => {
             )}
 
             <View className="flex-0 flex-row justify-center mt-16">
-                <TouchableOpacity style={{width:150, height:40}} className=" bg-black flex justify-center items-center rounded mt-10 m-2"
+                <TouchableOpacity style={{ backgroundColor: '#ececec', width: 150, height: 40, borderRadius: 8, justifyContent: 'center', alignItems:'center' }}
                         onPress={() => nextButton()}
                 >
-                    <Text className="text-white text-sm">Continue</Text>
+                    <Text style={{ color: 'black', fontSize:15 }}>Continue</Text>
                 </TouchableOpacity>
             </View>
         </View>

@@ -1,18 +1,22 @@
 import {Text, TouchableOpacity, View, styles} from "react-native";
 import React, {useState} from "react";
 
-const InterestAndCompetenceButtonComponent = ({compOrInterestName, addToLookingFor, index}) => {
+const InterestAndCompetenceButtonComponent = ({compOrInterestName, addToLookingFor, index }) => {
 
     const [buttonColor, setButtonColor] = useState('white');
+    const [borderColor, setBorderColor] = useState('#bcbcbc')
 
-    [interestAdded, setInterestAdded] = useState(false);
+    const [interestAdded, setInterestAdded] = useState(false);
 
     function addInterestToProfile(interestToAdd) {
         if(buttonColor=='white'){
-            setButtonColor('#E6E6FA')
+            setButtonColor('#e3f1ff')
+            setBorderColor('#95caff')
+
         }
         else{
             setButtonColor('white')
+            setBorderColor('#bcbcbc')
         }
         
         if(interestAdded){
@@ -31,23 +35,27 @@ const InterestAndCompetenceButtonComponent = ({compOrInterestName, addToLookingF
     return(
         <View className="">
         {isEven(index) ? (
-        <View style={{ backgroundColor: buttonColor, activeOpacity: 0.8, underlayColor: '#FFFFFF'}} className="flex-0 w-2/5 h-12 flex-row ml-12
-        rounded-3xl border-2 justify-center items-center mt-2">
-            <TouchableOpacity  className="mr-4" onPress={() => addInterestToProfile(compOrInterestName)}>
-                <Text>
+        
+            <TouchableOpacity  className="mr-4 " onPress={() => addInterestToProfile(compOrInterestName)}>
+                <View style={ {backgroundColor: buttonColor, borderWidth: 1, borderColor: borderColor}}  className="flex-0 w-2/5 h-12 flex-row ml-10
+                        rounded-3xl border-2 justify-center items-center mt-2">
+                <Text style={{fontSize: 20}}>
                     {compOrInterestName}
                 </Text>
+                </View>
             </TouchableOpacity>
-        </View>
+        
         ) : (
-        <View style={ {backgroundColor: buttonColor}} className="flex-0 w-2/5 h-12 flex-row-reverse
-             rounded-3xl border-2 justify-center items-center mr-52 mt-2">
+       
             <TouchableOpacity className="mr-4" onPress={() => addInterestToProfile(compOrInterestName)}>
-                <Text>
+                 <View style={ {backgroundColor: buttonColor, borderWidth: 1, borderColor: borderColor}} className="flex-0 w-2/5 h-12 flex-row-reverse
+                        rounded-3xl border-2 justify-center items-center mr-52 mt-2">
+                <Text style={{fontSize: 20}}>
                     {compOrInterestName} 
                 </Text>
+                </View>
             </TouchableOpacity>
-        </View>
+
         )}
         </View>
         )
