@@ -8,7 +8,7 @@ import emptyHeart from '../images/emptyHeart.png'
 import terminPic from '../images/terminPic.png'
 import profile from '../images/profile.png'
 
-const EditProfile = ({ closeModal }) => {
+const EditProfile = ({ closeModal, userInfo, interests, competencies}) => {
     return (
 
 <LinearGradient colors={['#d0e6f7','#e0effa', '#FFFFFF']}
@@ -33,11 +33,9 @@ const EditProfile = ({ closeModal }) => {
 
                     <View className="flex-row m-5 ">
                         <Image className="w-8 h-8 ml-3" source={schoolPic}></Image>
-                        <TextInput
-                            style={{ borderWidth: 0, fontSize: 17, color: 'black' }}
-                            // placeholder={userInfo.university}
-                            placeholderTextColor="black"
-                        />
+                        <Text>
+                            {userInfo.university}
+                        </Text>
                     </View>
                     <View className="ml-7">
                         <View className="h-px bg-gray border-0 dark:bg-gray w-11/12">
@@ -45,11 +43,11 @@ const EditProfile = ({ closeModal }) => {
                     </View>
                     <View className="flex-row m-5">
                         <Image className="w-8 h-8 ml-3" source={coursePic}></Image>
-                        <TextInput
-                            style={{ borderWidth: 0, fontSize: 17, color: 'black' }}
-                            // placeholder={userInfo.education}
-                            placeholderTextColor="black"
-                        />
+                        <View>
+                            <Text>
+                                {userInfo.education}
+                            </Text>
+                        </View>
                     </View>
                     <View className="ml-7">
                         <View className="h-px bg-gray border-0 dark:bg-gray w-11/12">
@@ -58,11 +56,9 @@ const EditProfile = ({ closeModal }) => {
 
                     <View className="flex-row m-5">
                         <Image className="w-8 h-8 ml-3" source={terminPic}></Image>
-                        <TextInput
-                            style={{ borderWidth: 0, fontSize: 17, color: 'black' }}
-                            placeholder="Termin 6/10"
-                            placeholderTextColor="black"
-                        />
+                        <Text>
+                            Vårterminen 2025
+                        </Text>
                     </View>
 
                     <View className="ml-7">
@@ -72,11 +68,11 @@ const EditProfile = ({ closeModal }) => {
 
                     <View className="flex-row m-5">
                         <Image className="w-8 h-8 ml-3" source={jobPic}></Image>
-                        <TextInput
-                            style={{ borderWidth: 0, fontSize: 17, color: 'black' }}
-                            placeholder="Sommarjobb, Trainee"
-                            placeholderTextColor="black"
-                        />
+                        <View className="flex-0 flex-row">
+                            {interests.map((interest) => (
+                                <Text className="ml-1">{interest}, </Text>
+                            ))}
+                        </View>
                     </View>
 
                     <View className="ml-7">
@@ -86,11 +82,11 @@ const EditProfile = ({ closeModal }) => {
 
                     <View className="flex-row m-5">
                         <Image className="w-8 h-8 ml-3" source={emptyHeart}></Image>
-                        <TextInput
-                            style={{ borderWidth: 0, fontSize: 17, color: 'black' }}
-                            placeholder="SQL, React, Javascript"
-                            placeholderTextColor="black"
-                        />
+                        <View>
+                            {competencies.map((competency) => (
+                                <Text className="ml-3">{competency}, </Text>
+                            ))}
+                        </View>
                     </View>
 
                 </View>
