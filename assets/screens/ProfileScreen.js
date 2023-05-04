@@ -1,14 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions, TextInput, Image, Animated, Modal } from "react-native";
-import Svg, { Path } from 'react-native-svg';
-import profilePicture from '../images/profilePicture.png'
-import schoolPic from '../images/schoolPic.png'
-import jobPic from '../images/jobPic.png'
-import coursePic from '../images/coursePic.png'
-import emptyHeart from '../images/emptyHeart.png'
-import terminPic from '../images/terminPic.png'
 import profile from '../images/profile.png'
-import { LinearGradient } from 'expo-linear-gradient';
 import { useFocusEffect } from "@react-navigation/native";
 import { AntDesign, Ionicons, Entypo, MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'
 import CompetenceScreen from "./CompetenceScreen";
@@ -136,7 +128,7 @@ const ProfileScreen = ({ userInfo, isLoggedOut, emitToBottomNav }) => {
         <View className="flex-1 bg-white">
 
 
-            <View style={{ marginBottom:10 }} className="flex-1">
+            <View style={{ marginBottom: 10 }} className="flex-1">
 
 
                 {/* Namn, bild och universitetsprogram main ProfileScreen */}
@@ -165,7 +157,7 @@ const ProfileScreen = ({ userInfo, isLoggedOut, emitToBottomNav }) => {
 
                 {/* Input Lärosäte  */}
                 <View className="flex-2 m-3 flex-col">
-                    <View className="flex flex-row items-center justify-evenly">
+                    <View className="flex flex-row items-center">
                         <View className="m-8 items-center justify-center">
                             <Text className="text-x1 font-bold">Lärosäte</Text>
                             <Text className="text-x1">{userInfo.university}</Text>
@@ -199,7 +191,6 @@ const ProfileScreen = ({ userInfo, isLoggedOut, emitToBottomNav }) => {
                                         {chunk.map((comp) => (
                                             <View style={styles.codeBlock}>
                                                 <Text style={styles.codeText}>{comp}</Text>
-                                                <Text style={styles.codeText}>Hej</Text>
                                             </View>
                                         ))}
                                     </View>
@@ -233,14 +224,14 @@ const ProfileScreen = ({ userInfo, isLoggedOut, emitToBottomNav }) => {
                 </View>
 
                 {/* Redigera profil och logga ut - knappar main profileScreen */}
-                <View>
-
-                    <TouchableOpacity style={{ width: 80, height: 40, backgroundColor: 'black', justifyContent: 'center', alignItems: 'center', }} onPress={handleLogout}>
-                        <Text className="text-white text-sm">Logga ut</Text>
-                    </TouchableOpacity>
-                </View>
 
 
+            </View>
+
+            <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'center', paddingBottom: 40 }}>
+                <TouchableOpacity style={{ backgroundColor: '#ececec', width: 150, height: 40, borderRadius: 8, justifyContent: 'center', alignItems:'center' }} onPress={handleLogout}>
+                    <Text style={{ color: 'black', fontSize:15 }}>Log out</Text>
+                </TouchableOpacity>
             </View>
 
         </View>
@@ -264,7 +255,7 @@ const styles = StyleSheet.create({
     },
     codeBlock: {
         borderWidth: 1,
-        borderColor: 'black',
+        borderColor: '#95caff',
         borderRadius: 10,
         paddingHorizontal: 10,
         marginHorizontal: 2,

@@ -11,9 +11,7 @@ import profile from '../images/profile.png'
 const EditProfile = ({ closeModal }) => {
     return (
 
-<LinearGradient colors={['#d0e6f7','#e0effa', '#FFFFFF']}
-            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
-        >
+
         <View className="h-full w-full flex-1 mt-12">
 
 
@@ -57,7 +55,7 @@ const EditProfile = ({ closeModal }) => {
                     </View>
 
                     <View className="flex-row m-5">
-                        <Image className="w-8 h-8 ml-3" source={terminPic}></Image>
+                        <Image className="w-7 h-7 ml-3" source={terminPic}></Image>
                         <TextInput
                             style={{ borderWidth: 0, fontSize: 17, color: 'black' }}
                             placeholder="Termin 6/10"
@@ -71,7 +69,7 @@ const EditProfile = ({ closeModal }) => {
                     </View>
 
                     <View className="flex-row m-5">
-                        <Image className="w-8 h-8 ml-3" source={jobPic}></Image>
+                        <Image className="w-7 h-7 ml-2" source={jobPic}></Image>
                         <TextInput
                             style={{ borderWidth: 0, fontSize: 17, color: 'black' }}
                             placeholder="Sommarjobb, Trainee"
@@ -85,7 +83,7 @@ const EditProfile = ({ closeModal }) => {
                     </View>
 
                     <View className="flex-row m-5">
-                        <Image className="w-8 h-8 ml-3" source={emptyHeart}></Image>
+                        <Image className="w-7 h-7 ml-3" source={emptyHeart}></Image>
                         <TextInput
                             style={{ borderWidth: 0, fontSize: 17, color: 'black' }}
                             placeholder="SQL, React, Javascript"
@@ -97,15 +95,15 @@ const EditProfile = ({ closeModal }) => {
 
             </View>
 
-            <View className="flex items-center">
-                <TouchableOpacity className=" bg-black w-20 h-8 flex justify-center items-center rounded mt-20" onPress={closeModal}>
-                    <Text className="text-white text-sm">Spara</Text>
+            <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'center', paddingBottom: 50 }}>
+                <TouchableOpacity style={{ backgroundColor: '#ececec', width: 150, height: 40, borderRadius: 8, justifyContent: 'center', alignItems:'center' }} onPress={closeModal}>
+                    <Text style={{ color: 'black', fontSize:15 }}>Save</Text>
                 </TouchableOpacity>
             </View>
 
-        </View>
+            
 
-        </LinearGradient>
+        </View>
 
     );
 };
