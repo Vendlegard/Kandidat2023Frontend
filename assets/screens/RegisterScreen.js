@@ -18,7 +18,7 @@
 import React, {useEffect, useState} from "react";
 import {View, Text, TextInput, Button, TouchableOpacity, Image}  from "react-native";
 import leftArrow from '../images/leftArrow.png';
-import {Picker} from "@react-native-picker/picker";
+
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 //create a basic component

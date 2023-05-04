@@ -4,9 +4,10 @@ import JobCard from "../components/JobCard";
 
 
 
-export default function App() {
+export default function App({userInfo}) {
   const [query, setQuery] = useState('');
   const [allJobs, setALLJobs] = useState([]); // [1
+  const [likedJobs, setLikedJobs] = useState([]);
 
   const handleSearch = text => {
     setQuery(text);
@@ -35,10 +36,43 @@ export default function App() {
     }
   };
 
+  const fetchLikedJobs = async () => {
+    try {
+        const response = await fetch("http://127.0.0.1:8000/api/fetchLikedJobs", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                id: userInfo.userID,
+            }
+            )
+        });
+        const data = await response.json();
+        setLikedJobs(data.liked_jobs)
+    } catch (error) {
+        console.error(error);
+    }
+};
+
   useState(() => {
     console.log("fetch Jobs called");
     fetchALLJobs();
   }, []);
+
+  useState(
+    () => {
+        fetchLikedJobs();
+    });
+
+    allJobs.map((job) => {
+      const isJobLiked = likedJobs.some(likedJob => likedJob.jobID === job.jobID);
+      console.log(job.jobName, isJobLiked)
+      if (isJobLiked){
+          job.liked=true
+      }
+    });
+
 
   return (
     <View style={styles.container}>
@@ -53,6 +87,7 @@ export default function App() {
         {allJobs.map(job => (
           <JobCard
               jobIcon={job.employerImage}
+              userID={userInfo.userID}
               jobID={job.jobID}
               jobTitle={job.jobName}
               location={job.location}
@@ -60,7 +95,7 @@ export default function App() {
               wage={"300kr/h"}
               duration={"3 months"}
               experience={"1 year"}
-              liked={false}
+              liked={job.liked}
             />
         ))}
       </ScrollView>
