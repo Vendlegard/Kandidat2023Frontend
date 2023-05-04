@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { StyleSheet, Text, TextInput, View, FlatList, ScrollView } from 'react-native';
 import JobCard from "../components/JobCard";
 
@@ -11,15 +11,7 @@ export default function App({userInfo}) {
 
   const handleSearch = text => {
     setQuery(text);
-
-    const filteredData = jobs.filter(job =>
-      job.title.toLowerCase().includes(text.toLowerCase()) ||
-      job.description.toLowerCase().includes(text.toLowerCase()) ||
-      job.salary.toLowerCase().includes(text.toLowerCase())
-    );
-
-    setFilteredJobs(filteredData);
-  };
+    };
 
   const fetchALLJobs = async () => {
     try {
@@ -31,6 +23,7 @@ export default function App({userInfo}) {
       });
       const data = await response.json();
       setALLJobs(data.all_jobs);
+      console.log(data.all_jobs);
     } catch (error) {
       console.error(error);
     }
@@ -65,13 +58,40 @@ export default function App({userInfo}) {
         fetchLikedJobs();
     });
 
+
+  const [jobTitles, setJobTitles] = useState([]);
     allJobs.map((job) => {
       const isJobLiked = likedJobs.some(likedJob => likedJob.jobID === job.jobID);
-      console.log(job.jobName, isJobLiked)
       if (isJobLiked){
           job.liked=true
       }
     });
+
+    const [filtered, setFiltered] = useState(allJobs);
+
+    const jobTitlesArray = allJobs.map((job) => job.jobName);
+
+    const [arrayToFilter, setArrayToFilter] = useState(jobTitlesArray);
+
+    const [jobsToShow, setJobsToShow] = useState(allJobs);
+
+    const filteredJobs = (query) => {
+      const filtered = jobTitlesArray.filter((job) => job.toLowerCase().includes(query.toLowerCase()));
+      setArrayToFilter(filtered);
+      for(let i = 0; i < filtered.length; i++){
+        for(let j = 0; j < allJobs.length; j++){
+          if(filtered[i] === allJobs[j].jobName){
+            setJobsToShow([...jobsToShow, allJobs[j]]);
+          }
+        }
+      }
+      return console.log(jobsToShow);
+  }
+
+    useEffect(() => {
+      filteredJobs(query);
+    }, [query]);
+
 
 
   return (
@@ -84,7 +104,7 @@ export default function App({userInfo}) {
       />
       <ScrollView>
 
-        {allJobs.map(job => (
+        {allJobs.filter(job => job.jobName.includes(query)).map(job => (
           <JobCard
               jobIcon={job.employerImage}
               userID={userInfo.userID}
