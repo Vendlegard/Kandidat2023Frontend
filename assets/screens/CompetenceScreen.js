@@ -36,7 +36,7 @@ const CompetenceScreen = ({finishedToApp, userInfo}) => {
 
 
     return (
-        <View className="flex-1 items-center justify-center">
+        <View style={{flex: 1, alignItems: "center", justifyContent: "center"}}>
             <ScrollView>
             <InterestComponent
             finishedEmit={finishedRecevied}
