@@ -145,7 +145,11 @@ const ProfileScreen = ({ userInfo, isLoggedOut, emitToBottomNav }) => {
 
                 <Modal visible={showModal} animationType='slide'>
                     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                        {isProfileEdited && <EditProfile {...isProfileEdited} closeModal={closeModal} />}
+                        {isProfileEdited && <EditProfile
+                            competencies={userComp}
+                            interests={userInterest}
+                            userInfo={userInfo}
+                            {...isProfileEdited} closeModal={closeModal} />}
                         <TouchableOpacity onPress={closeModal}>
 
                         </TouchableOpacity>
