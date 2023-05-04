@@ -85,6 +85,11 @@ export default function App() {
         console.log("updateUserInfo called in app.js funcitoon updateUserInfoFromRegister with the value", userInfo);
     }
 
+    const comesFromRegister = (value) => {
+        setComesFromLogin(value);
+        console.log("comesFromRegister called in app.js with the value", value);
+    }
+
 
     function finished(){
         console.log("finshed called in app.js");
@@ -174,6 +179,7 @@ export default function App() {
                     updateRegisterState={updateRegisterStatus}
                     firstTimeLoggingIn={updateFirstTimeLoggingIn}
                     userInfoStore={updateUserInfoFromRegister}
+                    comesFromLogin={comesFromRegister}
                 />
             ) : firstTimeLoggingIn ? (
                 <CompetenceScreen

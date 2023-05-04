@@ -22,9 +22,15 @@ import leftArrow from '../images/leftArrow.png';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 //create a basic component
-const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn, userInfoStore}) => {
+const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn, userInfoStore, comesFromLogin}) => {
 
     const [possibleExamDates, setPossibleExamDates] = useState(["VT2023", "HT2023", "VT2024", "HT2024", "VT2025", "HT2025", "VT2026", "HT2027"]);
+
+    useState(
+        () => {
+            comesFromLogin(false);
+        }
+    )
 
 
 
