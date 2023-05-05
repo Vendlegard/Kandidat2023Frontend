@@ -20,6 +20,7 @@ import {View, Text, TextInput, Button, TouchableOpacity, Image}  from "react-nat
 import InterestAndCompetenceButtonComponent from "./InterestAndCompetenceButtonComponent";
 import leftArrow from '../images/leftArrow.png';
 import { setStatusBarBackgroundColor } from "expo-status-bar";
+import { useRef } from "react";
 
 //create a basic component
 const InterestComponent = ({finishedEmit, userInfo}) => {
@@ -182,7 +183,7 @@ const InterestComponent = ({finishedEmit, userInfo}) => {
                 </View>
                 {allCompetencies.map((currElement, index) => (
                         <InterestAndCompetenceButtonComponent
-                        compOrInterestName={currElement}
+                            compOrInterestName={currElement}
                             index={index}
                             addToLookingFor={userCompetenciesAdd}
                         />
