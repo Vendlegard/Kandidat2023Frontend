@@ -240,8 +240,8 @@ const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn, userInfoStore,
                 value={password}
             >
             </TextInput>
-            <TouchableOpacity className="bg-black w-22 h-9 justify-center items-center rounded-xl mt-12" onPress={() => registerUser(emailAdress, password, firstName, lastName, university, education)}>
-                <Text className="text-white text-sm">{t('signup')}</Text>
+            <TouchableOpacity className="justify-center items-center mt-12" style={{backgroundColor: '#ececec', width: 150, height: 40, borderRadius: 8, justifyContent: 'center', alignItems:'center'}} onPress={() => registerUser(emailAdress, password, firstName, lastName, university, education)}>
+                <Text style={{color: 'black', fontSize:15}}>{t('signup')}</Text>
             </TouchableOpacity>
             {serverResponse !== "" && ( // render the server response if it's not an empty string
                 <Text>Server response: {serverResponse}</Text>
@@ -253,3 +253,4 @@ const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn, userInfoStore,
 
 }
 export default RegisterScreen;
+

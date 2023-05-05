@@ -144,15 +144,15 @@ const LoginScreen = ({ updateLoggedInState, updateRegisterState, updateUserInfo 
             />
 
             <View className="mt-10" >
-                    <TouchableOpacity style={{backgroundColor: 'black', width: 130, height:40, borderWidth:1, borderColor:'808080'}} className="justify-center items-center rounded-xl" onPress={() => handleLogin(emailAdressAuth,passwordAuth)}>
-                        <Text style={{color: 'white'}}>{t('login')}</Text>
+                    <TouchableOpacity style={{backgroundColor: '#ececec', width: 150, height: 40, borderRadius: 8, justifyContent: 'center', alignItems:'center'}} className="justify-center items-center rounded-xl" onPress={() => handleLogin(emailAdressAuth,passwordAuth)}>
+                        <Text style={{color: 'black', fontSize:15}}>{t('login')}</Text>
                     </TouchableOpacity>
             </View>
 
             <View className="items-center -mb-10">
                 <Text style={{fontSize: 20, color: '#A9A9A9', marginTop:40, marginBottom:5}} > {t('noAccount')} </Text>
-                <TouchableOpacity style={{backgroundColor: 'black', width: 130, height:40, borderWidth:1, borderColor:'808080'}} className="justify-center items-center rounded-xl mt-2"onPress={() => handleRegister()}>
-                    <Text style={{color: 'white'}}>{t('signup')}</Text>
+                <TouchableOpacity style={{backgroundColor: '#ececec', width: 150, height: 40, borderRadius: 8, justifyContent: 'center', alignItems:'center'}} className="justify-center items-center rounded-xl mt-2"onPress={() => handleRegister()}>
+                    <Text style={{color: 'black', fontSize:15}}>{t('signup')}</Text>
                 </TouchableOpacity>
             </View>
 
