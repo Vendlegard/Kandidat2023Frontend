@@ -164,22 +164,22 @@ const ProfileScreen = ({ userInfo, isLoggedOut, emitToBottomNav }) => {
                 </View>
 
                 {/* Input Lärosäte  */}
-                <View className="flex-2 m-3 flex-col">
-                    <View className="flex flex-row items-center">
-                        <View className="m-8 items-center justify-center">
-                            <Text className="text-x1 font-bold">{t('welcomeMessage')}</Text>
+                <View className=" ">
+                    <View className="flex-row flex items-center m-3 justify-evenly mb-6 mt-6">
+                        <View className=" items-center justify-center">
+                            <Text className="text-x1 font-bold">{t('university')}</Text>
                             <Text className="text-x1">{userInfo.university}</Text>
                         </View>
-                        <View className="m-5 flex-col-reverse items-center justify-center bg-green-200">
+                        <View className="flex-col-reverse items-center justify-center bg-green-200">
                             <View className="h-20 border-l border-gray dark:border-gray">
                             </View>
                         </View>
 
 
                         {/* Input Termin */}
-                        <View className="items-center justify-center m-8">
-                            <Text className="text-x1 font-bold">Termin</Text>
-                            <Text className="text-x1">6/10</Text>
+                        <View className="items-center justify-center m-4">
+                        <Text className="text-x1 font-bold">{t('graduation')}</Text>
+                            <Text className="text-x1">2025</Text>
                         </View>
                     </View>
                 </View>
@@ -191,7 +191,7 @@ const ProfileScreen = ({ userInfo, isLoggedOut, emitToBottomNav }) => {
                 {/* Input min kompetenser */}
                 <View className="flex-2 m-7 flex-row items-center justify-center">
                     <View className="items-center justify-center">
-                        <Text className="text-x1 font-bold">Mina kompetenser </Text>
+                    <Text className="text-x1 font-bold">{t('competences')}</Text>
                         <View>
                             {chunkedUserComp.map((chunk, index) =>
                                 index < 1 || showAllComps ? (
@@ -207,7 +207,7 @@ const ProfileScreen = ({ userInfo, isLoggedOut, emitToBottomNav }) => {
                         </View>
                         <TouchableOpacity onPress={() => setShowAllComps(!showAllComps)}>
                             <Text style={styles.toggleButton}>
-                                <AntDesign name={showAllComps ? 'up' : 'down'} size={16} />{'Visa mer '}
+                                <AntDesign name={showAllComps ? 'up' : 'down'} size={16} />{t('showmore')}
                             </Text>
                         </TouchableOpacity>
                     </View>
@@ -220,7 +220,7 @@ const ProfileScreen = ({ userInfo, isLoggedOut, emitToBottomNav }) => {
                 {/* Input vad jag söker för jobb */}
                 <View className="flex-2 m-7 flex-row items-center justify-center">
                     <View className="items-center justify-center">
-                        <Text className="text-x1 font-bold">Jag söker</Text>
+                    <Text className="text-x1 font-bold">{t('employment')}</Text>
                         <View style={styles.containers}>
                             {userInterest.map((interest) => (
                                 <View style={styles.codeBlock}>
@@ -238,7 +238,7 @@ const ProfileScreen = ({ userInfo, isLoggedOut, emitToBottomNav }) => {
 
             <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'center', paddingBottom: 40 }}>
                 <TouchableOpacity style={{ backgroundColor: '#ececec', width: 150, height: 40, borderRadius: 8, justifyContent: 'center', alignItems:'center' }} onPress={handleLogout}>
-                    <Text style={{ color: 'black', fontSize:15 }}>Log out</Text>
+                    <Text style={{ color: 'black', fontSize:15 }}>{t('logout')}</Text>
                 </TouchableOpacity>
             </View>
 

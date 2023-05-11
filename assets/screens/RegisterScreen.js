@@ -18,12 +18,12 @@
 import React, {useEffect, useState} from "react";
 import {View, Text, TextInput, Button, TouchableOpacity, Image}  from "react-native";
 import leftArrow from '../images/leftArrow.png';
-
+import { useTranslation} from "react-i18next";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 //create a basic component
 const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn, userInfoStore, comesFromLogin}) => {
-
+    const { t, i18n } = useTranslation();
     const [possibleExamDates, setPossibleExamDates] = useState(["VT2023", "HT2023", "VT2024", "HT2024", "VT2025", "HT2025", "VT2026", "HT2027"]);
 
     useState(
@@ -178,12 +178,12 @@ const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn, userInfoStore,
 
            
             
-            <Text className = 'text-4xl m-4'>Create account</Text>
+            <Text className = 'text-4xl m-4'>{t('createAccount')}</Text>
 
             <TextInput
                 style = {{fontSize: 20, width: "75%", height: "4%", margin: "3%", borderRadius: 12,  backgroundColor: "#e3f1ff", paddingHorizontal:6,
                 shadowOffset: {width:0, height: 1}, shadowColor: '#000', shadowOpacity: 0.15, shadowRadius: 3}}
-                placeholder="First name"
+                placeholder={t('firstName')}
                 onChangeText={onChangeFirstName}
                 value={firstName}
             >
@@ -192,7 +192,7 @@ const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn, userInfoStore,
             <TextInput
                 style = {{fontSize: 20, width: "75%", height: "4%", margin: "3%", borderRadius: 12,  backgroundColor: "#e3f1ff", paddingHorizontal:6,
                 shadowOffset: {width:0, height: 1}, shadowColor: '#000', shadowOpacity: 0.15, shadowRadius: 3}}
-                placeholder="Last name"
+                placeholder={t('lastName')}
                 onChangeText={onChangeLastName}
                 value={lastName}
             >
@@ -201,7 +201,7 @@ const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn, userInfoStore,
             <TextInput
                 style = {{fontSize: 20, width: "75%", height: "4%", margin: "3%", borderRadius: 12,  backgroundColor: "#e3f1ff", paddingHorizontal:6,
                 shadowOffset: {width:0, height: 1}, shadowColor: '#000', shadowOpacity: 0.15, shadowRadius: 3}}
-                placeholder="University"
+                placeholder={t('university')}
                 onChangeText={onChangeUniversity}
                 value={university}
             >
@@ -210,7 +210,7 @@ const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn, userInfoStore,
             <TextInput
                 style = {{fontSize: 20, width: "75%", height: "4%", margin: "3%", borderRadius: 12,  backgroundColor: "#e3f1ff", paddingHorizontal:6,
                 shadowOffset: {width:0, height: 1}, shadowColor: '#000', shadowOpacity: 0.15, shadowRadius: 3}}
-                placeholder="Education"
+                placeholder={t('education')}
                 onChangeText={onChangeEducation}
                 value={education}
             >
@@ -219,7 +219,7 @@ const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn, userInfoStore,
             <TextInput
                 style = {{fontSize: 20, width: "75%", height: "4%", margin: "3%", borderRadius: 12,  backgroundColor: "#e3f1ff", paddingHorizontal:6,
                     shadowOffset: {width:0, height: 1}, shadowColor: '#000', shadowOpacity: 0.15, shadowRadius: 3}}
-                placeholder="Exam date"
+                placeholder={t('graduation')}
                 onChangeText={onChangeExamDate}
                 value={examDate}
             >
@@ -228,20 +228,20 @@ const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn, userInfoStore,
             <TextInput
                 style = {{fontSize: 20, width: "75%", height: "4%", margin: "3%", borderRadius: 12,  backgroundColor: "#e3f1ff", paddingHorizontal:6,
                 shadowOffset: {width:0, height: 1}, shadowColor: '#000', shadowOpacity: 0.15, shadowRadius: 3}}
-                placeholder="Email adress"
+                placeholder="Email"
                 onChangeText={onChangeEmailAdress}
                 value={emailAdress}
             />
             <TextInput
                 style = {{fontSize: 20, width: "75%", height: "4%", margin: "3%", borderRadius: 12,  backgroundColor: "#e3f1ff", paddingHorizontal:6,
                 shadowOffset: {width:0, height: 1}, shadowColor: '#000', shadowOpacity: 0.15, shadowRadius: 3}}
-                placeholder="Password"
+                placeholder={t('password')}
                 onChangeText={onChangePassword}
                 value={password}
             >
             </TextInput>
-            <TouchableOpacity className="bg-black w-20 h-9 justify-center items-center rounded-xl mt-12" onPress={() => registerUser(emailAdress, password, firstName, lastName, university, education)}>
-                <Text className="text-white text-sm">SIGNUP</Text>
+            <TouchableOpacity className="justify-center items-center mt-12" style={{backgroundColor: '#ececec', width: 150, height: 40, borderRadius: 8, justifyContent: 'center', alignItems:'center'}} onPress={() => registerUser(emailAdress, password, firstName, lastName, university, education)}>
+                <Text style={{color: 'black', fontSize:15}}>{t('signup')}</Text>
             </TouchableOpacity>
             {serverResponse !== "" && ( // render the server response if it's not an empty string
                 <Text>Server response: {serverResponse}</Text>
@@ -253,3 +253,4 @@ const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn, userInfoStore,
 
 }
 export default RegisterScreen;
+

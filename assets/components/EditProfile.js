@@ -7,8 +7,11 @@ import coursePic from '../images/coursePic.png'
 import emptyHeart from '../images/emptyHeart.png'
 import terminPic from '../images/terminPic.png'
 import profile from '../images/profile.png'
+import { useTranslation} from "react-i18next";
 
 const EditProfile = ({ closeModal, interests, competencies, userInfo }) => {
+
+    const { t, i18n } = useTranslation();
     return (
 
 
@@ -52,7 +55,7 @@ const EditProfile = ({ closeModal, interests, competencies, userInfo }) => {
                         <Image className="w-7 h-7 ml-3" source={terminPic}></Image>
                         <TextInput
                             style={{ borderWidth: 0, fontSize: 17, color: 'black' }}
-                            placeholder="Termin 6/10"
+                            placeholder="2025"
                             placeholderTextColor="black"
                         />
                     </View>
@@ -95,7 +98,7 @@ const EditProfile = ({ closeModal, interests, competencies, userInfo }) => {
 
             <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'center', paddingBottom: 50 }}>
                 <TouchableOpacity style={{ backgroundColor: '#ececec', width: 150, height: 40, borderRadius: 8, justifyContent: 'center', alignItems:'center' }} onPress={closeModal}>
-                    <Text style={{ color: 'black', fontSize:15 }}>Save</Text>
+                    <Text style={{ color: 'black', fontSize:15 }}>{t('save')}</Text>
                 </TouchableOpacity>
             </View>
 

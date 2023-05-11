@@ -7,6 +7,7 @@ import vattenfallPic from '../images/vattenfallPic.png'
 import AFRY from '../images/AFRY.png'
 import consid from '../images/consid.png'
 import { useFocusEffect } from '@react-navigation/native';
+import { useTranslation} from "react-i18next";
 
 
 
@@ -15,6 +16,7 @@ const LikeScreen = ({userInfo}) => {
 
 
     const [searchText, setSearchText] = useState("");
+    const { t, i18n } = useTranslation();
 
     const handleSearchTextChange = (text) => {
         setSearchText(text);
@@ -123,12 +125,13 @@ const LikeScreen = ({userInfo}) => {
 
                         <View className="h-10 w-24 rounded-xl bg-lightgreen
                          flex-0 justify-center items-center">
-                        <Text className="font-bold">Liked</Text>
+                        
+                        <Text className="text-x1 font-bold">{t('liked')}</Text>
                         </View>
                         :
                         <View className="h-10 w-24 rounded-xl
                          flex-0 justify-center items-center">
-                        <Text className="font-bold">Liked</Text>
+                        <Text className="font-bold">{t('liked')}</Text>
                         </View>
                     }
                 </View>
@@ -138,12 +141,12 @@ const LikeScreen = ({userInfo}) => {
                     {showLikedJobs ?
                         <View className="h-10 w-24 rounded-xl ml-3
                          flex-0 justify-center items-center">
-                            <Text className="font-bold">Not Liked</Text>
+                            <Text className="font-bold">{t('disliked')}</Text>
                         </View>
                         :
                         <View className="h-10 w-24 rounded-xl bg-lightred ml-3
                          flex-0 justify-center items-center">
-                            <Text className="font-bold">Not Liked</Text>
+                            <Text className="font-bold">{t('disliked')}</Text>
                         </View>
                     }
                 </View>

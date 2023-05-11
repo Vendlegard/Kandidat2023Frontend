@@ -102,8 +102,8 @@ const JobCard = ({ jobIcon, jobTitle, employer, location, date, wage, duration, 
               <Text className="text-lg ml-4 font-bold mt-3" style={{ maxWidth: '70%' }}>{jobTitle}</Text>
               <TouchableOpacity onPress={heartPressHandler} style={{ position:'', top: 5, right: 5 }}>
             {
-              heartPressed ? <AntDesign name='heart' size={28} /> :
-                <AntDesign name='hearto' size={28} />
+              heartPressed ? <AntDesign name='heart' size={28} color='#fd9090'/> :
+                <AntDesign name='hearto' size={28} color='#fd9090' />
             }
           </TouchableOpacity>
             </View>

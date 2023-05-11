@@ -1,3 +1,22 @@
 {
-  "welcomeMessage": "Welcome to React"
+  "welcomeMessage": "Welcome to React",
+  "liked": "Liked",
+  "disliked": "Not Liked",
+  "graduation": "Year of Graduation",
+  "university": "University",
+  "competences": "Competencies",
+  "employment": "Type of employment",
+  "showmore": "Show more",
+  "logout": "Log out",
+  "save": "Save",
+  "searchJobs": "Search for jobs...",
+  "login": "Log in",
+  "signup": "Sign up",
+  "signIn": "Please sign in with",
+  "password": "Password",
+  "noAccount": "Don't have an account yet?",
+  "createAccount": "Create account",
+  "firstName": "First Name",
+  "lastName": "Last name",
+  "education": "Education"
 }
