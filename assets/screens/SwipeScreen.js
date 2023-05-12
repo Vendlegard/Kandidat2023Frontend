@@ -1,5 +1,5 @@
 import React, {useState, useRef} from "react";
-import {View, Text, SafeAreaView, Image, Pressable, Modal} from "react-native";
+import {View, Text, SafeAreaView, Image, Pressable, Modal, Linking} from "react-native";
 import SEB from "../images/SEB.jpeg";
 import vattenfall from "../images/vattenfall.jpeg";
 import sweco from "../images/sweco.png"
@@ -63,6 +63,11 @@ const SwipeScreen = ({userInfo}) => {
     const [notLikedIDs , setNotLikedIDs] = useState([]);
 
     const [likedID, setLikedID] = useState("");
+
+
+    const goToWebsite = () => {
+        Linking.openURL('https://www.stssektionen.com/');
+      };
 
 
 
@@ -239,7 +244,7 @@ const SwipeScreen = ({userInfo}) => {
     {/* Modal with additional info when clicking a card*/}
     <Modal visible={showModal} animationType='slide'>
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        {selectedJob && <JobInfo {...selectedJob} closeModal={closeModal} />}
+        {selectedJob && <JobInfo {...selectedJob} closeModal={closeModal} goToWebsite={goToWebsite}/>}
             <TouchableOpacity onPress={closeModal}>
             </TouchableOpacity>
         </View>

@@ -1,6 +1,6 @@
 import { AntDesign } from '@expo/vector-icons';
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, TouchableOpacity, Modal } from 'react-native';
+import { View, Text, Image, TouchableOpacity, Modal, Linking} from 'react-native';
 import JobInfo from './JobInfo';
 
 const JobCard = ({ jobIcon, jobTitle, employer, location, date, wage, duration, experience, liked, jobID, userID }) => {
@@ -15,7 +15,12 @@ const JobCard = ({ jobIcon, jobTitle, employer, location, date, wage, duration, 
     duration,
     experience,
     closeModal, // add closeModal function to selectedJob state
+    goToWebsite
   });
+
+  const goToWebsite = () => {
+    Linking.openURL('https://www.stssektionen.com/');
+  };
 
   const onPressHandler = () => {
     setSelectedJob({ jobIcon, jobTitle, employer, location, date, wage, duration, experience });
@@ -118,7 +123,7 @@ const JobCard = ({ jobIcon, jobTitle, employer, location, date, wage, duration, 
 
       <Modal visible={showModal} animationType='slide'>
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-          {selectedJob && <JobInfo {...selectedJob} closeModal={closeModal} />}
+          {selectedJob && <JobInfo {...selectedJob} closeModal={closeModal} goToWebsite={goToWebsite} />}
           <TouchableOpacity onPress={closeModal}>
 
           </TouchableOpacity>
