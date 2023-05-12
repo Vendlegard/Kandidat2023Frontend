@@ -137,11 +137,22 @@ const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn, userInfoStore,
                 }),
             });
             const data = await response.json();
-            setServerResponse(data.message);
-            firstTimeLoggingIn(true);
-            updateRegisterState(false);
-            authenticateUser(emailAddressToSend, passwordToSend);
-            setIsMounted(true);
+
+            if(data.message!="already exists"){
+                setServerResponse(data.message);
+                firstTimeLoggingIn(true);
+                updateRegisterState(false);
+                authenticateUser(emailAddressToSend, passwordToSend);
+                setIsMounted(true);
+
+                console.log("här skapas en användare: ", data.message);
+            
+
+            }
+            else {
+            alert("Email already exists");
+            }
+               
         } catch (error) {
             console.error(error);
         }
