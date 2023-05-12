@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Image, ant } from 'react-native';
+import { View, Text, TouchableOpacity, Image, ant, Linking } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import cross from '../images/cross.png'
 import { AntDesign } from '@expo/vector-icons';
@@ -8,7 +8,9 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 const JobInfo = ({ jobIcon, jobTitle, employer, location, date, closeModal }) => {
 
-
+    const handlePress = () => {
+      Linking.openURL('https://www.stssektionen.com/');
+    };
 
   return (
     <LinearGradient
@@ -92,7 +94,7 @@ const JobInfo = ({ jobIcon, jobTitle, employer, location, date, closeModal }) =>
 
 
     <View className="flex items-center">
-      <TouchableOpacity className=" bg-lightblue w-20 h-8 flex justify-center items-center rounded mt-10">
+      <TouchableOpacity className=" bg-lightblue w-20 h-8 flex justify-center items-center rounded mt-10" onPress={handlePress()}>
         <Text className="text-white text-sm">Ansök här</Text>
       </TouchableOpacity>
     </View>
