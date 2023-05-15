@@ -3,6 +3,8 @@ import { View, Text, TextInput, TouchableOpacity, Image, Button, StyleSheet, Ani
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import peaceSign from '../images/peaceSign.png'
 import { useTranslation } from "react-i18next";
+import SvCircle from '../images/SvCircle.png';
+import UkCircle from '../images/UkCircle.png';
 
 
 const StartScreen = ({ goToLogin, goToCreate }) => {
@@ -12,6 +14,7 @@ const StartScreen = ({ goToLogin, goToCreate }) => {
   const INITIAL_OPACITY = 0;
   const fadeAnim1 = React.useRef(new Animated.Value(INITIAL_OPACITY)).current;
   const fadeAnim2 = React.useRef(new Animated.Value(INITIAL_OPACITY)).current;
+  const [showSwedishFlag, setShowSwedishFlag] = useState(false);
 
   React.useEffect(() => {
     // Animate the opacity of the first text from 0 to 1 over 1000 milliseconds
@@ -40,9 +43,27 @@ const StartScreen = ({ goToLogin, goToCreate }) => {
     goToCreate(value);
   }
 
+  const handleLanguageSelect = () => {
+    if (i18n.language === 'en') {
+        i18n.changeLanguage('sv');
+        setShowSwedishFlag(false);
+    } else {
+        i18n.changeLanguage('en');
+        setShowSwedishFlag(true);
+    }
+}
+
 
   return (
+
     <View style={styles.container}>
+
+      <View>
+        <TouchableOpacity style={styles.languageButton} onPress={handleLanguageSelect}>
+          {showSwedishFlag ? <Image source={SvCircle} style={{ width: 30, height: 30 }} /> : <Image source={UkCircle} style={{ width: 30, height: 30 }} />}
+        </TouchableOpacity>
+
+      </View>
       <View style={styles.logoContainer}>
         <Animated.Text style={[styles.LogoText, { opacity: fadeAnim1 }]}>Swipe</Animated.Text>
         <Image source={peaceSign} className="w-11 h-16 items-center m-2"></Image>
@@ -118,7 +139,13 @@ const styles = StyleSheet.create({
     fontSize: '55',
     fontWeight: '500',
 
-  }
+  },
+  languageButton: {
+    position: 'relative',
+    bottom:90,
+    left: 170,
+    zIndex: 999, 
+  },
 })
 
 export default StartScreen;

@@ -18,5 +18,8 @@
   "createAccount": "Skapa konto",
   "firstName": "Förnamn",
   "lastName": "Efternamn",
-  "education": "Utbildning"
+  "education": "Utbildning",
+  "welcomeToJob": "Välkommen till oss på",
+  "jobDescription": "Jobbeskrivning",
+  "apply": "Ansök här"
 }

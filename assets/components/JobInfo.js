@@ -5,16 +5,17 @@ import cross from '../images/cross.png'
 import { AntDesign } from '@expo/vector-icons';
 import leftArrow from '../images/leftArrow.png'
 import { LinearGradient } from 'expo-linear-gradient';
+import { useTranslation } from "react-i18next";
 
 const JobInfo = ({ jobIcon, jobTitle, employer, location, date, closeModal, goToWebsite }) => {
-
+  const { t, i18n } = useTranslation();
 
 
   return (
     <LinearGradient
-      colors={['#e3f1ff', '#ecf1f6', '#ffffff']}
+      colors={['#e3e3e3', '#ededed', '#ffffff']}
       start={{ x: 0, y: 0 }}
-      end={{ x: 0.5, y: 0.5 }}
+      end={{ x: 0.3, y: 0.3 }}
       style={{ flex: 1 }}
     >
 
@@ -33,7 +34,8 @@ const JobInfo = ({ jobIcon, jobTitle, employer, location, date, closeModal, goTo
           <Image source={{uri: jobIcon}} className="w-20 h-20" />
         </View>
         <View className="justify-center items-center mt-5">
-          <Text className="text-lg font-bold"> Välkommer till oss på </Text>
+          <Text className="text-lg font-bold"> {t('welcomeToJob')} </Text>
+          <Text>{employer}</Text>
         </View>
         <View className="mt-5 px-5">
           <View className="flex flex-row mb-1">
@@ -61,7 +63,7 @@ const JobInfo = ({ jobIcon, jobTitle, employer, location, date, closeModal, goTo
     </View>
 
     <View className="justify-center items-center mt-5 mb-3">
-      <Text className="text-lg font-bold">Jobbbeskrivning</Text>
+      <Text className="text-lg font-bold">{t('jobDescription')}</Text>
     </View>
 
     <View className="mt-3 px-5 h-80">
@@ -69,18 +71,7 @@ const JobInfo = ({ jobIcon, jobTitle, employer, location, date, closeModal, goTo
         <View className="">
           <Text>
             Detta är bara för att se hur stylingen ska se ut och inte vår beskrivning av jobbet
-            Hejsan Hoppsan vi söker dig som är glad blablabla. Vi ska jobba med python och javascript blablabla.
-            Hej och hå vi vill ha en glad person trevlig och rolig och blablabla {'\n'}{'\n'}Vi kommer att arbeta
-            tillsammans i 8 spännande veckor blablabla. Kontoret ligger i stockholm, kul blabla
-            {'\n'}{'\n'}Också så kommer vi att ha jättekul hej och hå vi jobbar så mcyket blablablaoch vi
-            har så trevligt tillsammans wow vad kul det ska bli välkommen till oss Hejsan Hoppsan vi söker dig som är glad blablabla. Vi ska jobba med python och javascript blablabla.
-            Hej och hå vi vill ha en glad person trevlig och rolig och blablabla {'\n'}{'\n'}Vi kommer att arbeta
-            tillsammans i 8 spännande veckor blablabla. Kontoret ligger i stockholm, kul blabla
-            {'\n'}{'\n'}Också så kommer vi att ha jättekul hej och hå vi jobbar så mcyket blablablaoch vi
-            har så trevligt tillsammans wow vad kul det ska bli välkommen till oss. Hej och hå vi vill ha en glad person trevlig och rolig och blablabla {'\n'}{'\n'}Vi kommer att arbeta
-            tillsammans i 8 spännande veckor blablabla. Kontoret ligger i stockholm, kul blabla
-            {'\n'}{'\n'}Också så kommer vi att ha jättekul hej och hå vi jobbar så mcyket blablablaoch vi
-            har så trevligt tillsammans wow vad kul det ska bli välkommen till oss
+        
           </Text>
 
         </View>
@@ -92,8 +83,8 @@ const JobInfo = ({ jobIcon, jobTitle, employer, location, date, closeModal, goTo
 
 
     <View className="flex items-center">
-      <TouchableOpacity className=" bg-lightblue w-20 h-8 flex justify-center items-center rounded mt-10" onPress={goToWebsite}>
-        <Text className="text-white text-sm">Ansök här</Text>
+      <TouchableOpacity style={{width: 150, height: 40, borderRadius: 8}} className=" bg-appBlue flex justify-center items-center rounded mt-10" onPress={goToWebsite}>
+        <Text style={{ color: 'black', fontSize: 15 }}>{t('apply')}</Text>
       </TouchableOpacity>
     </View>
 

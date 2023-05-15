@@ -24,8 +24,8 @@ const Navigator = ({ userInfo, isLoggedOut, emitToAppJs }) => {
   }
 
   return (
-    <NavigationContainer className='b'>
-      <Tab.Navigator>
+    <NavigationContainer className='b' >
+      <Tab.Navigator style={{ marginBottom: 10 }}>
         <Tab.Screen name='Swipe'
           children={() => <SwipeScreen userInfo={userInfo} />}
           options={{

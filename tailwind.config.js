@@ -13,9 +13,10 @@ module.exports = {
       'pink': '#FFC0CB',
       'purple': '#E6E6FA',
       'lightgray': '#f6f6f6',
-      'lightblue':'#9dc5d5',
+      'lightblue':'#e3f1ff',
       'lightred': '#FECACA',
-      'lightgreen': '#BBF7D0'
+      'lightgreen': '#BBF7D0',
+      'appBlue': '#e3f1ff'
 
     }
   },

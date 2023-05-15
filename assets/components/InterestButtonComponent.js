@@ -1,7 +1,8 @@
 import {Text, TouchableOpacity, View, styles} from "react-native";
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 
-const InterestAndCompetenceButtonComponent = ({compOrInterestName, addToLookingFor, index }) => {
+const InterestButtonComponent = ({compOrInterestName, addToLookingFor, index, isAdded }) => {
+
 
     const [buttonColor, setButtonColor] = useState('white');
     const [borderColor, setBorderColor] = useState('#bcbcbc')
@@ -18,19 +19,28 @@ const InterestAndCompetenceButtonComponent = ({compOrInterestName, addToLookingF
             setButtonColor('white')
             setBorderColor('#bcbcbc')
         }
-        
+
         if(interestAdded){
             console.log(interestToAdd + " already added to profile");
             return;
         }
         console.log(interestToAdd + " added to profile");
         addToLookingFor(interestToAdd);
-        //setInterestAdded(true);
     }
 
     function isEven(n) {
         return n % 2 == 0;
     }
+
+    useEffect(() => {
+        if(isAdded){
+            setButtonColor('#e3f1ff')
+            setBorderColor('#95caff')
+        }
+    })
+
+
+
 
     return(
         <View className="">
@@ -61,4 +71,4 @@ const InterestAndCompetenceButtonComponent = ({compOrInterestName, addToLookingF
         )
 }
 
-export default InterestAndCompetenceButtonComponent;
+export default InterestButtonComponent;

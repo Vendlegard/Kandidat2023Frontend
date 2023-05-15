@@ -3,11 +3,10 @@ import { View, Text, TouchableOpacity, StyleSheet, Dimensions, TextInput, Image,
 import profile from '../images/profile.png'
 import { useFocusEffect } from "@react-navigation/native";
 import { AntDesign, Ionicons, Entypo, MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'
-import CompetenceScreen from "./CompetenceScreen";
-import LoginScreen from "./LoginScreen";
 import EditProfile from '../components/EditProfile';
-import { useTranslation} from "react-i18next";
-import LanguageSwitcher from "../components/LanguageSwitcher";
+import { useTranslation } from "react-i18next";
+import SvCircle from '../images/SvCircle.png';
+import UkCircle from '../images/UkCircle.png';
 
 
 
@@ -15,6 +14,7 @@ const ProfileScreen = ({ userInfo, isLoggedOut, emitToBottomNav }) => {
     const { t, i18n } = useTranslation();
     const [isProfileEdited, setIsProfileEdited] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const [showSwedishFlag, setShowSwedishFlag] = useState(false);
     // const bubble1Position = useRef(new Animated.ValueXY({ x: 0, y: 0 })).current;
     // const bubble2Position = useRef(new Animated.ValueXY({ x: 10, y: 30 })).current;
     // const bubble3Position = useRef(new Animated.ValueXY({ x: 50, y: -20 })).current;
@@ -86,6 +86,16 @@ const ProfileScreen = ({ userInfo, isLoggedOut, emitToBottomNav }) => {
         }
     };
 
+    const handleLanguageSelect = () => {
+        if (i18n.language === 'en') {
+            i18n.changeLanguage('sv');
+            setShowSwedishFlag(false);
+        } else {
+            i18n.changeLanguage('en');
+            setShowSwedishFlag(true);
+        }
+    };
+
     const getUserInterest = async () => {
         try {
             const response = await fetch("http://127.0.0.1:8000/api/getInterest", {
@@ -132,29 +142,16 @@ const ProfileScreen = ({ userInfo, isLoggedOut, emitToBottomNav }) => {
         <View className="flex-1 bg-white">
 
 
-            <View style={{ marginBottom: 10 }} className="flex-1">
+            <View className="flex-1">
 
+                <View>
+                    <TouchableOpacity style={{ marginLeft: 380, marginBottom: 60 }} onPress={handleLanguageSelect}>
+                        {showSwedishFlag ? <Image source={SvCircle} style={{ width: 30, height: 30 }} /> : <Image source={UkCircle} style={{ width: 30, height: 30 }} />}
+                    </TouchableOpacity>
+
+                </View>
 
                 {/* Namn, bild och universitetsprogram main ProfileScreen */}
-
-
-                <TouchableOpacity style={{ marginLeft: 380, marginBottom: 60 }} onPress={handleEditProfile}>
-                    <MaterialCommunityIcons name="cog" size={35} color="gray" />
-                </TouchableOpacity>
-
-
-                <Modal visible={showModal} animationType='slide'>
-                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                        {isProfileEdited && <EditProfile
-                            competencies={userComp}
-                            interests={userInterest}
-                            userInfo={userInfo}
-                            {...isProfileEdited} closeModal={closeModal} />}
-                        <TouchableOpacity onPress={closeModal}>
-
-                        </TouchableOpacity>
-                    </View>
-                </Modal>
 
 
                 <View className="justify-center items-center">
@@ -178,7 +175,7 @@ const ProfileScreen = ({ userInfo, isLoggedOut, emitToBottomNav }) => {
 
                         {/* Input Termin */}
                         <View className="items-center justify-center m-4">
-                        <Text className="text-x1 font-bold">{t('graduation')}</Text>
+                            <Text className="text-x1 font-bold">{t('graduation')}</Text>
                             <Text className="text-x1">2025</Text>
                         </View>
                     </View>
@@ -191,7 +188,7 @@ const ProfileScreen = ({ userInfo, isLoggedOut, emitToBottomNav }) => {
                 {/* Input min kompetenser */}
                 <View className="flex-2 m-7 flex-row items-center justify-center">
                     <View className="items-center justify-center">
-                    <Text className="text-x1 font-bold">{t('competences')}</Text>
+                        <Text className="text-x1 font-bold">{t('competences')}</Text>
                         <View>
                             {chunkedUserComp.map((chunk, index) =>
                                 index < 1 || showAllComps ? (
@@ -220,7 +217,7 @@ const ProfileScreen = ({ userInfo, isLoggedOut, emitToBottomNav }) => {
                 {/* Input vad jag söker för jobb */}
                 <View className="flex-2 m-7 flex-row items-center justify-center">
                     <View className="items-center justify-center">
-                    <Text className="text-x1 font-bold">{t('employment')}</Text>
+                        <Text className="text-x1 font-bold">{t('employment')}</Text>
                         <View style={styles.containers}>
                             {userInterest.map((interest) => (
                                 <View style={styles.codeBlock}>
@@ -236,9 +233,31 @@ const ProfileScreen = ({ userInfo, isLoggedOut, emitToBottomNav }) => {
 
             </View>
 
-            <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'center', paddingBottom: 40 }}>
-                <TouchableOpacity style={{ backgroundColor: '#ececec', width: 150, height: 40, borderRadius: 8, justifyContent: 'center', alignItems:'center' }} onPress={handleLogout}>
-                    <Text style={{ color: 'black', fontSize:15 }}>{t('logout')}</Text>
+            <View style={{ justifyContent: 'flex-end', alignItems: 'center', paddingBottom: 30 }}>
+
+                <TouchableOpacity style={{ backgroundColor: '#e3f1ff', width: 150, height: 40, borderRadius: 8, justifyContent: 'center', alignItems: 'center', margin: 15 }} onPress={handleEditProfile}>
+                    <Text style={{ color: 'black', fontSize: 15 }}>Redigera profil</Text>
+                </TouchableOpacity>
+
+
+
+
+                <Modal visible={showModal} animationType='slide'>
+                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                        {isProfileEdited && <EditProfile
+                            competencies={userComp}
+                            interests={userInterest}
+                            userInfo={userInfo}
+                            {...isProfileEdited} closeModal={closeModal} />}
+                        <TouchableOpacity onPress={closeModal}>
+
+                        </TouchableOpacity>
+                    </View>
+                </Modal>
+
+
+                <TouchableOpacity style={{ backgroundColor: '#ececec', width: 150, height: 40, borderRadius: 8, justifyContent: 'center', alignItems: 'center' }} onPress={handleLogout}>
+                    <Text style={{ color: 'black', fontSize: 15 }}>{t('logout')}</Text>
                 </TouchableOpacity>
             </View>
 
