@@ -17,7 +17,6 @@ const SwipeScreen = ({userInfo}) => {
 
     const [showModal, setShowModal] = useState(null);
     const [selectedJob, setSelectedJob] = useState({
-        jobDescription,
         closeModal // add closeModal function to selectedJob state
     });
     const onClicked = () => {
@@ -49,7 +48,7 @@ const SwipeScreen = ({userInfo}) => {
 
     const fetchJobs = async () => {
         try {
-            const response = await fetch("http://127.0.0.1:8000/api/fetchALLJobs", {
+            const response = await fetch("http://127.0.0.1:8000/api/fetchJobs", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
