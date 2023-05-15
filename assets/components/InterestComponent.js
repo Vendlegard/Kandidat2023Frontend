@@ -186,8 +186,7 @@ const InterestComponent = ({finishedEmit, userInfo}) => {
                 <View>
                     <View className ="justify-center items-center">
                     <Text className="text-3xl mt-16 mb-5"> What are your competencies? </Text>
-                        <Text> competencies added: {answer.userCompenencies}</Text>
-                </View>
+                    </View>
                     {allCompetencies.map((currElement, index) => {
                         const isCompAdded = answer.userCompenencies.includes(currElement);
 
@@ -212,7 +211,6 @@ const InterestComponent = ({finishedEmit, userInfo}) => {
                 <View>
                     <View className ="justify-center items-center">
                     <Text className="text-3xl mt-16 mb-5"> What are you looking for? </Text>
-                        <Text> Looking for: {answer.lookingForPreferences}</Text>
                     </View>
                     {allInterests.map((currElement, index) => {
                         const isInterestAdded = answer.lookingForPreferences.includes(currElement);

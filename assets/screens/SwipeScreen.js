@@ -236,9 +236,7 @@ const SwipeScreen = ({userInfo}) => {
         style={{ alignItems: 'center', justifyContent: 'center', borderRadius: 50, width: 75, height: 75, backgroundColor: 'rgb(187 247 208)' }}>
             <AntDesign name='heart' size={30}/>
         </TouchableOpacity>
-          <View>
-            <Text> {userInfo.userID}</Text>
-        </View>
+
     </View>
 
     {/* Modal with additional info when clicking a card*/}
