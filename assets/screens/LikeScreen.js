@@ -162,6 +162,7 @@ const LikeScreen = ({userInfo}) => {
                             jobIcon={job.employerImage}
                             userID={userInfo.userID}
                             jobID={job.jobID}
+                            description={job.jobDescription}
                             jobTitle={job.jobName}
                             location={job.location}
                             employer={job.employerName}
