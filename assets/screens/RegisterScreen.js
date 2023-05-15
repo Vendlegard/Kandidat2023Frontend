@@ -238,6 +238,7 @@ const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn, userInfoStore,
                 placeholder={t('password')}
                 onChangeText={onChangePassword}
                 value={password}
+                secureTextEntry={true}
             >
             </TextInput>
             <TouchableOpacity className="justify-center items-center mt-12" style={{backgroundColor: '#ececec', width: 150, height: 40, borderRadius: 8, justifyContent: 'center', alignItems:'center'}} onPress={() => registerUser(emailAdress, password, firstName, lastName, university, education)}>

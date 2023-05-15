@@ -164,6 +164,7 @@ const LikeScreen = ({userInfo}) => {
                             jobID={job.jobID}
                             jobTitle={job.jobName}
                             location={job.location}
+                            employer={job.employerName}
                             date={"2021-05-01"}
                             wage={"300kr/h"}
                             duration={"3 months"}
@@ -183,6 +184,7 @@ const LikeScreen = ({userInfo}) => {
                                     jobIcon={job.employerImage}
                                     jobTitle={job.jobName}
                                     location={job.location}
+                                    employer={job.employerName}
                                     date={"2021-05-01"}
                                     wage={"300kr/h"}
                                     duration={"3 months"}
