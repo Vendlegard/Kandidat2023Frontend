@@ -160,6 +160,7 @@ const LikeScreen = ({userInfo}) => {
                     {likedJobsWithLikedProp.map((job) => (
                         <JobCard
                             jobIcon={job.employerImage}
+                            url= {job.link}
                             userID={userInfo.userID}
                             jobID={job.jobID}
                             jobTitle={job.jobName}
@@ -180,6 +181,7 @@ const LikeScreen = ({userInfo}) => {
                          (
                                 <JobCard
                                     jobID={job.jobID}
+                                    url= {job.link}
                                     userID={userInfo.userID}
                                     jobIcon={job.employerImage}
                                     jobTitle={job.jobName}

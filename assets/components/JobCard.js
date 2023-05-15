@@ -3,10 +3,11 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, Modal, Linking} from 'react-native';
 import JobInfo from './JobInfo';
 
-const JobCard = ({ jobIcon, jobTitle, employer, location, date, wage, duration, experience, liked, jobID, userID }) => {
+const JobCard = ({ jobIcon, jobTitle, employer, location, date, wage, duration, experience, url, liked, jobID, userID }) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedJob, setSelectedJob] = useState({
     jobIcon,
+    url,
     jobTitle,
     employer,
     location,
@@ -19,11 +20,11 @@ const JobCard = ({ jobIcon, jobTitle, employer, location, date, wage, duration, 
   });
 
   const goToWebsite = () => {
-    Linking.openURL('https://www.stssektionen.com/');
+    Linking.openURL(url);
   };
 
   const onPressHandler = () => {
-    setSelectedJob({ jobIcon, jobTitle, employer, location, date, wage, duration, experience });
+    setSelectedJob({ jobIcon, jobTitle, employer, location, date, wage, duration, experience, url });
     setShowModal(true);
   };
 
