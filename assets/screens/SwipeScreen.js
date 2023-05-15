@@ -40,23 +40,11 @@ let testCards = [
 const SwipeScreen = ({ userInfo, jobDescription }) => {
     const swipeRef = useRef(null);
 
-    const [showModal, setShowModal] = useState(null);
-    const [selectedJob, setSelectedJob] = useState({
-        jobDescription,
-        closeModal // add closeModal function to selectedJob state
-    });
-    const onClicked = () => {
-        setSelectedJob({ jobDescription
-        });
-        setShowModal(true);
-    };
-    const closeModal = () => {
-        setShowModal(false);
-    };
+   
 
     const [jobs, setJobs] = useState([]);
 
-    const [card, setCards] = useState(false);
+    // const [card, setCards] = useState(false);
 
     const [cardIndex, setCardIndex] = useState(0);
 
@@ -193,7 +181,7 @@ const SwipeScreen = ({ userInfo, jobDescription }) => {
                         },
                     }}
                     renderCard={(card) => card ? (
-                        <Pressable onPress={onClicked}>
+                        <Pressable >
                             <View key={card.id}
                                 style={{ backgroundColor: '#f6f6f6', height: '87%', borderRadius: 15, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.35, shadoRadius: 3, elevation: 2 }}
                             >
@@ -244,14 +232,7 @@ const SwipeScreen = ({ userInfo, jobDescription }) => {
         </View>
     </View>
 
-    {/* Modal with additional info when clicking a card*/}
-    <Modal visible={showModal} animationType='slide'>
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        {selectedJob && <JobInfo {...selectedJob} closeModal={closeModal} />}
-            <TouchableOpacity onPress={closeModal}>
-            </TouchableOpacity>
-        </View>
-    </Modal>
+   
 
         </SafeAreaView>
     );
