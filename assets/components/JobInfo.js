@@ -7,9 +7,8 @@ import leftArrow from '../images/leftArrow.png'
 import { LinearGradient } from 'expo-linear-gradient';
 import { useTranslation } from "react-i18next";
 
-const JobInfo = ({ jobIcon, jobTitle, employer, location, date, closeModal }) => {
+const JobInfo = ({ jobIcon, jobTitle, employer, location, date, closeModal, goToWebsite }) => {
   const { t, i18n } = useTranslation();
-
 
 
   return (
@@ -84,7 +83,7 @@ const JobInfo = ({ jobIcon, jobTitle, employer, location, date, closeModal }) =>
 
 
     <View className="flex items-center">
-      <TouchableOpacity style={{width: 150, height: 40, borderRadius: 8}} className=" bg-appBlue flex justify-center items-center rounded mt-10">
+      <TouchableOpacity style={{width: 150, height: 40, borderRadius: 8}} className=" bg-appBlue flex justify-center items-center rounded mt-10" onPress={goToWebsite}>
         <Text style={{ color: 'black', fontSize: 15 }}>{t('apply')}</Text>
       </TouchableOpacity>
     </View>

@@ -1,5 +1,5 @@
-import React, { useState, useRef } from "react";
-import { View, Text, SafeAreaView, Image, Pressable, Modal } from "react-native";
+import React, {useState, useRef} from "react";
+import {View, Text, SafeAreaView, Image, Pressable, Modal} from "react-native";
 import SEB from "../images/SEB.jpeg";
 import vattenfall from "../images/vattenfall.jpeg";
 import sweco from "../images/sweco.png"
@@ -64,6 +64,11 @@ const SwipeScreen = ({ userInfo, jobDescription }) => {
     const [notLikedIDs, setNotLikedIDs] = useState([]);
 
     const [likedID, setLikedID] = useState("");
+
+
+    const goToWebsite = () => {
+        Linking.openURL('https://www.stssektionen.com/');
+      };
 
 
 
@@ -229,24 +234,24 @@ const SwipeScreen = ({ userInfo, jobDescription }) => {
                     <Entypo name='cross' size={35} />
                 </TouchableOpacity>
 
-                <TouchableOpacity
-                    onPress={() => swipeRef.current.swipeRight()}
-                    style={{ alignItems: 'center', justifyContent: 'center', borderRadius: 50, width: 75, height: 75, backgroundColor: 'rgb(187 247 208)' }}>
-                    <AntDesign name='heart' size={30} />
-                </TouchableOpacity>
-                <View>
-                    <Text> {userInfo.userID}</Text>
-                </View>
-            </View>
+        <TouchableOpacity 
+        onPress={() =>swipeRef.current.swipeRight()}
+        style={{ alignItems: 'center', justifyContent: 'center', borderRadius: 50, width: 75, height: 75, backgroundColor: 'rgb(187 247 208)' }}>
+            <AntDesign name='heart' size={30}/>
+        </TouchableOpacity>
+          <View>
+            <Text> {userInfo.userID}</Text>
+        </View>
+    </View>
 
-            {/* Modal with additional info when clicking a card*/}
-            <Modal visible={showModal} animationType='slide'>
-                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                    {selectedJob && <JobInfo {...selectedJob} closeModal={closeModal} />}
-                    <TouchableOpacity onPress={closeModal}>
-                    </TouchableOpacity>
-                </View>
-            </Modal>
+    {/* Modal with additional info when clicking a card*/}
+    <Modal visible={showModal} animationType='slide'>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        {selectedJob && <JobInfo {...selectedJob} closeModal={closeModal} />}
+            <TouchableOpacity onPress={closeModal}>
+            </TouchableOpacity>
+        </View>
+    </Modal>
 
         </SafeAreaView>
     );

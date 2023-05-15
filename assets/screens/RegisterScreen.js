@@ -90,6 +90,11 @@ const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn, userInfoStore,
         }
     }
 
+    const isValidEmail = (email) => {
+        const emailRegex = /\S+@student\.\S+\.se$/;
+        return emailRegex.test(email);
+      }
+
 
     const authenticateUser = async (emailAddressToSend,passwordToSend) => {
         try {
@@ -121,6 +126,11 @@ const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn, userInfoStore,
             alert("Please fill in all fields");
             return;
         }
+        if (!(isValidEmail(emailAddressToSend))) {
+            alert('Please enter a valid student email');
+            return;
+          }
+
         try {
             const response = await fetch("http://127.0.0.1:8000/api/testResponse", {
                 method: "POST",
@@ -137,11 +147,22 @@ const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn, userInfoStore,
                 }),
             });
             const data = await response.json();
-            setServerResponse(data.message);
-            firstTimeLoggingIn(true);
-            updateRegisterState(false);
-            authenticateUser(emailAddressToSend, passwordToSend);
-            setIsMounted(true);
+
+            if(data.message!="already exists"){
+                setServerResponse(data.message);
+                firstTimeLoggingIn(true);
+                updateRegisterState(false);
+                authenticateUser(emailAddressToSend, passwordToSend);
+                setIsMounted(true);
+
+                console.log("här skapas en användare: ", data.message);
+            
+
+            }
+            else {
+            alert("Email already exists");
+            }
+               
         } catch (error) {
             console.error(error);
         }
