@@ -3,18 +3,17 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, Modal, Linking} from 'react-native';
 import JobInfo from './JobInfo';
 
-const JobCard = ({ jobIcon, jobTitle, employer, location, date, wage, duration, experience, url, liked, jobID, userID }) => {
+const JobCard = ({ jobIcon, jobTitle, employer, location, date, wage, duration, experience, liked, jobID, userID, description, email, url }) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedJob, setSelectedJob] = useState({
     jobIcon,
     url,
     jobTitle,
     employer,
+    description,
     location,
     date,
-    wage,
-    duration,
-    experience,
+    email,
     closeModal, // add closeModal function to selectedJob state
     goToWebsite
   });
@@ -24,7 +23,7 @@ const JobCard = ({ jobIcon, jobTitle, employer, location, date, wage, duration, 
   };
 
   const onPressHandler = () => {
-    setSelectedJob({ jobIcon, jobTitle, employer, location, date, wage, duration, experience, url });
+    setSelectedJob({ jobIcon, jobTitle, employer, location, date, wage, duration, experience, description, email, url});
     setShowModal(true);
   };
 

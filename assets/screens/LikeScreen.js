@@ -163,6 +163,7 @@ const LikeScreen = ({userInfo}) => {
                             url= {job.link}
                             userID={userInfo.userID}
                             jobID={job.jobID}
+                            description={job.jobDescription}
                             jobTitle={job.jobName}
                             location={job.location}
                             employer={job.employerName}
@@ -171,6 +172,7 @@ const LikeScreen = ({userInfo}) => {
                             duration={"3 months"}
                             experience={"1 year"}
                             liked={job.liked}
+                            email={job.employerEmail}
                         ></JobCard>
                     ))}
                 </View>
@@ -192,6 +194,7 @@ const LikeScreen = ({userInfo}) => {
                                     duration={"3 months"}
                                     experience={"1 year"}
                                     liked={job.liked}
+                                    email={job.employerEmail}
                                 ></JobCard>
                             ))}
                 </View>

@@ -19,7 +19,10 @@
   "firstName": "First Name",
   "lastName": "Last name",
   "education": "Education",
-  "welcomeToJob": "Welcome to us at",
+  "welcomeToJob": "Welcome to us!",
   "jobDescription": "Job description",
-  "apply": "Apply here"
+  "apply": "Apply here",
+  "myCompetences":"What are your competences?",
+  "lookingFor": "What are you looking for?",
+  "continue": "Continue"
 }
