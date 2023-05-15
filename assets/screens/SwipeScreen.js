@@ -68,7 +68,6 @@ const SwipeScreen = ({userInfo}) => {
     };
 
     useState(() => {
-        console.log("fetch Jobs called");
         fetchJobs();
     }, []);
 
@@ -87,7 +86,6 @@ const SwipeScreen = ({userInfo}) => {
                 )
             });
             const data = await response.json();
-            console.log(data);
         } catch (error) {
             console.error(error);
         }
@@ -108,7 +106,6 @@ const SwipeScreen = ({userInfo}) => {
                 )
             });
             const data = await response.json();
-            console.log(data);
         } catch (error) {
             console.error(error);
         }
@@ -134,7 +131,6 @@ const SwipeScreen = ({userInfo}) => {
                             return;
                         }
                         setCardIndex(cardIndex + 1);
-                        console.log('Swiped NOPE on', jobs[cardIndex].jobName, "with the ID", jobs[cardIndex].jobID);
                         storeDisliked(jobs[cardIndex].jobID, userInfo.userID);
                     }}
                     onSwipedRight={() => {
@@ -142,9 +138,6 @@ const SwipeScreen = ({userInfo}) => {
                             return;
                         }
                         setCardIndex(cardIndex + 1);
-                        console.log('user with id: ', userInfo.userID, 'Swiped LIKE on ', jobs[cardIndex].jobName, "with the ID", jobs[cardIndex].jobID);
-                        console.log('detta är det gillade jobbet: ', jobs[cardIndex].jobID)
-                        //console.log(likedIDs, "are the liked hjobs");
                         storeLiked(jobs[cardIndex].jobID, userInfo.userID);
                     }}
                     overlayLabels={{        /*LIKE and NOPE signs*/
