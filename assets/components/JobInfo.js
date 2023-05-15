@@ -7,10 +7,11 @@ import leftArrow from '../images/leftArrow.png'
 import { LinearGradient } from 'expo-linear-gradient';
 import { useTranslation } from "react-i18next";
 
-const JobInfo = ({ jobIcon, jobTitle, employer, location, date, closeModal, goToWebsite, email }) => {
+const JobInfo = ({ jobIcon, jobTitle, employer, location, date, closeModal, goToWebsite, description, email }) => {
   const { t, i18n } = useTranslation();
 
 
+  console.log(description);
   return (
     <LinearGradient
       colors={['#e3e3e3', '#ededed', '#ffffff']}
@@ -76,8 +77,7 @@ const JobInfo = ({ jobIcon, jobTitle, employer, location, date, closeModal, goTo
       <ScrollView>
         <View className="">
           <Text>
-            Detta är bara för att se hur stylingen ska se ut och inte vår beskrivning av jobbet
-        
+            {description}
           </Text>
 
         </View>

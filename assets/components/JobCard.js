@@ -3,12 +3,13 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, Modal, Linking} from 'react-native';
 import JobInfo from './JobInfo';
 
-const JobCard = ({ jobIcon, jobTitle, employer, location, date, liked, jobID, userID, email }) => {
+const JobCard = ({ jobIcon, jobTitle, employer, location, date, wage, duration, experience, liked, jobID, userID, description, email }) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedJob, setSelectedJob] = useState({
     jobIcon,
     jobTitle,
     employer,
+    description,
     location,
     date,
     email,
@@ -21,7 +22,7 @@ const JobCard = ({ jobIcon, jobTitle, employer, location, date, liked, jobID, us
   };
 
   const onPressHandler = () => {
-    setSelectedJob({ jobIcon, jobTitle, employer, location, date, email });
+    setSelectedJob({ jobIcon, jobTitle, employer, location, date, wage, duration, experience, description, email });
     setShowModal(true);
   };
 

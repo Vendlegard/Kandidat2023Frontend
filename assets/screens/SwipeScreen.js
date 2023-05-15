@@ -12,32 +12,7 @@ import JobInfo from "../components/JobInfo";
 
 
 
-let testCards = [
-    {
-        title: "Internship",
-        desc: "Vi söker dig som studerar ekonomi för att delta i vårt traineeprogram",
-        location: "Solna kommun, Stockholms län",
-        photoURL: "https://sebgroup.com/ImageVault/publishedmedia/nkuwms2up8mjzxmomo6p/SEB_Logotypes.jpg",
-        idJobs: 123,
-    },
-    {
-        title: "Sommarjobb",
-        desc: "Ingenjörsstudent sökes till sommarjobb",
-        location: "Uppsala, Uppsala län",
-        photoURL: "https://cached-images.bonnier.news/gcs/di-bilder-prod/media/44de0244a8cd1b93ed81ce44af590011.jpg",
-        idJobs: 456,
-    },
-    {
-        title: "Sommarjobb",
-        desc: "Prova på att vara konsult för sommaren",
-        location: "Västerås, Västerås län",
-        photoURL: "https://www.swecogroup.com/wp-content/uploads/sites/2/2021/03/sweco_black.png",
-        idJobs: 789,
-    }
-];
-
-
-const SwipeScreen = ({ userInfo, jobDescription }) => {
+const SwipeScreen = ({userInfo}) => {
     const swipeRef = useRef(null);
 
    
@@ -62,7 +37,7 @@ const SwipeScreen = ({ userInfo, jobDescription }) => {
 
     const fetchJobs = async () => {
         try {
-            const response = await fetch("http://127.0.0.1:8000/api/fetchJobs", {
+            const response = await fetch("http://127.0.0.1:8000/api/fetchALLJobs", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -81,7 +56,6 @@ const SwipeScreen = ({ userInfo, jobDescription }) => {
     };
 
     useState(() => {
-        console.log("fetch Jobs called");
         fetchJobs();
     }, []);
 
@@ -100,7 +74,6 @@ const SwipeScreen = ({ userInfo, jobDescription }) => {
                 )
             });
             const data = await response.json();
-            console.log(data);
         } catch (error) {
             console.error(error);
         }
@@ -121,7 +94,6 @@ const SwipeScreen = ({ userInfo, jobDescription }) => {
                 )
             });
             const data = await response.json();
-            console.log(data);
         } catch (error) {
             console.error(error);
         }
@@ -147,7 +119,6 @@ const SwipeScreen = ({ userInfo, jobDescription }) => {
                             return;
                         }
                         setCardIndex(cardIndex + 1);
-                        console.log('Swiped NOPE on', jobs[cardIndex].jobName, "with the ID", jobs[cardIndex].jobID);
                         storeDisliked(jobs[cardIndex].jobID, userInfo.userID);
                     }}
                     onSwipedRight={() => {
@@ -155,9 +126,6 @@ const SwipeScreen = ({ userInfo, jobDescription }) => {
                             return;
                         }
                         setCardIndex(cardIndex + 1);
-                        console.log('user with id: ', userInfo.userID, 'Swiped LIKE on ', jobs[cardIndex].jobName, "with the ID", jobs[cardIndex].jobID);
-                        console.log('detta är det gillade jobbet: ', jobs[cardIndex].jobID)
-                        //console.log(likedIDs, "are the liked hjobs");
                         storeLiked(jobs[cardIndex].jobID, userInfo.userID);
                     }}
                     overlayLabels={{        /*LIKE and NOPE signs*/
@@ -227,9 +195,6 @@ const SwipeScreen = ({ userInfo, jobDescription }) => {
         style={{ alignItems: 'center', justifyContent: 'center', borderRadius: 50, width: 75, height: 75, backgroundColor: 'rgb(187 247 208)' }}>
             <AntDesign name='heart' size={30}/>
         </TouchableOpacity>
-          <View>
-            <Text> {userInfo.userID}</Text>
-        </View>
     </View>
 
    
