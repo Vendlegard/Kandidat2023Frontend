@@ -22,9 +22,12 @@ import leftArrow from '../images/leftArrow.png';
 import { setStatusBarBackgroundColor } from "expo-status-bar";
 import { useRef } from "react";
 import CompetenceButtonComponent from "./CompetenceButtonComponent";
+import { useTranslation } from "react-i18next";
 
 //create a basic component
 const InterestComponent = ({finishedEmit, userInfo}) => {
+
+    const { t, i18n } = useTranslation();
 
     [allInterests, setAllInterests] = useState([]);
     [userLookingFor, setUserLookingFor] = useState([]);
@@ -174,18 +177,14 @@ const InterestComponent = ({finishedEmit, userInfo}) => {
 
     return (
         <View className="flex-1 w-full flex-col">
-            <TouchableOpacity className="relative top-0 left-0 mt-20 ml-5" onPress={() => previousButton()}>
-                <View style={{ position: 'relative' }}>
-                    <Image source={leftArrow} className="w-11 h-8"></Image>
-                </View>
-            </TouchableOpacity>
+            
 
 
             <ScrollView>
             { lookingForFilled ? (
                 <View>
-                    <View className ="justify-center items-center">
-                    <Text className="text-3xl mt-16 mb-5"> What are your competencies? </Text>
+                    <View style={{marginTop:80}} className ="justify-center items-center">
+                    <Text className="text-3xl mt-16 mb-5">{t('myCompetences')}</Text>
                     </View>
                     {allCompetencies.map((currElement, index) => {
                         const isCompAdded = answer.userCompenencies.includes(currElement);
@@ -209,8 +208,8 @@ const InterestComponent = ({finishedEmit, userInfo}) => {
                 </View>
             ) : (
                 <View>
-                    <View className ="justify-center items-center">
-                    <Text className="text-3xl mt-16 mb-5"> What are you looking for? </Text>
+                    <View style={{marginTop:120}} className ="justify-center items-center">
+                    <Text className="text-3xl mb-5">{t('lookingFor')}</Text>
                     </View>
                     {allInterests.map((currElement, index) => {
                         const isInterestAdded = answer.lookingForPreferences.includes(currElement);
@@ -232,7 +231,7 @@ const InterestComponent = ({finishedEmit, userInfo}) => {
                 <TouchableOpacity style={{ backgroundColor: '#ececec', width: 150, height: 40, borderRadius: 8, justifyContent: 'center', alignItems:'center' }}
                                   onPress={() => nextButton()}
                 >
-                    <Text style={{ color: 'black', fontSize:15}}>Continue</Text>
+                    <Text style={{ color: 'black', fontSize:15}}>{t('continue')}</Text>
                 </TouchableOpacity>
             </View>
         </View>

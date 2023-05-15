@@ -7,7 +7,7 @@ import leftArrow from '../images/leftArrow.png'
 import { LinearGradient } from 'expo-linear-gradient';
 import { useTranslation } from "react-i18next";
 
-const JobInfo = ({ jobIcon, jobTitle, employer, location, date, closeModal, goToWebsite }) => {
+const JobInfo = ({ jobIcon, jobTitle, employer, location, date, closeModal, goToWebsite, email }) => {
   const { t, i18n } = useTranslation();
 
 
@@ -43,12 +43,18 @@ const JobInfo = ({ jobIcon, jobTitle, employer, location, date, closeModal, goTo
             <Text className="ml-2">{jobTitle}</Text>
           </View>
           <View className="flex flex-row mb-1">
-            <AntDesign name='questioncircleo' size={16} />
+            <AntDesign name='pushpino' size={16} />
             <Text className="ml-2">{location}</Text>
           </View>
+          
           <View className="flex flex-row mb-1">
             <AntDesign name='hearto' size={16} />
             <Text className="ml-2">{date}</Text>
+          </View>
+          
+          <View className="flex flex-row mb-1">
+            <AntDesign name='questioncircleo' size={16} />
+            <Text className="ml-2">{email}</Text>
           </View>
          
 

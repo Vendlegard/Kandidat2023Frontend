@@ -170,6 +170,7 @@ const LikeScreen = ({userInfo}) => {
                             duration={"3 months"}
                             experience={"1 year"}
                             liked={job.liked}
+                            email={job.employerEmail}
                         ></JobCard>
                     ))}
                 </View>
@@ -190,6 +191,7 @@ const LikeScreen = ({userInfo}) => {
                                     duration={"3 months"}
                                     experience={"1 year"}
                                     liked={job.liked}
+                                    email={job.employerEmail}
                                 ></JobCard>
                             ))}
                 </View>

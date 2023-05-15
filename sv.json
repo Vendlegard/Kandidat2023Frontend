@@ -19,7 +19,10 @@
   "firstName": "Förnamn",
   "lastName": "Efternamn",
   "education": "Utbildning",
-  "welcomeToJob": "Välkommen till oss på",
+  "welcomeToJob": "Välkommen till oss!",
   "jobDescription": "Jobbeskrivning",
-  "apply": "Ansök här"
+  "apply": "Ansök här",
+  "myCompetences":"Vad är dina kompetenser?",
+  "lookingFor": "Vad söker du?",
+  "continue": "Fortsätt"
 }
