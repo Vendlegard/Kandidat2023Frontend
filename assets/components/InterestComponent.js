@@ -16,11 +16,12 @@
 ] */
 
 import React, {useState} from "react";
-import {View, Text, TextInput, Button, TouchableOpacity, Image}  from "react-native";
-import InterestAndCompetenceButtonComponent from "./InterestAndCompetenceButtonComponent";
+import {View, Text, TextInput, ScrollView, TouchableOpacity, Image}  from "react-native";
+import InterestButtonComponent from "./InterestButtonComponent";
 import leftArrow from '../images/leftArrow.png';
 import { setStatusBarBackgroundColor } from "expo-status-bar";
 import { useRef } from "react";
+import CompetenceButtonComponent from "./CompetenceButtonComponent";
 
 //create a basic component
 const InterestComponent = ({finishedEmit, userInfo}) => {
@@ -50,6 +51,8 @@ const InterestComponent = ({finishedEmit, userInfo}) => {
 
     function userLookingForAdd(lookingForToAdd){
         if(answer.lookingForPreferences.includes(lookingForToAdd)){
+            console.log("already added interest");
+            setanswer({...answer, lookingForPreferences: answer.lookingForPreferences.filter(item => item !== lookingForToAdd)});
             return;
         }
         setanswer({...answer, lookingForPreferences: [...answer.lookingForPreferences, lookingForToAdd]});
@@ -58,6 +61,8 @@ const InterestComponent = ({finishedEmit, userInfo}) => {
 
     function userCompetenciesAdd(competenciesToAdd){
         if(answer.userCompenencies.includes(competenciesToAdd)){
+            console.log("already added competence");
+            setanswer({...answer, userCompenencies: answer.userCompenencies.filter(item => item !== competenciesToAdd)});
             return;
         }
         setanswer({...answer, userCompenencies: [...answer.userCompenencies, competenciesToAdd]});
@@ -168,7 +173,7 @@ const InterestComponent = ({finishedEmit, userInfo}) => {
 
 
     return (
-        <View className="flex-1 w-full  flex-col">
+        <View className="flex-1 w-full flex-col">
             <TouchableOpacity className="relative top-0 left-0 mt-20 ml-5" onPress={() => previousButton()}>
                 <View style={{ position: 'relative' }}>
                     <Image source={leftArrow} className="w-11 h-8"></Image>
@@ -176,18 +181,26 @@ const InterestComponent = ({finishedEmit, userInfo}) => {
             </TouchableOpacity>
 
 
+            <ScrollView>
             { lookingForFilled ? (
                 <View>
                     <View className ="justify-center items-center">
                     <Text className="text-3xl mt-16 mb-5"> What are your competencies? </Text>
+                        <Text> competencies added: {answer.userCompenencies}</Text>
                 </View>
-                {allCompetencies.map((currElement, index) => (
-                        <InterestAndCompetenceButtonComponent
-                            compOrInterestName={currElement}
-                            index={index}
-                            addToLookingFor={userCompetenciesAdd}
-                        />
-                    ))}
+                    {allCompetencies.map((currElement, index) => {
+                        const isCompAdded = answer.userCompenencies.includes(currElement);
+
+                        return (
+                            <CompetenceButtonComponent
+                                key={index}
+                                compOrInterestName={currElement}
+                                index={index}
+                                isAdded={isCompAdded}
+                                addToCompetencies={userCompetenciesAdd}
+                            />
+                        );
+                    })}
                     <View className="mt-32">
                         <TouchableOpacity title={"Finish"}
                         onPress={() => finishButton()}
@@ -199,22 +212,29 @@ const InterestComponent = ({finishedEmit, userInfo}) => {
                 <View>
                     <View className ="justify-center items-center">
                     <Text className="text-3xl mt-16 mb-5"> What are you looking for? </Text>
+                        <Text> Looking for: {answer.lookingForPreferences}</Text>
                     </View>
-                    {allInterests.map((currElement, index) => (
-                        <InterestAndCompetenceButtonComponent
-                            compOrInterestName={currElement}
-                            index={index}
-                            addToLookingFor={userLookingForAdd}
-                        />
-                    ))}
+                    {allInterests.map((currElement, index) => {
+                        const isInterestAdded = answer.lookingForPreferences.includes(currElement);
+
+                        return (
+                            <InterestButtonComponent
+                                key={index}
+                                compOrInterestName={currElement}
+                                index={index}
+                                addToLookingFor={userLookingForAdd}
+                                isAdded={isInterestAdded}
+                            />
+                        );
+                    })}
                 </View>
             )}
-
-            <View className="flex-0 flex-row justify-center mt-16">
+            </ScrollView>
+            <View className="flex-0 flex-row justify-center">
                 <TouchableOpacity style={{ backgroundColor: '#ececec', width: 150, height: 40, borderRadius: 8, justifyContent: 'center', alignItems:'center' }}
-                        onPress={() => nextButton()}
+                                  onPress={() => nextButton()}
                 >
-                    <Text style={{ color: 'black', fontSize:15 }}>Continue</Text>
+                    <Text style={{ color: 'black', fontSize:15}}>Continue</Text>
                 </TouchableOpacity>
             </View>
         </View>
