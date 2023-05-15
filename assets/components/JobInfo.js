@@ -13,18 +13,18 @@ const JobInfo = ({ jobIcon, jobTitle, employer, location, date, closeModal, goTo
 
   console.log(description);
   return (
-    <LinearGradient
-      colors={['#e3e3e3', '#ededed', '#ffffff']}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 0.3, y: 0.3 }}
-      style={{ flex: 1 }}
-    >
+    // <LinearGradient
+    //   colors={['#e3e3e3', '#ededed', '#ffffff']}
+    //   start={{ x: 0, y: 0 }}
+    //   end={{ x: 0.3, y: 0.3 }}
+    //   style={{ flex: 1 }}
+    // >
 
-        <View>
-        <View className=" mt-20 w-full">
+        <View className="w-full">
+        <View className=" mt-20 ">
         <TouchableOpacity onPress={closeModal}>
-          <View style={{ position: 'relative' }}>
-            <Image source={leftArrow} className="w-11 h-8"></Image>
+          <View style={{ position: 'relative'}}>
+            <Image source={leftArrow} className="w-12 h-8"></Image>
             {/* Other content here */}
           </View>
         </TouchableOpacity>
@@ -32,7 +32,7 @@ const JobInfo = ({ jobIcon, jobTitle, employer, location, date, closeModal, goTo
         <View>
         
           <View className="justify-center items-center">
-          <Image source={{uri: jobIcon}} className="w-20 h-20" />
+          <Image source={{uri: jobIcon}} style={{width:100, height:100}} />
         </View>
         <View className="justify-center items-center mt-5">
           <Text className="text-lg font-bold"> {t('welcomeToJob')} </Text>
@@ -64,7 +64,7 @@ const JobInfo = ({ jobIcon, jobTitle, employer, location, date, closeModal, goTo
         </View>
     
         
-    <View className="mt-4">
+    <View style={{marginTop:60}}>
       <View className="h-px bg-gray border-0 dark:bg-gray w-full">
       </View>
     </View>
@@ -73,9 +73,9 @@ const JobInfo = ({ jobIcon, jobTitle, employer, location, date, closeModal, goTo
       <Text className="text-lg font-bold">{t('jobDescription')}</Text>
     </View>
 
-    <View className="mt-3 px-5 h-80">
+    <View className="mt-3 h-80">
       <ScrollView>
-        <View className="">
+        <View className="ml-5 mr-5">
           <Text>
             {description}
           </Text>
@@ -89,7 +89,7 @@ const JobInfo = ({ jobIcon, jobTitle, employer, location, date, closeModal, goTo
 
 
     <View className="flex items-center">
-      <TouchableOpacity style={{width: 150, height: 40, borderRadius: 8}} className=" bg-appBlue flex justify-center items-center rounded mt-10" onPress={goToWebsite}>
+      <TouchableOpacity style={{width: 150, height: 40, borderRadius: 8, marginBottom:20}} className=" bg-appBlue flex justify-center items-center rounded" onPress={goToWebsite}>
         <Text style={{ color: 'black', fontSize: 15 }}>{t('apply')}</Text>
       </TouchableOpacity>
     </View>
@@ -99,7 +99,7 @@ const JobInfo = ({ jobIcon, jobTitle, employer, location, date, closeModal, goTo
   </View>
       
    
-    </LinearGradient>
+    // </LinearGradient>
   );
 };
 

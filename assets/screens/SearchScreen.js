@@ -115,6 +115,8 @@ export default function App({userInfo}) {
               duration={"3 months"}
               experience={"1 year"}
               liked={job.liked}
+              email={job.employerEmail}
+              description={job.jobDescription}
             />
         ))}
       </ScrollView>
