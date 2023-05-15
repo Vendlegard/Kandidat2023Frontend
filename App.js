@@ -47,9 +47,7 @@ export default function App() {
         setLoggedIn(value);
     }
     const activateLoggedInScreen = (value) => {
-        console.log("activate logged in scrren ran in App.js, ", value)
         setStartScreen(value);
-        console.log("logged in variable should be", loggedIn)
         if(value === false ){
             setFirstTimeLoggingIn(false);
             AsyncStorage.removeItem("@token");
@@ -60,7 +58,6 @@ export default function App() {
     const [registerStatus, setRegisterStatus] = useState(false);
     const updateRegisterStatus = (value) => {
         setRegisterStatus(value);
-        console.log("in register status, value is: ", value);
     };
 
     const [firstTimeLoggingIn, setFirstTimeLoggingIn] = useState(true);
@@ -81,11 +78,9 @@ export default function App() {
 
     const updateFirstTimeLoggingIn = (value) => {
         setFirstTimeLoggingIn(value);
-        console.log("in updateFirsttimeloggingin status, value is: ", value);
     }
 
     const goToCompetenceScreen = (value) => {
-        console.log("denna borde blivit kallad från Profile.js i App.js med value", value);
         setLoggedIn(false);
         setFirstTimeLoggingIn(true);
         setRegisterStatus(false);
@@ -97,23 +92,19 @@ export default function App() {
     const updateUserInfo = (value) => {
         setUserInfo(value);
         setComesFromLogin(true);
-        console.log("updateUserInfo called in app.js with the value", userInfo);
     }
 
     const updateUserInfoFromRegister = (value) => {
         setUserInfo(value);
         setComesFromLogin(false);
-        console.log("updateUserInfo called in app.js funcitoon updateUserInfoFromRegister with the value", userInfo);
     }
 
     const comesFromRegister = (value) => {
         setComesFromLogin(value);
-        console.log("comesFromRegister called in app.js with the value", value);
     }
 
 
     function finished(){
-        console.log("finshed called in app.js");
         setLoggedIn(true);
     }
 
@@ -133,7 +124,6 @@ export default function App() {
             let userDataTemp = await data.userInfo;
             onChangeUserData(userDataTemp);
             updateUserInfo(userDataTemp);
-            console.log("authenticateUser called in App.js with the value", userDataTemp);
             updateLoggedInState(true);
         } catch (error) {
             console.error(error);
@@ -155,7 +145,6 @@ export default function App() {
     }
 
     useState(() => {
-        console.log("fetch Jobs called")
         authWithToken();
     }, []);
 
@@ -163,17 +152,14 @@ export default function App() {
         try {
             await AsyncStorage.removeItem('@token');
             if(value !== null) {
-                console.log(value)
             }
             sendingToken(value);
         } catch(e) {
             console.log(e);
-
         }
     }
 
     useEffect( () =>{
-            console.log("userInfo was changed in App.js to : ", userInfo)
             if(comesFromLogin === true){
                 setLoggedIn(true);
             }

@@ -29,7 +29,6 @@ const ProfileScreen = ({ userInfo, isLoggedOut, emitToBottomNav }) => {
 
     const onEditComp = () => {
         setEditComp(!editComp);
-        console.log("editComp", editComp);
         emitToBottomNav(editComp);
     }
 
@@ -48,7 +47,6 @@ const ProfileScreen = ({ userInfo, isLoggedOut, emitToBottomNav }) => {
     };
 
     const handleLogout = () => {
-        console.log("Logout button pressed");
         isLoggedOut(false);
         // Add navigation logic here to navigate to the logout screen or perform logout action
     };
@@ -78,8 +76,6 @@ const ProfileScreen = ({ userInfo, isLoggedOut, emitToBottomNav }) => {
             });
             const data = await response.json();
             setUserComp(data.comp_list);
-            console.log("userComp", data.comp_list);
-            console.log("the chunked array of data.comp_list", chunk(data.comp_list));
             setChunkedUserComp(chunk(data.comp_list));
         } catch (error) {
             console.error(error);

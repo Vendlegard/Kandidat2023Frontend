@@ -93,7 +93,6 @@ const SwipeScreen = ({ userInfo, jobDescription }) => {
     };
 
     useState(() => {
-        console.log("fetch Jobs called");
         fetchJobs();
     }, []);
 
@@ -112,7 +111,6 @@ const SwipeScreen = ({ userInfo, jobDescription }) => {
                 )
             });
             const data = await response.json();
-            console.log(data);
         } catch (error) {
             console.error(error);
         }
@@ -133,7 +131,6 @@ const SwipeScreen = ({ userInfo, jobDescription }) => {
                 )
             });
             const data = await response.json();
-            console.log(data);
         } catch (error) {
             console.error(error);
         }
@@ -159,7 +156,6 @@ const SwipeScreen = ({ userInfo, jobDescription }) => {
                             return;
                         }
                         setCardIndex(cardIndex + 1);
-                        console.log('Swiped NOPE on', jobs[cardIndex].jobName, "with the ID", jobs[cardIndex].jobID);
                         storeDisliked(jobs[cardIndex].jobID, userInfo.userID);
                     }}
                     onSwipedRight={() => {
@@ -167,9 +163,6 @@ const SwipeScreen = ({ userInfo, jobDescription }) => {
                             return;
                         }
                         setCardIndex(cardIndex + 1);
-                        console.log('user with id: ', userInfo.userID, 'Swiped LIKE on ', jobs[cardIndex].jobName, "with the ID", jobs[cardIndex].jobID);
-                        console.log('detta är det gillade jobbet: ', jobs[cardIndex].jobID)
-                        //console.log(likedIDs, "are the liked hjobs");
                         storeLiked(jobs[cardIndex].jobID, userInfo.userID);
                     }}
                     overlayLabels={{        /*LIKE and NOPE signs*/
@@ -239,9 +232,6 @@ const SwipeScreen = ({ userInfo, jobDescription }) => {
         style={{ alignItems: 'center', justifyContent: 'center', borderRadius: 50, width: 75, height: 75, backgroundColor: 'rgb(187 247 208)' }}>
             <AntDesign name='heart' size={30}/>
         </TouchableOpacity>
-          <View>
-            <Text> {userInfo.userID}</Text>
-        </View>
     </View>
 
     {/* Modal with additional info when clicking a card*/}

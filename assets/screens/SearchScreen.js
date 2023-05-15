@@ -25,7 +25,6 @@ export default function App({userInfo}) {
       });
       const data = await response.json();
       setALLJobs(data.all_jobs);
-      console.log(data.all_jobs);
     } catch (error) {
       console.error(error);
     }
@@ -51,7 +50,6 @@ export default function App({userInfo}) {
 };
 
   useState(() => {
-    console.log("fetch Jobs called");
     fetchALLJobs();
   }, []);
 
@@ -87,7 +85,6 @@ export default function App({userInfo}) {
           }
         }
       }
-      return console.log(jobsToShow);
   }
 
     useEffect(() => {
