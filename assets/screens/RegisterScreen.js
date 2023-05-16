@@ -20,6 +20,7 @@ import {View, Text, TextInput, Button, TouchableOpacity, Image}  from "react-nat
 import leftArrow from '../images/leftArrow.png';
 import { useTranslation} from "react-i18next";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { AntDesign } from '@expo/vector-icons';
 
 //create a basic component
 const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn, userInfoStore, comesFromLogin}) => {
@@ -193,7 +194,7 @@ const RegisterScreen = ({updateRegisterState, firstTimeLoggingIn, userInfoStore,
 
             <TouchableOpacity className="flex-1 absolute top-0 left-0 mt-20 ml-5" onPress={goBackToLogin}>
                 <View style={{ position: 'relative' }}>
-                    <Image source={leftArrow} className="w-11 h-8"></Image>
+                    <AntDesign name='leftcircleo' size={30} />
                 </View>
             </TouchableOpacity>
 

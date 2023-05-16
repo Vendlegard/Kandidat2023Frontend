@@ -23,13 +23,11 @@ const JobInfo = ({ jobIcon, jobTitle, employer, location, date, closeModal, goTo
         <View className="w-full">
         <View className=" mt-20 ">
         <TouchableOpacity onPress={closeModal}>
-          <View style={{ position: 'relative'}}>
-            <Image source={leftArrow} className="w-12 h-8"></Image>
+          <View style={{ position: 'relative', marginLeft:5, marginTop:-50}}>
+          <AntDesign name='leftcircleo' size={30} />
             {/* Other content here */}
           </View>
         </TouchableOpacity>
-
-        <View>
         
           <View className="justify-center items-center">
           <Image source={{uri: jobIcon}} style={{width:100, height:100}} />
@@ -38,35 +36,34 @@ const JobInfo = ({ jobIcon, jobTitle, employer, location, date, closeModal, goTo
           <Text className="text-lg font-bold"> {t('welcomeToJob')} </Text>
           <Text>{employer}</Text>
         </View>
-        <View className="mt-5 px-5">
-          <View className="flex flex-row mb-1">
+
+    <View style={{backgroundColor:'#f6f6f6', borderRadius:15, marginBottom:50, marginTop:30, marginLeft:15, marginRight:15, height:450, shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.25, }}>
+    <View className="flex flex-row mb-1" style={{marginLeft:5, marginTop:5}}>
             <AntDesign name='clockcircleo' size={16} />
             <Text className="ml-2">{jobTitle}</Text>
           </View>
-          <View className="flex flex-row mb-1">
+          <View className="flex flex-row mb-1" style={{marginLeft:5, marginTop:3}}>
             <AntDesign name='pushpino' size={16} />
             <Text className="ml-2">{location}</Text>
           </View>
           
-          <View className="flex flex-row mb-1">
+          <View className="flex flex-row mb-1" style={{marginLeft:5, marginTop:3}}>
             <AntDesign name='hearto' size={16} />
             <Text className="ml-2">{date}</Text>
           </View>
           
-          <View className="flex flex-row mb-1">
+          <View className="flex flex-row mb-1" style={{marginLeft:5, marginTop:3}}>
             <AntDesign name='questioncircleo' size={16} />
             <Text className="ml-2">{email}</Text>
           </View>
-         
-
-        </View>
+ 
         
-        </View>
+        
     
         
-    <View style={{marginTop:60}}>
-      <View className="h-px bg-gray border-0 dark:bg-gray w-full">
-      </View>
+    <View className="justify-center items-center" style={{marginTop:60}}>
+    <View className="h-px bg-gray border-0 dark:bg-gray w-80">
+                    </View>
     </View>
 
     <View className="justify-center items-center mt-5 mb-3">
@@ -83,6 +80,7 @@ const JobInfo = ({ jobIcon, jobTitle, employer, location, date, closeModal, goTo
         </View>
       </ScrollView>
 
+    </View>
     </View>
 
 
@@ -105,6 +103,8 @@ const JobInfo = ({ jobIcon, jobTitle, employer, location, date, closeModal, goTo
 
 
 export default JobInfo;
+
+
 
 
 
